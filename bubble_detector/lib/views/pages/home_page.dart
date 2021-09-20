@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Obx(() => Text(
-                  'Authenticated: ${authController.authenticated}',
+                  'Authenticated: ${authController.authStatus.value}',
                 )),
             Obx(() => Text(
                   'clicks: ${homeController.count}',
@@ -52,7 +52,7 @@ class SecondPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Obx(() => Text(
-                  'Authenticated: ${authController.authenticated.value.toString()}',
+                  'Authenticated: ${authController.authStatus.value.toString()}',
                 )),
             Obx(() => Text(
                   'clicks: ${homeController.count}',
@@ -60,7 +60,7 @@ class SecondPage extends StatelessWidget {
             ElevatedButton(
               child: Text('Authenticate'),
               onPressed: () {
-                authController.authenticate();
+                authController.phoneAuth("+94778396415");
               },
             ),
           ],
