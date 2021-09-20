@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "944555507589",
+    "project_id": "covid19-bubble-detector",
+    "storage_bucket": "covid19-bubble-detector.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944555507589:android:caf4819c788e86698cceec",
+        "android_client_info": {
+          "package_name": "com.example.bubble_detector"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944555507589-kuo601h8abn5j1fmkgo7uhkeh4sh6jh6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bubble_detector",
+            "certificate_hash": "bb4e01c3e0d4a33378cadfe5cb9f70cdf7122672"
+          }
+        },
+        {
+          "client_id": "944555507589-7p98bot0nnkdnkfu1577t3ck19nehn16.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAy6h0T6i4peUyXrJ-9hXiwnd6uRAE_3Bw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944555507589-7p98bot0nnkdnkfu1577t3ck19nehn16.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

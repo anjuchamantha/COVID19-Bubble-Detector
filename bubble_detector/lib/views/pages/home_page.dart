@@ -1,9 +1,11 @@
 import 'package:bubble_detector/controllers/page_controller.dart';
+import 'package:bubble_detector/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
-  final controller = Get.put(HomeController());
+  final HomeController homeController = Get.find();
+  final AuthController authController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +15,10 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Obx(() => Text(
-                  'clicks: ${controller.count}',
+                  'Authenticated: ${authController.authenticated}',
+                )),
+            Obx(() => Text(
+                  'clicks: ${homeController.count}',
                 )),
             ElevatedButton(
               child: Text('Next Route'),
@@ -26,25 +31,40 @@ class HomePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => controller.increment(),
+        onPressed: () => homeController.increment(),
       ),
     );
   }
 }
 
 class SecondPage extends StatelessWidget {
-  final HomeController ctrl = Get.find();
+  final AuthController authController = Get.find();
+  final HomeController homeController = Get.find();
   @override
   Widget build(context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => ctrl.increment(),
+        onPressed: () => homeController.increment(),
       ),
       body: Center(
-        child: Obx(() => Text(
-              'clicks: ${ctrl.count}',
-            )),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Obx(() => Text(
+                  'Authenticated: ${authController.authenticated.value.toString()}',
+                )),
+            Obx(() => Text(
+                  'clicks: ${homeController.count}',
+                )),
+            ElevatedButton(
+              child: Text('Authenticate'),
+              onPressed: () {
+                authController.authenticate();
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
