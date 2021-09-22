@@ -1,7 +1,8 @@
-import '../../controllers/page_controller.dart';
-import '../../controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../controllers/auth_controller.dart';
+import '../../controllers/page_controller.dart';
 
 class HomePage extends StatelessWidget {
   final HomeController homeController = Get.find();

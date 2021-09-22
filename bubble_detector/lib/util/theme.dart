@@ -6,6 +6,7 @@ abstract class PrimaryTheme {
       brightness: Brightness.light,
       fontFamily: 'Poppins',
       primaryColor: _ProjectColors.PRIMARY_COLOR,
+      secondaryHeaderColor: _ProjectColors.SECONDARY_COLOR,
       textTheme: TextTheme(
         bodyText1: TextStyle(),
         bodyText2: TextStyle(),
@@ -40,5 +41,6 @@ abstract class PrimaryTheme {
 abstract class _ProjectColors {
   static const Color BACKGROUND_COLOR = Color(0xffFDFDFF);
   static const Color PRIMARY_COLOR = Color(0xff191BA9);
+  static const Color SECONDARY_COLOR = Color(0xff5BC2F1);
   static const Color ACCENT_COLOR = Color(0xff7D7E97);
 }

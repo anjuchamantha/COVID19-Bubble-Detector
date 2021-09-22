@@ -1,7 +1,8 @@
-import '../../widgets/landin_page_body_text.dart';
-import '../../widgets/landing_page_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../widgets/landin_page_body_text.dart';
+import '../../widgets/landing_page_button.dart';
 
 class LandingOne extends StatelessWidget {
   const LandingOne({Key? key}) : super(key: key);

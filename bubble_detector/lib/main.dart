@@ -8,6 +8,7 @@ import 'bindings/home_bindings.dart';
 import 'bindings/splash_bindings.dart';
 import 'util/theme.dart';
 import 'views/pages/Landing/landing_one.dart';
+import 'views/pages/Landing/landing_outer.dart';
 import 'views/pages/home_page.dart';
 import 'views/pages/splash_page.dart';
 
@@ -23,7 +24,7 @@ void main() async {
     GetMaterialApp(
       initialBinding: AppBinding(),
       theme: PrimaryTheme.buildTheme(),
-      initialRoute: '/landing_one',
+      initialRoute: '/landing_outer',
       getPages: [
         GetPage(
           name: '/splash',
@@ -33,6 +34,10 @@ void main() async {
         GetPage(
           name: '/landing_one',
           page: () => LandingOne(),
+        ),
+        GetPage(
+          name: '/landing_outer',
+          page: () => LandingOuter(),
         ),
         GetPage(
           name: '/home',
