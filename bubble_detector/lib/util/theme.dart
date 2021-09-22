@@ -5,12 +5,40 @@ abstract class PrimaryTheme {
     return ThemeData(
       brightness: Brightness.light,
       fontFamily: 'Poppins',
+      primaryColor: _ProjectColors.PRIMARY_COLOR,
+      textTheme: TextTheme(
+        bodyText1: TextStyle(),
+        bodyText2: TextStyle(),
+      ).apply(
+        bodyColor: _ProjectColors.ACCENT_COLOR,
+        displayColor: _ProjectColors.ACCENT_COLOR,
+      ),
       scaffoldBackgroundColor: _ProjectColors.BACKGROUND_COLOR,
       backgroundColor: _ProjectColors.BACKGROUND_COLOR,
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          primary: _ProjectColors.PRIMARY_COLOR,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(40),
+            ),
+          ),
+          textStyle: TextStyle(
+            fontSize: 14,
+            letterSpacing: 1.25,
+            fontWeight: FontWeight.w500,
+            fontFamily: 'Poppins',
+          ),
+          elevation: 0,
+        ),
+      ),
     );
   }
 }
 
+// 7D7E97
 abstract class _ProjectColors {
   static const Color BACKGROUND_COLOR = Color(0xffFDFDFF);
+  static const Color PRIMARY_COLOR = Color(0xff191BA9);
+  static const Color ACCENT_COLOR = Color(0xff7D7E97);
 }
