@@ -2,8 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class LandingPageTextField extends StatelessWidget {
+  final String hintText;
+  final String labelText;
+  final int maxLength;
+  final TextAlign textAlign;
   const LandingPageTextField({
     Key? key,
+    this.hintText = '',
+    this.labelText = '',
+    this.maxLength = 1,
+    this.textAlign = TextAlign.center,
   }) : super(key: key);
 
   @override
@@ -31,13 +39,14 @@ class LandingPageTextField extends StatelessWidget {
           borderSide: BorderSide(color: Colors.orangeAccent),
         ),
         contentPadding: EdgeInsets.all(18),
-        hintText: '07xxxxxxxx',
-        labelText: 'Phone Number',
+        hintText: hintText,
+        labelText: labelText,
       ),
       inputFormatters: [
-        LengthLimitingTextInputFormatter(10),
+        LengthLimitingTextInputFormatter(maxLength),
         FilteringTextInputFormatter.digitsOnly,
       ],
+      textAlign: textAlign,
       keyboardType: TextInputType.numberWithOptions(decimal: true),
     );
   }

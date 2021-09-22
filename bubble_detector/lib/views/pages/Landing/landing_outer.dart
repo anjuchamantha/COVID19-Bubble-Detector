@@ -1,3 +1,4 @@
+import 'package:bubble_detector/views/pages/Landing/landing_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -5,6 +6,7 @@ import '../../widgets/landin_page_body_text.dart';
 import '../../widgets/landing_page_button.dart';
 import '../../widgets/landing_page_textfield.dart';
 import '../../widgets/landing_step_progress.dart';
+import 'landing_phone_number.dart';
 
 class LandingOuter extends StatelessWidget {
   const LandingOuter({Key? key}) : super(key: key);
@@ -31,36 +33,7 @@ class LandingOuter extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('Enter the Phone Number'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: SvgPicture.asset('images/phone_phone.svg'),
-                  ),
-                  Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.all(14.0),
-                    child: LandingPageTextField(),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: LandingPageBodyText(
-                      text:
-                          'Bubble Detector requires your phone number to register you, we only collect this data and nothing else.',
-                    ),
-                  ),
-                  Spacer(),
-                  LandingPageButton(
-                    text: 'Next',
-                    onPressed: () {},
-                  ),
-                  Spacer(),
-                ],
-              ),
+              child: LandingOtp(),
             ),
           ],
         ),
