@@ -1,4 +1,4 @@
-import 'package:bubble_detector/views/pages/Landing/landing_otp.dart';
+import 'landing_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

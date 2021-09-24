@@ -5,8 +5,15 @@ import 'package:flutter/material.dart';
 /// Mainly used in the Landing Page
 class LandingPageBodyText extends StatelessWidget {
   final String text;
+  final Color color;
+  final FontWeight fontWeight;
 
-  const LandingPageBodyText({Key? key, required this.text}) : super(key: key);
+  const LandingPageBodyText({
+    Key? key,
+    required this.text,
+    this.color = Colors.transparent,
+    this.fontWeight = FontWeight.w400,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +23,9 @@ class LandingPageBodyText extends StatelessWidget {
         fontSize: 14,
         letterSpacing: 0.25,
         height: 1.5,
+        color:
+            this.color == Colors.transparent ? Color(0xff7D7E97) : this.color,
+        fontWeight: this.fontWeight,
       ),
       textAlign: TextAlign.center,
     );

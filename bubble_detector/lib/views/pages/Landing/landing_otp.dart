@@ -1,6 +1,6 @@
-import 'package:bubble_detector/views/widgets/landin_page_body_text.dart';
-import 'package:bubble_detector/views/widgets/landing_page_button.dart';
-import 'package:bubble_detector/views/widgets/landing_page_textfield.dart';
+import '../../widgets/landin_page_body_text.dart';
+import '../../widgets/landing_page_button.dart';
+import '../../widgets/landing_page_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
