@@ -1,3 +1,6 @@
+import 'package:bubble_detector/util/routes.dart';
+import 'package:bubble_detector/views/pages/Main/emergency_contact_page.dart';
+import 'package:bubble_detector/views/pages/Main/main_home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,28 +27,32 @@ void main() async {
     GetMaterialApp(
       initialBinding: AppBinding(),
       theme: PrimaryTheme.buildTheme(),
-      initialRoute: '/landing_outer',
+      initialRoute: AppRoutes.MAIN_HOME_PAGE,
       getPages: [
         GetPage(
-          name: '/splash',
+          name: AppRoutes.SPLASH,
           page: () => SplashPage(),
           binding: SplashBinding(),
         ),
         GetPage(
-          name: '/landing_one',
+          name: AppRoutes.LANDING_ONE,
           page: () => LandingOne(),
         ),
         GetPage(
-          name: '/landing_outer',
+          name: AppRoutes.LANDING_OUTER,
           page: () => LandingOuter(),
         ),
         GetPage(
-          name: '/home',
+          name: AppRoutes.MAIN_HOME_PAGE,
+          page: () => MainHomePage(),
+        ),
+        GetPage(
+          name: AppRoutes.HOME,
           page: () => HomePage(),
           binding: HomeBinding(),
         ),
         GetPage(
-          name: '/second',
+          name: AppRoutes.SECOND,
           page: () => SecondPage(),
         ),
       ],
