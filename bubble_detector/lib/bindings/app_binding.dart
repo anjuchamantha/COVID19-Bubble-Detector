@@ -1,6 +1,6 @@
-import 'package:bubble_detector/controllers/auth_controller.dart';
-
 import 'package:get/get.dart';
+
+import '../controllers/auth_controller.dart';
 
 class AppBinding extends Bindings {
   @override
