@@ -1,5 +1,8 @@
+import 'package:bubble_detector/controllers/auth_controller.dart';
+import 'package:bubble_detector/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../widgets/landin_page_body_text.dart';
 import '../../widgets/landing_page_button.dart';
@@ -22,14 +25,27 @@ class LandingOne extends StatelessWidget {
 
             Spacer(),
             // Welcome Text
-            Text(
-              'Welcome to Bubble Detector',
-              style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontSize: 24,
-                letterSpacing: 0.18,
-                fontWeight: FontWeight.bold,
-              ),
+            Column(
+              children: [
+                Text(
+                  'Welcome to',
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 24,
+                    letterSpacing: 0.18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  'Bubble Detector',
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 24,
+                    letterSpacing: 0.18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
 
             // Body Text
@@ -37,7 +53,7 @@ class LandingOne extends StatelessWidget {
               padding: const EdgeInsets.all(14.0),
               child: LandingPageBodyText(
                 text:
-                    'Bubble Detector is a mobile application that will save from hassle of wr iting your name in a book or scanning a QR code when you go to a shop. Because Bubble Detector will do that for you.',
+                    'Bubble Detector is a mobile application that will save from hassle of writing your name in a book or scanning a QR code when you go to a shop. Because Bubble Detector will do that for you.',
               ),
             ),
 
@@ -57,11 +73,11 @@ class LandingOne extends StatelessWidget {
               ),
             ),
 
-            Spacer(),
-
             // Register button
             LandingPageButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(AppRoutes.LANDING_OUTER);
+              },
               text: 'Register',
             ),
             Spacer(),

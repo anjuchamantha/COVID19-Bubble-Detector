@@ -6,8 +6,11 @@ class LandingPageTextField extends StatelessWidget {
   final String labelText;
   final int maxLength;
   final TextAlign textAlign;
+  final TextEditingController controller;
+
   const LandingPageTextField({
     Key? key,
+    required this.controller,
     this.hintText = '',
     this.labelText = '',
     this.maxLength = 1,
@@ -17,6 +20,7 @@ class LandingPageTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(40.0)),

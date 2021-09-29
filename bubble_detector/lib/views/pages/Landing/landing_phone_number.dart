@@ -1,17 +1,18 @@
+import 'package:bubble_detector/controllers/page_state_contollers/auth_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import '../../widgets/landin_page_body_text.dart';
 import '../../widgets/landing_page_button.dart';
 import '../../widgets/landing_page_textfield.dart';
 
 class LandingPhoneNumber extends StatelessWidget {
-  const LandingPhoneNumber({
-    Key? key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    final AuthPageController authPageController = Get.find();
+    // final AuthController authController = Get.find();
+
     return Column(
       children: [
         Padding(
@@ -25,7 +26,12 @@ class LandingPhoneNumber extends StatelessWidget {
         Spacer(),
         Padding(
           padding: const EdgeInsets.all(14.0),
-          child: LandingPageTextField(),
+          child: LandingPageTextField(
+            controller: authPageController.phoneNumberInputController,
+            hintText: "771234567",
+            labelText: "Phone Number",
+            maxLength: 9,
+          ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -37,7 +43,13 @@ class LandingPhoneNumber extends StatelessWidget {
         Spacer(),
         LandingPageButton(
           text: 'Next',
-          onPressed: () {},
+          onPressed: () {
+            var phoneNumber = "+94" +
+                authPageController.phoneNumberInputController.value.text;
+            print(phoneNumber);
+            authPageController.phoneNumberEnteredTrue();
+            authPageController.phoneAuth(phoneNumber);
+          },
         ),
         Spacer(),
       ],

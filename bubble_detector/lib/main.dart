@@ -4,14 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'bindings/app_binding.dart';
-import 'bindings/home_bindings.dart';
+import 'bindings/home_page_bindings.dart';
+import 'bindings/landing_binding.dart';
 import 'bindings/splash_bindings.dart';
 import 'util/routes.dart';
 import 'util/theme.dart';
 import 'views/pages/Landing/landing_one.dart';
 import 'views/pages/Landing/landing_outer.dart';
-import 'views/pages/Main/main_home_page.dart';
-import 'views/pages/home_page.dart';
+import 'views/pages/Main/home_page.dart';
 import 'views/pages/splash_page.dart';
 
 void main() async {
@@ -26,7 +26,7 @@ void main() async {
     GetMaterialApp(
       initialBinding: AppBinding(),
       theme: PrimaryTheme.buildTheme(),
-      initialRoute: AppRoutes.MAIN_HOME_PAGE,
+      initialRoute: AppRoutes.LANDING_ONE,
       getPages: [
         GetPage(
           name: AppRoutes.SPLASH,
@@ -40,19 +40,12 @@ void main() async {
         GetPage(
           name: AppRoutes.LANDING_OUTER,
           page: () => LandingOuter(),
-        ),
-        GetPage(
-          name: AppRoutes.MAIN_HOME_PAGE,
-          page: () => MainHomePage(),
+          binding: LandingOuterBinding(),
         ),
         GetPage(
           name: AppRoutes.HOME,
           page: () => HomePage(),
-          binding: HomeBinding(),
-        ),
-        GetPage(
-          name: AppRoutes.SECOND,
-          page: () => SecondPage(),
+          binding: HomePageBinding(),
         ),
       ],
     ),
