@@ -1,11 +1,9 @@
-import 'landing_otp.dart';
+import 'package:bubble_detector/controllers/page_state_contollers/auth_page_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
-import '../../widgets/landin_page_body_text.dart';
-import '../../widgets/landing_page_button.dart';
-import '../../widgets/landing_page_textfield.dart';
 import '../../widgets/landing_step_progress.dart';
+import 'landing_otp.dart';
 import 'landing_phone_number.dart';
 
 class LandingOuter extends StatelessWidget {
@@ -13,6 +11,7 @@ class LandingOuter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AuthPageController authPageController = Get.find();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -33,7 +32,9 @@ class LandingOuter extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: LandingOtp(),
+              child: Obx(() => (authPageController.phoneNumberEntered.value)
+                  ? LandingOtp()
+                  : LandingPhoneNumber()),
             ),
           ],
         ),

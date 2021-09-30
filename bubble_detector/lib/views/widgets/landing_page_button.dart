@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class LandingPageButton extends StatelessWidget {
   final bool secondary;
   final String text;
-  final Function onPressed;
+  final void Function() onPressed;
   const LandingPageButton({
     Key? key,
     required this.text,
@@ -26,7 +26,7 @@ class LandingPageButton extends StatelessWidget {
                 primary: Theme.of(context).backgroundColor,
               )
             : null,
-        onPressed: () {},
+        onPressed: onPressed,
         child: Text(
           this.text,
           style: secondary
