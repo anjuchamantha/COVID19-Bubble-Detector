@@ -1,4 +1,5 @@
-import 'package:bubble_detector/controllers/page_state_contollers/auth_page_controller.dart';
+import '../../../controllers/page_state_contollers/auth_page_controller.dart';
+import '../../../controllers/page_state_contollers/LandingPagesController/landing_pages_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,7 @@ class LandingPhoneNumber extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthPageController authPageController = Get.find();
-    // final AuthController authController = Get.find();
+    final LandingPagesController landingPagesController = Get.find();
 
     return Column(
       children: [
@@ -44,11 +45,13 @@ class LandingPhoneNumber extends StatelessWidget {
         LandingPageButton(
           text: 'Next',
           onPressed: () {
-            var phoneNumber = "+94" +
-                authPageController.phoneNumberInputController.value.text;
-            print(phoneNumber);
-            authPageController.phoneNumberEnteredTrue();
-            authPageController.phoneAuth(phoneNumber);
+            // var phoneNumber = "+94" +
+            //     authPageController.phoneNumberInputController.value.text;
+            // print(phoneNumber);
+            // authPageController.phoneNumberEnteredTrue();
+            // authPageController.phoneAuth(phoneNumber);
+            landingPagesController.increaseStepCounter();
+            landingPagesController.nextLandingPage();
           },
         ),
         Spacer(),

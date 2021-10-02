@@ -1,5 +1,6 @@
-import 'package:bubble_detector/controllers/page_state_contollers/home_page_controller.dart';
 import 'package:get/get.dart';
+
+import '../controllers/page_state_contollers/home_page_controller.dart';
 
 class HomePageBinding implements Bindings {
   @override

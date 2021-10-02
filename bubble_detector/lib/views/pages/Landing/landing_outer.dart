@@ -1,4 +1,7 @@
-import 'package:bubble_detector/controllers/page_state_contollers/auth_page_controller.dart';
+import '../../../controllers/page_state_contollers/LandingPagesController/landing_page_state.dart';
+
+import '../../../controllers/page_state_contollers/auth_page_controller.dart';
+import '../../../controllers/page_state_contollers/LandingPagesController/landing_pages_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +15,8 @@ class LandingOuter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthPageController authPageController = Get.find();
+    final LandingPagesController landingPagesController = Get.find();
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -19,7 +24,11 @@ class LandingOuter extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 20.0),
-              child: LandingStepProgress(currentStep: 1),
+              child: Obx(
+                () => LandingStepProgress(
+                  currentStep: landingPagesController.stepCounter.value,
+                ),
+              ),
             ),
             SizedBox(height: 40),
             Text(
@@ -31,14 +40,53 @@ class LandingOuter extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Expanded(
-              child: Obx(() => (authPageController.phoneNumberEntered.value)
-                  ? LandingOtp()
-                  : LandingPhoneNumber()),
+            GetX<LandingPagesController>(
+              builder: (controller) {
+                print(2);
+                return Expanded(
+                  child: _landingPageWidget(
+                    landingPagesController.landingPageState.value,
+                  ),
+                );
+              },
             ),
+            /*  Obx(
+              () => Expanded(
+                child: _landingPageWidget(
+                  landingPagesController.landingPageState.value,
+                ),
+              ),
+            ), */
           ],
         ),
       ),
     );
+  }
+
+/*   Widget _landingPageWidget(LandingPageState landingPageState) {
+    print(landingPageState.current());
+    switch (landingPageState.current()) {
+      case LandingPagePhoneNumberState:
+        return LandingPhoneNumber();
+
+      case LandingPageOtpState:
+        return LandingOtp();
+
+      default:
+        return Container();
+    }
+  } */
+
+  Widget _landingPageWidget(int landingPageState) {
+    switch (landingPageState) {
+      case 1:
+        return LandingPhoneNumber();
+
+      case 2:
+        return LandingOtp();
+
+      default:
+        return Container();
+    }
   }
 }
