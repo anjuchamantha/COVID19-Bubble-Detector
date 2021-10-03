@@ -51,7 +51,9 @@ class LandingPageTextField extends StatelessWidget {
       ),
       inputFormatters: [
         LengthLimitingTextInputFormatter(maxLength),
-        FilteringTextInputFormatter.digitsOnly,
+        this.keyboardType == TextInputType.numberWithOptions(decimal: true)
+            ? FilteringTextInputFormatter.digitsOnly
+            : FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]')),
       ],
       textAlign: textAlign,
       keyboardType: this.keyboardType,

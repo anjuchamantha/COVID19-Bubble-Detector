@@ -1,3 +1,4 @@
+import 'package:bubble_detector/views/pages/Landing/landing_bluetooth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -62,6 +63,9 @@ class LandingOuter extends StatelessWidget {
 
       case LandingPageStoreOrIndividualState:
         return LandingStoreOrIndividual();
+
+      case LandingPageBluetoothState:
+        return LandingBluetooth();
 
       default:
         return Container();

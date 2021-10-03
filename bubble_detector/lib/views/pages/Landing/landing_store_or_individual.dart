@@ -34,6 +34,7 @@ class LandingStoreOrIndividual extends StatelessWidget {
             controller: landingStoreOrIndividualController.nameController,
             hintText: "Name",
             keyboardType: TextInputType.name,
+            maxLength: 20,
           ),
         ),
         SizedBox(height: 0),
@@ -67,13 +68,8 @@ class LandingStoreOrIndividual extends StatelessWidget {
         LandingPageButton(
           text: 'Next',
           onPressed: () {
-            // var phoneNumber = "+94" +
-            //     authPageController.phoneNumberInputController.value.text;
-            // print(phoneNumber);
-            // authPageController.phoneNumberEnteredTrue();
-            // authPageController.phoneAuth(phoneNumber);
-            /*  landingPagesController.increaseStepCounter();
-            landingPagesController.nextLandingPage(); */
+            landingPagesController.increaseStepCounter();
+            landingPagesController.nextLandingPage();
 
             landingStoreOrIndividualController.writeToStorage();
           },

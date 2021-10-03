@@ -15,6 +15,7 @@ class LandingStoreOrIndividualController extends GetxController {
     _getStorage.write(UiUtil.STOREINDIVIDUAL, storeIndividual.value); */
 
     print(nameController.text);
+    print(storeIndividual);
   }
 
   void updateStoreIndividual(StoreIndividual? newStoreIndividual) {
@@ -24,4 +25,4 @@ class LandingStoreOrIndividualController extends GetxController {
 }
 
 /// Used maintain whether the app is store or indiviual
-enum StoreIndividual { STORE, INDIVIDUAL }
+enum StoreIndividual { INDIVIDUAL, STORE }

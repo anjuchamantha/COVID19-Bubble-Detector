@@ -47,6 +47,18 @@ class LandingPageStoreOrIndividualState extends LandingPageState {
 class LandingPageBluetoothState extends LandingPageState {
   @override
   LandingPageState nextState() {
+    return LandingPageLoadingtate();
+  }
+
+  @override
+  Type current() {
+    return this.runtimeType;
+  }
+}
+
+class LandingPageLoadingtate extends LandingPageState {
+  @override
+  LandingPageState nextState() {
     // TODO: implement nextState
     throw UnimplementedError();
   }

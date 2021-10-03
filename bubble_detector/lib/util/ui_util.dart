@@ -1,3 +1,4 @@
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -12,5 +13,10 @@ abstract class UiUtil {
     if (await canLaunch('tel:$number')) {
       await launch('tel:$number');
     }
+  }
+
+  /// Used to enable bluetooth
+  static Future<bool?> enableBluetooth() async {
+    return FlutterBluetoothSerial.instance.requestEnable();
   }
 }
