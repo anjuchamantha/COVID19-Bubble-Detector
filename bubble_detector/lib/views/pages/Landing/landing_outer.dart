@@ -37,16 +37,6 @@ class LandingOuter extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-/*             GetX<LandingPagesController>(
-              builder: (controller) {
-                print(2);
-                return Expanded(
-                  child: _landingPageWidget(
-                    landingPagesController.landingPageState.value,
-                  ),
-                );
-              },
-            ), */
             GetBuilder<LandingPagesController>(
               builder: (controller) => Expanded(
                 child: _landingPageWidget(
@@ -54,13 +44,6 @@ class LandingOuter extends StatelessWidget {
                 ),
               ),
             ),
-            /*  Obx(
-              () => Expanded(
-                child: _landingPageWidget(
-                  landingPagesController.landingPageState.value,
-                ),
-              ),
-            ), */
           ],
         ),
       ),
@@ -80,17 +63,4 @@ class LandingOuter extends StatelessWidget {
         return Container();
     }
   }
-
-/*   Widget _landingPageWidget(int landingPageState) {
-    switch (landingPageState) {
-      case 1:
-        return LandingPhoneNumber();
-
-      case 2:
-        return LandingOtp();
-
-      default:
-        return Container();
-    }
-  } */
 }
