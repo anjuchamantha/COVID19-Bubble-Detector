@@ -1,3 +1,5 @@
+import 'package:bubble_detector/views/pages/Landing/landing.dart';
+
 import '../../../controllers/page_state_contollers/auth_page_controller.dart';
 import '../../../controllers/page_state_contollers/LandingPagesController/landing_pages_controller.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +10,7 @@ import '../../widgets/landin_page_body_text.dart';
 import '../../widgets/landing_page_button.dart';
 import '../../widgets/landing_page_textfield.dart';
 
-class LandingPhoneNumber extends StatelessWidget {
+class LandingPhoneNumber extends StatelessWidget implements Landing {
   @override
   Widget build(BuildContext context) {
     final AuthPageController authPageController = Get.find();
@@ -51,11 +53,14 @@ class LandingPhoneNumber extends StatelessWidget {
             // authPageController.phoneNumberEnteredTrue();
             // authPageController.phoneAuth(phoneNumber);
             landingPagesController.increaseStepCounter();
-            landingPagesController.nextLandingPage();
+            landingPagesController.nextLandingPage(this.landingId);
           },
         ),
         Spacer(),
       ],
     );
   }
+
+  @override
+  final int landingId = 1;
 }

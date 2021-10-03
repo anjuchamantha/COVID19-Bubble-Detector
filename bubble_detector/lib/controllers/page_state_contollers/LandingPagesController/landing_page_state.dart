@@ -9,7 +9,7 @@ abstract class LandingPageState {
   }
 
   LandingPageState nextState();
-  String current();
+  Type current();
 }
 
 class LandingPagePhoneNumberState extends LandingPageState {
@@ -19,8 +19,8 @@ class LandingPagePhoneNumberState extends LandingPageState {
   }
 
   @override
-  String current() {
-    return this.runtimeType.toString();
+  Type current() {
+    return this.runtimeType;
   }
 }
 
@@ -31,8 +31,8 @@ class LandingPageOtpState extends LandingPageState {
   }
 
   @override
-  String current() {
-    return this.runtimeType.toString();
+  Type current() {
+    return this.runtimeType;
   }
 }
 
@@ -43,8 +43,8 @@ class LandingPageStoreOrIndividualState extends LandingPageState {
   }
 
   @override
-  String current() {
-    return this.runtimeType.toString();
+  Type current() {
+    return this.runtimeType;
   }
 }
 
@@ -56,7 +56,7 @@ class LandingPageBluetoothState extends LandingPageState {
   }
 
   @override
-  String current() {
-    return this.runtimeType.toString();
+  Type current() {
+    return this.runtimeType;
   }
 }
