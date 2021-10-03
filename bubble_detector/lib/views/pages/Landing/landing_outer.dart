@@ -1,10 +1,8 @@
-import '../../../controllers/page_state_contollers/LandingPagesController/landing_page_state.dart';
-
-import '../../../controllers/page_state_contollers/auth_page_controller.dart';
-import '../../../controllers/page_state_contollers/LandingPagesController/landing_pages_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/page_state_contollers/LandingPagesController/landing_page_state.dart';
+import '../../../controllers/page_state_contollers/LandingPagesController/landing_pages_controller.dart';
 import '../../widgets/landing_step_progress.dart';
 import 'landing_otp.dart';
 import 'landing_phone_number.dart';
@@ -14,7 +12,6 @@ class LandingOuter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AuthPageController authPageController = Get.find();
     final LandingPagesController landingPagesController = Get.find();
 
     return Scaffold(
@@ -70,7 +67,7 @@ class LandingOuter extends StatelessWidget {
     );
   }
 
-/*   Widget _landingPageWidget(LandingPageState landingPageState) {
+  Widget _landingPageWidget(LandingPageState landingPageState) {
     print(landingPageState.current());
     switch (landingPageState.current()) {
       case LandingPagePhoneNumberState:
@@ -82,11 +79,9 @@ class LandingOuter extends StatelessWidget {
       default:
         return Container();
     }
-  } */
+  }
 
-  Widget _landingPageWidget(int landingPageState) {
-    print(landingPageState);
-    print('asdddddddddddddddddddddddd');
+/*   Widget _landingPageWidget(int landingPageState) {
     switch (landingPageState) {
       case 1:
         return LandingPhoneNumber();
@@ -97,5 +92,5 @@ class LandingOuter extends StatelessWidget {
       default:
         return Container();
     }
-  }
+  } */
 }

@@ -1,7 +1,3 @@
-import '../../../views/pages/Landing/landing_otp.dart';
-import '../../../views/pages/Landing/landing_phone_number.dart';
-import 'package:flutter/material.dart';
-
 /// Used to change the pages of the Landing Pages
 abstract class LandingPageState {
   static LandingPageState initial() {

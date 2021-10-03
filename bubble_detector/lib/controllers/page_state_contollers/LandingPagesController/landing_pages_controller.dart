@@ -1,18 +1,16 @@
 import 'package:get/get.dart';
 
-import '../../../views/pages/Landing/landing_otp.dart';
-import '../../../views/pages/Landing/landing_phone_number.dart';
+import 'landing_page_state.dart';
 
 class LandingPagesController extends GetxController {
   RxInt stepCounter = 1.obs;
-  var landingPageState = LandingPhoneNumber().landingId.obs;
+  Rx<LandingPageState> landingPageState = LandingPagePhoneNumberState().obs;
+  //var landingPageState = LandingPhoneNumber().landingId.obs;
   void increaseStepCounter() => stepCounter++;
 
   /// This returns the next state of the Landing Page Series
-  /// [1] - [LandingPhoneNumber]
-  /// [2] - [LandingOtp]
-  void nextLandingPage(int landingId) {
-    landingPageState = landingId.obs + 1;
+  void nextLandingPage() {
+    landingPageState = landingPageState.value.nextState().obs;
     this.update();
   }
 }

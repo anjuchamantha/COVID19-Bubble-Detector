@@ -1,4 +1,4 @@
-import 'package:bubble_detector/views/pages/Landing/landing.dart';
+import 'landing.dart';
 
 import '../../../controllers/page_state_contollers/auth_page_controller.dart';
 import '../../../controllers/page_state_contollers/LandingPagesController/landing_pages_controller.dart';
@@ -53,7 +53,7 @@ class LandingPhoneNumber extends StatelessWidget implements Landing {
             // authPageController.phoneNumberEnteredTrue();
             // authPageController.phoneAuth(phoneNumber);
             landingPagesController.increaseStepCounter();
-            landingPagesController.nextLandingPage(this.landingId);
+            landingPagesController.nextLandingPage();
           },
         ),
         Spacer(),
