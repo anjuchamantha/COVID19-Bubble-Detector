@@ -1,9 +1,7 @@
-import 'package:bubble_detector/views/pages/Landing/landing_otp.dart';
-import 'package:bubble_detector/views/pages/Landing/landing_phone_number.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'landing_page_state.dart';
+import '../../../views/pages/Landing/landing_otp.dart';
+import '../../../views/pages/Landing/landing_phone_number.dart';
 
 class LandingPagesController extends GetxController {
   RxInt stepCounter = 1.obs;

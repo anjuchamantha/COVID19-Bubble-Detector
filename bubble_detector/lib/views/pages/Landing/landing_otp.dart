@@ -1,12 +1,12 @@
-import '../../../controllers/page_state_contollers/auth_page_controller.dart';
-import '../../../controllers/page_state_contollers/LandingPagesController/landing_pages_controller.dart';
-import '../../widgets/landing_page_textfield.dart';
-import 'package:get/get.dart';
-
-import '../../widgets/landin_page_body_text.dart';
-import '../../widgets/landing_page_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+
+import '../../../controllers/page_state_contollers/LandingPagesController/landing_pages_controller.dart';
+import '../../../controllers/page_state_contollers/auth_page_controller.dart';
+import '../../widgets/landin_page_body_text.dart';
+import '../../widgets/landing_page_button.dart';
+import '../../widgets/landing_page_textfield.dart';
 
 class LandingOtp extends StatelessWidget {
   const LandingOtp({Key? key}) : super(key: key);
