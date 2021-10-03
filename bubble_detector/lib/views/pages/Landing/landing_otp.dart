@@ -1,4 +1,3 @@
-import 'landing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -9,7 +8,7 @@ import '../../widgets/landin_page_body_text.dart';
 import '../../widgets/landing_page_button.dart';
 import '../../widgets/landing_page_textfield.dart';
 
-class LandingOtp extends StatelessWidget implements Landing {
+class LandingOtp extends StatelessWidget {
   const LandingOtp({Key? key}) : super(key: key);
 
   @override
@@ -67,6 +66,7 @@ class LandingOtp extends StatelessWidget implements Landing {
             // authPageController.otp.value = otp;
 
             landingPagesController.increaseStepCounter();
+            landingPagesController.nextLandingPage();
           },
         ),
         SizedBox(
@@ -86,7 +86,4 @@ class LandingOtp extends StatelessWidget implements Landing {
       ],
     );
   }
-
-  @override
-  final int landingId = 2;
 }

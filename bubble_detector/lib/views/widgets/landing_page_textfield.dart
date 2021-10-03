@@ -7,6 +7,7 @@ class LandingPageTextField extends StatelessWidget {
   final int maxLength;
   final TextAlign textAlign;
   final TextEditingController controller;
+  final TextInputType keyboardType;
 
   const LandingPageTextField({
     Key? key,
@@ -15,12 +16,14 @@ class LandingPageTextField extends StatelessWidget {
     this.labelText = '',
     this.maxLength = 1,
     this.textAlign = TextAlign.center,
+    this.keyboardType = const TextInputType.numberWithOptions(decimal: true),
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      autofocus: true,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(40.0)),
@@ -51,7 +54,7 @@ class LandingPageTextField extends StatelessWidget {
         FilteringTextInputFormatter.digitsOnly,
       ],
       textAlign: textAlign,
-      keyboardType: TextInputType.numberWithOptions(decimal: true),
+      keyboardType: this.keyboardType,
     );
   }
 }

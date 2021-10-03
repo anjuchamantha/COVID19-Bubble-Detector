@@ -6,6 +6,7 @@ import '../../../controllers/page_state_contollers/LandingPagesController/landin
 import '../../widgets/landing_step_progress.dart';
 import 'landing_otp.dart';
 import 'landing_phone_number.dart';
+import 'landing_store_or_individual.dart';
 
 class LandingOuter extends StatelessWidget {
   const LandingOuter({Key? key}) : super(key: key);
@@ -40,7 +41,7 @@ class LandingOuter extends StatelessWidget {
             GetBuilder<LandingPagesController>(
               builder: (controller) => Expanded(
                 child: _landingPageWidget(
-                  landingPagesController.landingPageState.value,
+                  controller.landingPageState.value,
                 ),
               ),
             ),
@@ -58,6 +59,9 @@ class LandingOuter extends StatelessWidget {
 
       case LandingPageOtpState:
         return LandingOtp();
+
+      case LandingPageStoreOrIndividualState:
+        return LandingStoreOrIndividual();
 
       default:
         return Container();

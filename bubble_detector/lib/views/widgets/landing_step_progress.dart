@@ -8,10 +8,13 @@ class LandingStepProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StepProgressIndicator(
-        totalSteps: 6,
-        currentStep: this.currentStep,
-        selectedColor: Theme.of(context).primaryColor,
-        unselectedColor: Theme.of(context).secondaryHeaderColor);
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: StepProgressIndicator(
+          totalSteps: 6,
+          currentStep: this.currentStep,
+          selectedColor: Theme.of(context).primaryColor,
+          unselectedColor: Theme.of(context).secondaryHeaderColor),
+    );
   }
 }
