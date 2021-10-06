@@ -1,3 +1,4 @@
+import 'package:bubble_detector/controllers/database_controllers/user_controller.dart';
 import 'package:get/get.dart';
 
 import '../controllers/page_state_contollers/LandingPagesController/landing_pages_controller.dart';
@@ -10,5 +11,6 @@ class LandingOuterBinding implements Bindings {
     Get.lazyPut(() => AuthPageController());
     Get.lazyPut(() => LandingPagesController());
     Get.lazyPut(() => LandingStoreOrIndividualController());
+    Get.lazyPut(() => UserController());
   }
 }

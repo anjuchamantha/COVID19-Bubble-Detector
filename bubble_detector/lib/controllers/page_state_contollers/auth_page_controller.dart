@@ -73,8 +73,13 @@ class AuthPageController extends GetxController {
             landingPagesController.increaseStepCounter();
             landingPagesController.nextLandingPage();
           } catch (e) {
-            Get.snackbar("ERROR", "Invalid OTP", duration: 5000.milliseconds);
-            print(e.toString());
+            if (e.hashCode == 21005953 && auth.currentUser != null) {
+              print("User alredy logged in via Automatic Login");
+            } else {
+              Get.snackbar("ERROR", "Invalid OTP", duration: 5000.milliseconds);
+              print(e.toString());
+              print(e.hashCode);
+            }
             otp.value = "";
             this.phoneAuth();
           }
