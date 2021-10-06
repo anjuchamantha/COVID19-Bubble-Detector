@@ -60,10 +60,10 @@ class LandingOtp extends StatelessWidget {
         LandingPageButton(
           text: 'Next',
           onPressed: () {
-            // authPageController.otpEntered.value = true;
-            // var otp = authPageController.otpInputController.text.toString();
-            // print(otp);
-            // authPageController.otp.value = otp;
+            authPageController.otpEntered.value = true;
+            var otp = authPageController.otpInputController.text.toString();
+            print(otp);
+            authPageController.otp.value = otp;
 
             landingPagesController.increaseStepCounter();
             landingPagesController.nextLandingPage();

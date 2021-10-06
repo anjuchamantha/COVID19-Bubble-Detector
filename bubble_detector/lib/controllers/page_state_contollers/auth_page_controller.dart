@@ -2,7 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'LandingPagesController/landing_pages_controller.dart';
+
 class AuthPageController extends GetxController {
+  final LandingPagesController landingPagesController = Get.find();
+
   final phoneNumberInputController = TextEditingController();
   final otpInputController = TextEditingController();
 
@@ -35,6 +39,9 @@ class AuthPageController extends GetxController {
             Get.snackbar("SMS OTP", "Automatic Login Successful");
             isLoading.value = false;
             authStatus.value = "login successfully";
+
+            landingPagesController.increaseStepCounter();
+            landingPagesController.nextLandingPage();
           }
         },
         verificationFailed: (FirebaseAuthException e) {

@@ -45,11 +45,12 @@ class LandingPhoneNumber extends StatelessWidget {
         LandingPageButton(
           text: 'Next',
           onPressed: () {
-            // var phoneNumber = "+94" +
-            //     authPageController.phoneNumberInputController.value.text;
-            // print(phoneNumber);
-            // authPageController.phoneNumberEnteredTrue();
-            // authPageController.phoneAuth(phoneNumber);
+            var phoneNumber = "+94" +
+                authPageController.phoneNumberInputController.value.text;
+            print(phoneNumber);
+            authPageController.phoneNumberEnteredTrue();
+            authPageController.phoneAuth(phoneNumber);
+
             landingPagesController.increaseStepCounter();
             landingPagesController.nextLandingPage();
           },
