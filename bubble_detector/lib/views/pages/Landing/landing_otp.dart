@@ -57,17 +57,22 @@ class LandingOtp extends StatelessWidget {
           ),
         ),
         Spacer(),
-        LandingPageButton(
-          text: 'Next',
-          onPressed: () {
-            authPageController.otpEntered.value = true;
-            var otp = authPageController.otpInputController.text.toString();
-            print(otp);
-            authPageController.otp.value = otp;
+        Obx(
+          () => (authPageController.otp.value != "")
+              ? CircularProgressIndicator()
+              : LandingPageButton(
+                  text: 'Next',
+                  onPressed: () {
+                    // authPageController.otpEntered.value = true;
+                    var _otp =
+                        authPageController.otpInputController.text.toString();
+                    print(_otp);
+                    authPageController.otp.value = _otp;
 
-            landingPagesController.increaseStepCounter();
-            landingPagesController.nextLandingPage();
-          },
+                    // landingPagesController.increaseStepCounter();
+                    // landingPagesController.nextLandingPage();
+                  },
+                ),
         ),
         SizedBox(
           height: 15,
