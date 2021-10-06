@@ -1,11 +1,10 @@
 import 'dart:ui';
 
-import 'package:bubble_detector/util/ui_util.dart';
-import 'package:bubble_detector/util/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:url_launcher/url_launcher.dart';
 
+import '../../../util/theme.dart';
+import '../../../util/ui_util.dart';
 import '../../widgets/landin_page_body_text.dart';
 
 class EmergencyContactPage extends StatelessWidget {

@@ -1,9 +1,8 @@
-import 'package:bubble_detector/controllers/auth_controller.dart';
-import 'package:bubble_detector/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../../util/routes.dart';
 import '../../widgets/landin_page_body_text.dart';
 import '../../widgets/landing_page_button.dart';
 

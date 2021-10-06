@@ -1,11 +1,12 @@
-import 'package:bubble_detector/controllers/page_state_contollers/auth_page_controller.dart';
-import 'package:bubble_detector/views/widgets/landing_page_textfield.dart';
-import 'package:get/get.dart';
-
-import '../../widgets/landin_page_body_text.dart';
-import '../../widgets/landing_page_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+
+import '../../../controllers/page_state_contollers/LandingPagesController/landing_pages_controller.dart';
+import '../../../controllers/page_state_contollers/auth_page_controller.dart';
+import '../../widgets/landin_page_body_text.dart';
+import '../../widgets/landing_page_button.dart';
+import '../../widgets/landing_page_textfield.dart';
 
 class LandingOtp extends StatelessWidget {
   const LandingOtp({Key? key}) : super(key: key);
@@ -13,6 +14,8 @@ class LandingOtp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthPageController authPageController = Get.find();
+    final LandingPagesController landingPagesController = Get.find();
+
     return Column(
       children: [
         Padding(
@@ -61,6 +64,9 @@ class LandingOtp extends StatelessWidget {
             var otp = authPageController.otpInputController.text.toString();
             print(otp);
             authPageController.otp.value = otp;
+
+            landingPagesController.increaseStepCounter();
+            landingPagesController.nextLandingPage();
           },
         ),
         SizedBox(

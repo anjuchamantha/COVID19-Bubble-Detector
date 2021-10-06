@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "944555507589-rf1a83hvuv108gv9kbucn8qsbvqltllk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bubble_detector",
+            "certificate_hash": "df2e9f73eaa653be043a1fcbb21d41fec99b18d3"
+          }
+        },
+        {
           "client_id": "944555507589-7p98bot0nnkdnkfu1577t3ck19nehn16.apps.googleusercontent.com",
           "client_type": 3
         }
