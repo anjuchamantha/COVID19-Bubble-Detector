@@ -57,22 +57,19 @@ class LandingOtp extends StatelessWidget {
           ),
         ),
         Spacer(),
-        Obx(
-          () => (authPageController.otp.value != "")
-              ? CircularProgressIndicator()
-              : LandingPageButton(
-                  text: 'Next',
-                  onPressed: () {
-                    // authPageController.otpEntered.value = true;
-                    var _otp =
-                        authPageController.otpInputController.text.toString();
-                    print(_otp);
-                    authPageController.otp.value = _otp;
-
-                    // landingPagesController.increaseStepCounter();
-                    // landingPagesController.nextLandingPage();
-                  },
-                ),
+        Obx(() => (authPageController.otp.value != "")
+            ? Padding(
+                padding: const EdgeInsets.only(bottom: 24),
+                child: CircularProgressIndicator(),
+              )
+            : Container()),
+        LandingPageButton(
+          text: 'Next',
+          onPressed: () {
+            var _otp = authPageController.otpInputController.text.toString();
+            print(_otp);
+            authPageController.otp.value = _otp;
+          },
         ),
         SizedBox(
           height: 15,
@@ -80,7 +77,9 @@ class LandingOtp extends StatelessWidget {
         LandingPageButton(
           secondary: true,
           text: 'I didn’t get the code',
-          onPressed: () {},
+          onPressed: () {
+            authPageController.phoneAuth();
+          },
         ),
         /* Divider(),
         LandingPageButton(

@@ -12,6 +12,7 @@ class AuthPageController extends GetxController {
   var verId = '';
 
   final otp = "".obs;
+  final phone = "".obs;
 
   Future<void> _waitOtp() async {
     if (otp.value == "") {
@@ -20,20 +21,26 @@ class AuthPageController extends GetxController {
     }
   }
 
-  phoneAuth(String phoneNumber) async {
+  phoneAuth([String? phoneNumber]) async {
+    if (phoneNumber != null) {
+      phone.value = phoneNumber;
+    }
+
     await auth.verifyPhoneNumber(
         timeout: Duration(seconds: 120),
-        phoneNumber: phoneNumber,
+        phoneNumber: phone.value,
         verificationCompleted: (PhoneAuthCredential credential) async {
           otp.value = credential.toString();
-          await auth.signInWithCredential(credential);
-          if (auth.currentUser != null) {
-            Get.snackbar("SMS OTP", "Automatic Login Successful");
+          try {
+            await auth.signInWithCredential(credential);
+            Get.snackbar(
+                "Login Successful", "SMS OTP Automatic Login Successful");
 
             landingPagesController.increaseStepCounter();
             landingPagesController.nextLandingPage();
-          } else {
-            Get.snackbar("ERROR", "Error in Automatic Login");
+          } catch (e) {
+            Get.snackbar("ERROR", e.toString(), duration: 5000.milliseconds);
+            print(e.toString());
           }
         },
         verificationFailed: (FirebaseAuthException e) {
@@ -52,21 +59,24 @@ class AuthPageController extends GetxController {
           await _waitOtp();
 
           String smsCode = otp.value.toString();
-          print(smsCode);
+          print("OTP: " + smsCode);
           // Create a PhoneAuthCredential with the code
           PhoneAuthCredential credential = PhoneAuthProvider.credential(
               verificationId: verificationId, smsCode: smsCode);
           // Sign the user with the credential
           // Get.snackbar("SMS OTP", "Sign in with sms code");
           print("[SMS OTP] Sign in with sms code");
-          await auth.signInWithCredential(credential);
-          if (auth.currentUser != null) {
-            Get.snackbar("SMS OTP", "Login Successful");
+          try {
+            await auth.signInWithCredential(credential);
+            Get.snackbar("Login Successful", "SMS OTP Login Successful");
 
             landingPagesController.increaseStepCounter();
             landingPagesController.nextLandingPage();
-          } else {
-            Get.snackbar("ERROR", "Error SMS-OTP Login");
+          } catch (e) {
+            Get.snackbar("ERROR", "Invalid OTP", duration: 5000.milliseconds);
+            print(e.toString());
+            otp.value = "";
+            this.phoneAuth();
           }
         },
         codeAutoRetrievalTimeout: (String id) {
