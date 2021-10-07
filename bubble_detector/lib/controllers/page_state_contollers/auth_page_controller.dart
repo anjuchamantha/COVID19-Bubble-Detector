@@ -30,7 +30,7 @@ class AuthPageController extends GetxController {
         timeout: Duration(seconds: 120),
         phoneNumber: phone.value,
         verificationCompleted: (PhoneAuthCredential credential) async {
-          otp.value = credential.toString();
+          // otp.value = credential.toString();
           try {
             await auth.signInWithCredential(credential);
             Get.snackbar(
