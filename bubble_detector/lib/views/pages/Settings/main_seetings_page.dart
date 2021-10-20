@@ -1,11 +1,11 @@
 import 'dart:async';
 
+import 'package:bubble_detector/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:get/instance_manager.dart';
 import 'background_collecting_task.dart';
-import 'discovery_page.dart';
-
-// import './helpers/LineChart.dart';
+import 'package:get/get.dart';
 
 class MainSettingsPage extends StatefulWidget {
   @override
@@ -84,7 +84,7 @@ class _MainPage extends State<MainSettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bluetooth Settings'),
+        title: const Text('Settings'),
       ),
       body: Container(
         child: ListView(
@@ -187,21 +187,16 @@ class _MainPage extends State<MainSettingsPage> {
             ListTile(
               title: ElevatedButton(
                   child: const Text('Explore discovered devices'),
-                  onPressed: () async {
-                    final BluetoothDevice? selectedDevice =
-                        await Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return DiscoveryPage();
-                        },
-                      ),
-                    );
-
-                    if (selectedDevice != null) {
-                      print('Discovery -> selected ' + selectedDevice.address);
-                    } else {
-                      print('Discovery -> no device selected');
-                    }
+                  onPressed: () {
+                    // final BluetoothDevice? selectedDevice =
+                    //     await Navigator.of(context).push(
+                    //   MaterialPageRoute(
+                    //     builder: (context) {
+                    //       return DiscoveryPage();
+                    //     },
+                    //   ),
+                    // );
+                    Get.toNamed(AppRoutes.DISCOVERY);
                   }),
             ),
           ],

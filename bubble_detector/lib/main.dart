@@ -1,3 +1,4 @@
+import 'package:bubble_detector/views/pages/Settings/discovery_page.dart';
 import 'package:bubble_detector/views/pages/Settings/main_seetings_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,10 @@ void main() async {
         GetPage(
           name: AppRoutes.SETTINGS,
           page: () => MainSettingsPage(),
-          // binding: HomePageBinding(),
+        ),
+        GetPage(
+          name: AppRoutes.DISCOVERY,
+          page: () => DiscoveryPage(),
         ),
       ],
     ),
