@@ -23,8 +23,6 @@ class _MainPage extends State<MainSettingsPage> {
 
   BackgroundCollectingTask? _collectingTask;
 
-  bool _autoAcceptPairingRequests = false;
-
   @override
   void initState() {
     super.initState();
@@ -148,7 +146,7 @@ class _MainPage extends State<MainSettingsPage> {
                     onPressed: () async {
                       print('Discoverable requested');
                       final int timeout = (await FlutterBluetoothSerial.instance
-                          .requestDiscoverable(60))!;
+                          .requestDiscoverable(360))!;
                       if (timeout < 0) {
                         print('Discoverable mode denied');
                       } else {
@@ -188,14 +186,6 @@ class _MainPage extends State<MainSettingsPage> {
               title: ElevatedButton(
                   child: const Text('Explore discovered devices'),
                   onPressed: () {
-                    // final BluetoothDevice? selectedDevice =
-                    //     await Navigator.of(context).push(
-                    //   MaterialPageRoute(
-                    //     builder: (context) {
-                    //       return DiscoveryPage();
-                    //     },
-                    //   ),
-                    // );
                     Get.toNamed(AppRoutes.DISCOVERY);
                   }),
             ),
