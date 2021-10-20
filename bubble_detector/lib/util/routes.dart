@@ -5,4 +5,5 @@ class AppRoutes {
   static const String LANDING_OUTER = '/landing_outer';
   static const String HOME = '/home';
   static const String SECOND = '/second';
+  static const String SETTINGS = '/settings';
 }
