@@ -1,3 +1,4 @@
+import 'package:bubble_detector/controllers/database_controllers/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -68,10 +69,11 @@ class LandingStoreOrIndividual extends StatelessWidget {
         LandingPageButton(
           text: 'Next',
           onPressed: () {
+            landingStoreOrIndividualController.addUser();
             landingPagesController.increaseStepCounter();
             landingPagesController.nextLandingPage();
 
-            landingStoreOrIndividualController.writeToStorage();
+            // landingStoreOrIndividualController.writeToStorage();
           },
         ),
         Spacer(),

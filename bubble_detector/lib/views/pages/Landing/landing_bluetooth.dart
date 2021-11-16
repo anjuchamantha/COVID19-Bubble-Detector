@@ -1,3 +1,4 @@
+import 'package:bubble_detector/util/routes.dart';
 import 'package:bubble_detector/util/ui_util.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
@@ -50,8 +51,9 @@ class LandingBluetooth extends StatelessWidget {
                     'Bluetooth Enabled',
                     'Bluetooth successfully enabled.',
                   );
-                  landingPagesController.increaseStepCounter();
-                  landingPagesController.nextLandingPage();
+                  // landingPagesController.increaseStepCounter();
+                  // landingPagesController.nextLandingPage();
+                  Get.toNamed(AppRoutes.HOME);
                 } else {
                   Get.snackbar(
                     'Bluetooth not Enabled',

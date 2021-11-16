@@ -1,4 +1,6 @@
+import 'package:bubble_detector/util/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'emergency_contact_page.dart';
 
@@ -22,14 +24,30 @@ class HomePage extends StatelessWidget {
               Tab(icon: Icon(Icons.directions_bike)),
             ],
             labelColor: Theme.of(context).primaryColor,
-            unselectedLabelColor: Theme.of(context).scaffoldBackgroundColor,
+            unselectedLabelColor: Colors.grey[400],
             indicatorColor: Colors.transparent,
             indicatorWeight: 0.1,
           ),
-          title: Image(
-            image: AssetImage('images/logo.png'),
-            width: 150,
+          // title: Image(
+          //   image: AssetImage('images/logo.png'),
+          //   width: 150,
+          // ),
+          title: Text(
+            "Bubble Detector",
+            style: TextStyle(color: Colors.black),
           ),
+          actions: [
+            Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                    onPressed: () {
+                      Get.toNamed(AppRoutes.SETTINGS);
+                    },
+                    icon: Icon(
+                      Icons.settings,
+                      color: Colors.black,
+                    ))),
+          ],
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         ),
         body: Column(
