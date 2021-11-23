@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:bubble_detector/controllers/bluetooth_controllers/main_bluetooth_controller.dart';
+import 'package:bubble_detector/controllers/database_controllers/bluetooth_db_controller.dart';
 import 'package:bubble_detector/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
@@ -22,6 +24,8 @@ class _MainPage extends State<MainSettingsPage> {
   int _discoverableTimeoutSecondsLeft = 0;
 
   BackgroundCollectingTask? _collectingTask;
+  BluetoothDBController bluetoothDBcontroller = Get.find();
+  MainBluetoothController bluetoothController = Get.find();
 
   @override
   void initState() {
@@ -188,6 +192,22 @@ class _MainPage extends State<MainSettingsPage> {
                   onPressed: () {
                     Get.toNamed(AppRoutes.DISCOVERY);
                   }),
+            ),
+            ListTile(
+              title: ElevatedButton(
+                child: const Text('Update Bluetooth Details'),
+                onPressed: () {
+                  bluetoothDBcontroller.updateUserBluetoothID(_address);
+                },
+              ),
+            ),
+            ListTile(
+              title: ElevatedButton(
+                child: const Text('Discover Nearby Devices'),
+                onPressed: () {
+                  bluetoothController.startDiscovery();
+                },
+              ),
             ),
           ],
         ),

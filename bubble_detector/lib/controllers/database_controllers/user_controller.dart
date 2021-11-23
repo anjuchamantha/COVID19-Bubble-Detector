@@ -23,4 +23,18 @@ class UserController extends GetxController {
       Get.snackbar("ERROR", "Error saving User Data.");
     });
   }
+
+  Future<void> updateUser(String key, String value) {
+    DocumentReference userRef =
+        FirebaseFirestore.instance.collection('users').doc(user!.uid);
+    return userRef.update({
+      key: value,
+    }).then((value) {
+      print("User $key updated");
+      Get.snackbar("Successfull", "User $key updated");
+    }).catchError((error) {
+      print("Failed to update user $key with value $value: Error - $error");
+      Get.snackbar("ERROR", "Failed to update user $key with value $value");
+    });
+  }
 }
