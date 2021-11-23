@@ -1,4 +1,3 @@
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:get/get.dart';
 
 class MainBluetoothController extends GetxController {

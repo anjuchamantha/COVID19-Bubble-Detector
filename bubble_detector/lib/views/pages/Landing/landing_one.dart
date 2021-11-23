@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -75,7 +76,10 @@ class LandingOne extends StatelessWidget {
             // Register button
             LandingPageButton(
               onPressed: () {
-                Get.toNamed(AppRoutes.LANDING_OUTER);
+                SchedulerBinding.instance!.addPostFrameCallback((_) {
+                  Get.offAllNamed(AppRoutes.LANDING_OUTER);
+                  //Get.toNamed(AppRoutes.LANDING_OUTER);
+                });
               },
               text: 'Register',
             ),

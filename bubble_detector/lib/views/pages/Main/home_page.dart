@@ -1,4 +1,4 @@
-import 'package:bubble_detector/util/routes.dart';
+import '../../../util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

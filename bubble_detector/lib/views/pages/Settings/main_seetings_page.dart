@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bubble_detector/util/routes.dart';
+import '../../../util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:get/instance_manager.dart';

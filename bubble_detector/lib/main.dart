@@ -1,5 +1,3 @@
-import 'package:bubble_detector/views/pages/Settings/discovery_page.dart';
-import 'package:bubble_detector/views/pages/Settings/main_seetings_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,6 +13,8 @@ import 'util/theme.dart';
 import 'views/pages/Landing/landing_one.dart';
 import 'views/pages/Landing/landing_outer.dart';
 import 'views/pages/Main/home_page.dart';
+import 'views/pages/Settings/discovery_page.dart';
+import 'views/pages/Settings/main_seetings_page.dart';
 import 'views/pages/splash_page.dart';
 
 void main() async {
@@ -30,7 +30,7 @@ void main() async {
     GetMaterialApp(
       initialBinding: AppBinding(),
       theme: PrimaryTheme.buildTheme(),
-      initialRoute: AppRoutes.LANDING_ONE,
+      initialRoute: AppRoutes.SPLASH,
       getPages: [
         GetPage(
           name: AppRoutes.SPLASH,

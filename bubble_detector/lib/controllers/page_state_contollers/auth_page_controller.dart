@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import 'LandingPagesController/landing_pages_controller.dart';
 
-class AuthPageController extends GetxController {
+class AuthPageController extends GetxController with StateMixin {
   final LandingPagesController landingPagesController = Get.find();
   final phoneNumberInputController = TextEditingController();
   final otpInputController = TextEditingController();
@@ -13,6 +13,12 @@ class AuthPageController extends GetxController {
 
   final otp = "".obs;
   final phone = "".obs;
+
+/*   @override
+  void onInit() {
+    checkUserLoggedIn();
+    super.onInit();
+  } */
 
   Future<void> _waitOtp() async {
     if (otp.value == "") {
