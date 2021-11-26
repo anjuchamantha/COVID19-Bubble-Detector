@@ -7,4 +7,5 @@ class AppRoutes {
   static const String SECOND = '/second';
   static const String SETTINGS = '/settings';
   static const String DISCOVERY = '/discovery';
+  static const String HEALTH_TIPS = '/health_tips';
 }
