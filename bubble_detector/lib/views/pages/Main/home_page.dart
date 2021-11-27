@@ -1,7 +1,9 @@
 import 'dart:ui';
 
+import 'package:bubble_detector/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../../util/theme.dart';
 import '../../../util/ui_util.dart';
@@ -28,58 +30,13 @@ class HomePage extends StatelessWidget {
       children: [
         // Title
         Padding(
-          padding: const EdgeInsets.only(left: 4.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
           child: Text(
-            'Emergency Contacts',
+            'Take your Virtual COVID Test',
             style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-              color: Theme.of(context).primaryColor,
-              letterSpacing: 0.15,
-            ),
-          ),
-        ),
-
-        SizedBox(height: 12),
-
-        // Main Contact Cards
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Expanded(
-              flex: 4,
-              child: MainContactCard(
-                title: 'Suwasariya',
-                number: '1990',
-                imageLocation: 'doc_emer_cont.svg',
-                cardColor: Theme.of(context).primaryColor,
-                textColor: Theme.of(context).scaffoldBackgroundColor,
-              ),
-            ),
-            Expanded(
-              flex: 3,
-              child: MainContactCard(
-                title: 'Police',
-                number: '119',
-                imageLocation: 'police_emer_cont.svg',
-                cardColor: ProjectColors.TERTIARY_COLOR,
-                textColor: ProjectColors.ACCENT_COLOR,
-              ),
-            ),
-          ],
-        ),
-
-        SizedBox(height: 16),
-
-        // Subtitle
-        Padding(
-          padding: const EdgeInsets.only(left: 4.0),
-          child: Text(
-            'Other Emergency Contacts',
-            style: TextStyle(
-              fontSize: 16,
+              fontSize: 14,
               color: ProjectColors.BLACK,
-              letterSpacing: 0.15,
+              letterSpacing: 0.2,
             ),
           ),
         ),
@@ -87,160 +44,140 @@ class HomePage extends StatelessWidget {
         SizedBox(height: 12),
 
         Expanded(
-          child: ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            padding: const EdgeInsets.all(8),
-            itemCount: name.length,
-            itemBuilder: (BuildContext context, int index) {
-              return InkWell(
-                onTap: () {
-                  UiUtil.telephone(phoneNumber[index]);
-                },
-                child: Container(
-                  height: 40,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.phone_rounded,
-                        color: ProjectColors.SECONDARY_BLACK,
-                      ),
-                      SizedBox(width: 15),
-                      Column(
+          child: Stack(
+            alignment: Alignment.topCenter,
+            children: [
+              Material(
+                color: const Color(0xcffFF8906),
+                child: InkWell(
+                  onTap: () {
+                    Get.toNamed(AppRoutes.COVID_TEST);
+                  },
+                  splashColor: ProjectColors.ACCENT_COLOR,
+                  child: Container(
+                    color: Colors.green[400],
+                    height: MediaQuery.of(context).size.height / 6,
+                    width: MediaQuery.of(context).size.width,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 20),
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          LandingPageBodyText(
-                            text: name[index],
-                            color: ProjectColors.SECONDARY_BLACK,
-                            fontWeight: FontWeight.w300,
-                          ),
                           Text(
-                            phoneNumber[index],
+                            'Seems like you are OK',
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 14,
+                              color: ProjectColors.BACKGROUND_COLOR,
                               fontWeight: FontWeight.w300,
+                              letterSpacing: 0.1,
                             ),
-                          )
+                          ),
+                          SizedBox(height: 8),
+                          Row(
+                            children: [
+                              Text(
+                                'Take the Virtual COVID Test',
+                                style: TextStyle(
+                                  fontSize: 23,
+                                  color: ProjectColors.BACKGROUND_COLOR,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Spacer(),
+                              Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                size: 14,
+                                color: ProjectColors.BACKGROUND_COLOR,
+                              )
+                            ],
+                          ),
                         ],
-                      )
-                    ],
-                  ),
-                ),
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) =>
-                const Divider(),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-/// Main Contact Card used on top of the emergency contact page
-class MainContactCard extends StatelessWidget {
-  final String title;
-  final String number;
-  final String imageLocation;
-  final Color cardColor;
-  final Color textColor;
-
-  const MainContactCard({
-    Key? key,
-    required this.title,
-    required this.number,
-    required this.imageLocation,
-    required this.cardColor,
-    required this.textColor,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 0.18 * MediaQuery.of(context).size.height,
-      child: InkWell(
-        onTap: () {
-          UiUtil.telephone(number);
-        },
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(11.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                // Title
-                LandingPageBodyText(
-                  text: this.title,
-                  color: this.textColor,
-                  fontWeight: FontWeight.w300,
-                ),
-
-                SizedBox(height: 10),
-
-                Expanded(
-                  child: Container(
-                    child: new Stack(
-                      children: <Widget>[
-                        // SVG Image
-                        new Align(
-                          alignment: Alignment.bottomRight,
-                          child: Opacity(
-                            opacity: 0.5,
-                            child: SvgPicture.asset('images/$imageLocation'),
-                          ),
-                        ),
-
-                        // number
-                        Text(
-                          this.number,
-                          style: TextStyle(
-                            fontSize: 60,
-                            fontWeight: FontWeight.w900,
-                            color: this.textColor,
-                            letterSpacing: 0.25,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
-              ],
-            ),
-          ),
-          color: this.cardColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
-            ),
+              ),
+              Positioned(
+                top: 100,
+                child: GestureDetector(
+                  onTap: () {
+                    Get.toNamed(AppRoutes.HEALTH_TIPS);
+                  },
+                  child: Container(
+                    height: MediaQuery.of(context).size.height / 7.2,
+                    width: MediaQuery.of(context).size.width / 1.05,
+                    padding: EdgeInsets.all(16),
+                    child: Row(
+                      children: [
+                        SvgPicture.asset('images/doc_emer_cont.svg'),
+                        SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Health Tips',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: ProjectColors.BLACK,
+                                  letterSpacing: 0.1,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              SizedBox(height: 4),
+                              Flexible(
+                                child: Text(
+                                  'What can you do to protect you and your loved ones from COVID 19',
+                                  softWrap: true,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: ProjectColors.ACCENT_COLOR,
+                                    letterSpacing: 0.2,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(width: 6),
+                        Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          color: ProjectColors.ACCENT_COLOR,
+                          size: 16,
+                        ),
+                      ],
+                    ),
+                    decoration: new BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        new BoxShadow(
+                          color: Colors.black.withOpacity(0.04),
+                          blurRadius: 24.0,
+                          offset: Offset(0, 16),
+                        ),
+                        new BoxShadow(
+                          color: Colors.black.withOpacity(0.04),
+                          blurRadius: 8.0,
+                          offset: Offset(0, 4),
+                        ),
+                        new BoxShadow(
+                          color: Colors.black.withOpacity(0.04),
+                          blurRadius: 1.0,
+                          offset: Offset(0, 0),
+                        ),
+                      ],
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-      ),
-      decoration: new BoxDecoration(
-        boxShadow: [
-          new BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 32.0,
-            offset: Offset(0, 24),
-          ),
-          new BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 24.0,
-            offset: Offset(0, 16),
-          ),
-          new BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 8.0,
-            offset: Offset(0, 4),
-          ),
-          new BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 1.0,
-            offset: Offset(0, 0),
-          ),
-        ],
-        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-      ),
+      ],
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:bubble_detector/util/theme.dart';
 import 'package:bubble_detector/views/pages/Main/home_page.dart';
 
 import '../../../util/routes.dart';
@@ -36,16 +37,29 @@ class Home extends StatelessWidget {
             width: 150,
           ),
           actions: [
-            Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: IconButton(
-                    onPressed: () {
-                      Get.toNamed(AppRoutes.SETTINGS);
-                    },
-                    icon: Icon(
-                      Icons.settings_outlined,
-                      color: Colors.grey[400],
-                    ))),
+            PopupMenuButton(
+              itemBuilder: (context) => [
+                PopupMenuItem<int>(
+                  value: 0,
+                  child: Text(
+                    "Settings",
+                    style: TextStyle(
+                      color: ProjectColors.BLACK,
+                    ),
+                  ),
+                ),
+              ],
+              icon: Icon(
+                Icons.more_vert,
+                color: ProjectColors.ACCENT_COLOR,
+              ),
+              onSelected: (item) {
+                switch (item) {
+                  case 0:
+                    Get.toNamed(AppRoutes.SETTINGS);
+                }
+              },
+            ),
           ],
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         ),
@@ -56,19 +70,15 @@ class Home extends StatelessWidget {
               transform: Matrix4.translationValues(0.0, -6.0, 0.0),
             ),
             Expanded(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12.0, vertical: 0),
-                child: SafeArea(
-                  child: TabBarView(
-                    children: [
-                      HomePage(),
-                      EmergencyContactPage(),
-                      EmergencyContactPage(),
-                      EmergencyContactPage(),
-                    ],
-                    physics: BouncingScrollPhysics(),
-                  ),
+              child: SafeArea(
+                child: TabBarView(
+                  children: [
+                    HomePage(),
+                    EmergencyContactPage(),
+                    EmergencyContactPage(),
+                    EmergencyContactPage(),
+                  ],
+                  physics: BouncingScrollPhysics(),
                 ),
               ),
             ),

@@ -20,7 +20,7 @@ class _SplashPageState extends State<SplashPage> {
       Future.delayed(Duration(seconds: 2), () {
         bool user = splashController.checkUserLoggedIn();
         if (user) {
-          Get.toNamed(AppRoutes.COVID_TEST);
+          Get.toNamed(AppRoutes.HOME);
         } else {
           Get.toNamed(AppRoutes.LANDING_ONE);
         }

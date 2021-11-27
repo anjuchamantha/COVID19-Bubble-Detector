@@ -25,7 +25,7 @@ class CovidTestPage extends StatelessWidget {
               style: TextStyle(
                 color: ProjectColors.PRIMARY_COLOR,
                 fontSize: 22,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w700,
               ),
             ),
             SizedBox(height: 64),
@@ -37,7 +37,7 @@ class CovidTestPage extends StatelessWidget {
             Text(
               'I tested',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16, color: Colors.black54),
+              style: TextStyle(fontSize: 14, color: ProjectColors.ACCENT_COLOR),
             ),
             Row(
               children: [
@@ -77,12 +77,14 @@ class CovidPostiveNegativeRadioButton extends StatelessWidget {
       child: ListTile(
         title: Text(
           value == CovidPostiveNegative.NEGATIVE ? 'Negative' : 'Postive',
-          style: TextStyle(fontWeight: FontWeight.w400),
+          style: TextStyle(
+              fontWeight: FontWeight.w500, color: ProjectColors.BLACK),
         ),
         leading: Radio<CovidPostiveNegative>(
           value: value,
           groupValue: CovidPostiveNegative.NEGATIVE,
           onChanged: (CovidPostiveNegative? value) {},
+          activeColor: ProjectColors.PRIMARY_COLOR,
         ),
       ),
     );

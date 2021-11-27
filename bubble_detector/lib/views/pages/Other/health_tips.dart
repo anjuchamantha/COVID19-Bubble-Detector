@@ -89,7 +89,13 @@ class HealthTipCard extends StatelessWidget {
               ),
             ),
             SizedBox(height: 8),
-            Text(text),
+            Text(
+              text,
+              style: TextStyle(
+                fontWeight: FontWeight.w300,
+                color: ProjectColors.ACCENT_COLOR,
+              ),
+            ),
             SizedBox(height: 12),
             SvgPicture.asset(
               'images/$image.svg',
