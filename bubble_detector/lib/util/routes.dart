@@ -8,4 +8,5 @@ class AppRoutes {
   static const String SETTINGS = '/settings';
   static const String DISCOVERY = '/discovery';
   static const String HEALTH_TIPS = '/health_tips';
+  static const String COVID_TEST = '/covid_test';
 }

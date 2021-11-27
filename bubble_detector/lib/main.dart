@@ -1,3 +1,4 @@
+import 'package:bubble_detector/views/pages/Other/covid_test.dart';
 import 'package:bubble_detector/views/pages/Other/health_tips.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -63,6 +64,10 @@ void main() async {
         GetPage(
           name: AppRoutes.HEALTH_TIPS,
           page: () => HealthTipsPage(),
+        ),
+        GetPage(
+          name: AppRoutes.COVID_TEST,
+          page: () => CovidTestPage(),
         ),
       ],
     ),

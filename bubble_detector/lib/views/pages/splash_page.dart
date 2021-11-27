@@ -12,6 +12,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   final SplashController splashController = Get.find();
 
+  /// Initial page route based on user logged in
   @override
   void initState() {
     super.initState();
@@ -19,7 +20,7 @@ class _SplashPageState extends State<SplashPage> {
       Future.delayed(Duration(seconds: 2), () {
         bool user = splashController.checkUserLoggedIn();
         if (user) {
-          Get.toNamed(AppRoutes.HEALTH_TIPS);
+          Get.toNamed(AppRoutes.COVID_TEST);
         } else {
           Get.toNamed(AppRoutes.LANDING_ONE);
         }
