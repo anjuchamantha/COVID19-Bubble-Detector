@@ -44,7 +44,7 @@ class MainBluetoothController extends GetxController {
         devices.add(item.device.address);
       });
       print(devices);
-      Get.snackbar("Discover", "${devices.length}");
+      Get.snackbar("Discovered Devices: ", "${devices.length}");
       List<String> users = getUsersWithBluetoothID(devices);
       print("USERS : $users");
       return devices;
