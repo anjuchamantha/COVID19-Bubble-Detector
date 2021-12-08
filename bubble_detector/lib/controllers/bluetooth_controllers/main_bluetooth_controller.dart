@@ -58,7 +58,12 @@ class MainBluetoothController extends GetxController {
     _streamSubscription =
         FlutterBluetoothSerial.instance.startDiscovery().listen(
       (r) {
-        results.add(r);
+        final existingIndex = results.indexWhere(
+            (element) => element.device.address == r.device.address);
+        if (existingIndex >= 0)
+          results[existingIndex] = r;
+        else
+          results.add(r);
       },
     );
 
