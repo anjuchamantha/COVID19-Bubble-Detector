@@ -1,7 +1,41 @@
+import 'package:bubble_detector/util/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class SplashPage extends StatelessWidget {
-  const SplashPage({Key? key}) : super(key: key);
+import '../../controllers/splash_controller.dart';
+
+class SplashPage extends StatefulWidget {
+  @override
+  _SplashPageState createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  final SplashController splashController = Get.find();
+
+  /// Initial page route based on user logged in
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      Future.delayed(Duration(seconds: 2), () {
+        bool user = splashController.checkUserLoggedIn();
+        if (user) {
+          Get.toNamed(AppRoutes.HOME);
+        } else {
+          Get.toNamed(AppRoutes.LANDING_ONE);
+        }
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SplashPageWidget();
+  }
+}
+
+class SplashPageWidget extends StatelessWidget {
+  const SplashPageWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

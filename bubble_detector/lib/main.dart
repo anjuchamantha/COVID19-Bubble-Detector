@@ -1,5 +1,5 @@
-import 'package:bubble_detector/views/pages/Settings/discovery_page.dart';
-import 'package:bubble_detector/views/pages/Settings/main_seetings_page.dart';
+import 'package:bubble_detector/views/pages/Other/covid_test.dart';
+import 'package:bubble_detector/views/pages/Other/health_tips.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,7 +14,9 @@ import 'util/routes.dart';
 import 'util/theme.dart';
 import 'views/pages/Landing/landing_one.dart';
 import 'views/pages/Landing/landing_outer.dart';
-import 'views/pages/Main/home_page.dart';
+import 'views/pages/Main/home.dart';
+import 'views/pages/Settings/discovery_page.dart';
+import 'views/pages/Settings/main_seetings_page.dart';
 import 'views/pages/splash_page.dart';
 
 void main() async {
@@ -30,7 +32,7 @@ void main() async {
     GetMaterialApp(
       initialBinding: AppBinding(),
       theme: PrimaryTheme.buildTheme(),
-      initialRoute: AppRoutes.LANDING_ONE,
+      initialRoute: AppRoutes.SPLASH,
       getPages: [
         GetPage(
           name: AppRoutes.SPLASH,
@@ -48,7 +50,7 @@ void main() async {
         ),
         GetPage(
           name: AppRoutes.HOME,
-          page: () => HomePage(),
+          page: () => Home(),
           binding: HomePageBinding(),
         ),
         GetPage(
@@ -58,6 +60,14 @@ void main() async {
         GetPage(
           name: AppRoutes.DISCOVERY,
           page: () => DiscoveryPage(),
+        ),
+        GetPage(
+          name: AppRoutes.HEALTH_TIPS,
+          page: () => HealthTipsPage(),
+        ),
+        GetPage(
+          name: AppRoutes.COVID_TEST,
+          page: () => CovidTestPage(),
         ),
       ],
     ),

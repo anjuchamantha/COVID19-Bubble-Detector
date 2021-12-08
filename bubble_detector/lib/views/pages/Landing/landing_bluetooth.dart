@@ -1,16 +1,12 @@
-import 'package:bubble_detector/util/routes.dart';
-import 'package:bubble_detector/util/ui_util.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-
-import '../../../controllers/page_state_contollers/auth_page_controller.dart';
-import '../../../controllers/page_state_contollers/LandingPagesController/landing_pages_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/page_state_contollers/LandingPagesController/landing_pages_controller.dart';
+import '../../../util/routes.dart';
+import '../../../util/ui_util.dart';
 import '../../widgets/landin_page_body_text.dart';
 import '../../widgets/landing_page_button.dart';
-import '../../widgets/landing_page_textfield.dart';
 
 class LandingBluetooth extends StatelessWidget {
   @override

@@ -1,4 +1,4 @@
-import 'package:bubble_detector/views/pages/Landing/landing_bluetooth.dart';
+import 'landing_bluetooth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

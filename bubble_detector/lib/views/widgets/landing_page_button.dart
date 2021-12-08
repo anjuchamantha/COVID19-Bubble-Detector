@@ -26,7 +26,9 @@ class LandingPageButton extends StatelessWidget {
                 primary: Theme.of(context).backgroundColor,
               )
             : null,
-        onPressed: onPressed,
+        onPressed: () {
+          onPressed();
+        },
         child: Text(
           this.text,
           style: secondary

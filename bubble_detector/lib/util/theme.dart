@@ -46,4 +46,5 @@ abstract class ProjectColors {
   static const Color ACCENT_COLOR = Color(0xff7D7E97);
   static const Color BLACK = Color(0xff1B1B1B);
   static const Color SECONDARY_BLACK = Color(0xff535461);
+  static const Color GREEN = Color(0xff07e89f);
 }

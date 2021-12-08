@@ -23,116 +23,119 @@ class EmergencyContactPage extends StatelessWidget {
       '0112 860 000'
     ];
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Title
-        Padding(
-          padding: const EdgeInsets.only(left: 4.0),
-          child: Text(
-            'Emergency Contacts',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-              color: Theme.of(context).primaryColor,
-              letterSpacing: 0.15,
-            ),
-          ),
-        ),
-
-        SizedBox(height: 12),
-
-        // Main Contact Cards
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Expanded(
-              flex: 4,
-              child: MainContactCard(
-                title: 'Suwasariya',
-                number: '1990',
-                imageLocation: 'doc_emer_cont.svg',
-                cardColor: Theme.of(context).primaryColor,
-                textColor: Theme.of(context).scaffoldBackgroundColor,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Title
+          Padding(
+            padding: const EdgeInsets.only(left: 4.0),
+            child: Text(
+              'Emergency Contacts',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                color: Theme.of(context).primaryColor,
+                letterSpacing: 0.15,
               ),
             ),
-            Expanded(
-              flex: 3,
-              child: MainContactCard(
-                title: 'Police',
-                number: '119',
-                imageLocation: 'police_emer_cont.svg',
-                cardColor: ProjectColors.TERTIARY_COLOR,
-                textColor: ProjectColors.ACCENT_COLOR,
+          ),
+
+          SizedBox(height: 12),
+
+          // Main Contact Cards
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 4,
+                child: MainContactCard(
+                  title: 'Suwasariya',
+                  number: '1990',
+                  imageLocation: 'doc_emer_cont.svg',
+                  cardColor: Theme.of(context).primaryColor,
+                  textColor: Theme.of(context).scaffoldBackgroundColor,
+                ),
+              ),
+              Expanded(
+                flex: 3,
+                child: MainContactCard(
+                  title: 'Police',
+                  number: '119',
+                  imageLocation: 'police_emer_cont.svg',
+                  cardColor: ProjectColors.TERTIARY_COLOR,
+                  textColor: ProjectColors.ACCENT_COLOR,
+                ),
+              ),
+            ],
+          ),
+
+          SizedBox(height: 16),
+
+          // Subtitle
+          Padding(
+            padding: const EdgeInsets.only(left: 4.0),
+            child: Text(
+              'Other Emergency Contacts',
+              style: TextStyle(
+                fontSize: 16,
+                color: ProjectColors.BLACK,
+                letterSpacing: 0.15,
               ),
             ),
-          ],
-        ),
-
-        SizedBox(height: 16),
-
-        // Subtitle
-        Padding(
-          padding: const EdgeInsets.only(left: 4.0),
-          child: Text(
-            'Other Emergency Contacts',
-            style: TextStyle(
-              fontSize: 16,
-              color: ProjectColors.BLACK,
-              letterSpacing: 0.15,
-            ),
           ),
-        ),
 
-        SizedBox(height: 12),
+          SizedBox(height: 12),
 
-        Expanded(
-          child: ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            padding: const EdgeInsets.all(8),
-            itemCount: name.length,
-            itemBuilder: (BuildContext context, int index) {
-              return InkWell(
-                onTap: () {
-                  UiUtil.telephone(phoneNumber[index]);
-                },
-                child: Container(
-                  height: 40,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.phone_rounded,
-                        color: ProjectColors.SECONDARY_BLACK,
-                      ),
-                      SizedBox(width: 15),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          LandingPageBodyText(
-                            text: name[index],
-                            color: ProjectColors.SECONDARY_BLACK,
-                            fontWeight: FontWeight.w300,
-                          ),
-                          Text(
-                            phoneNumber[index],
-                            style: TextStyle(
-                              fontSize: 12,
+          Expanded(
+            child: ListView.separated(
+              physics: NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.all(8),
+              itemCount: name.length,
+              itemBuilder: (BuildContext context, int index) {
+                return InkWell(
+                  onTap: () {
+                    UiUtil.telephone(phoneNumber[index]);
+                  },
+                  child: Container(
+                    height: 40,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.phone_rounded,
+                          color: ProjectColors.SECONDARY_BLACK,
+                        ),
+                        SizedBox(width: 15),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            LandingPageBodyText(
+                              text: name[index],
+                              color: ProjectColors.SECONDARY_BLACK,
                               fontWeight: FontWeight.w300,
                             ),
-                          )
-                        ],
-                      )
-                    ],
+                            Text(
+                              phoneNumber[index],
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) =>
-                const Divider(),
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) =>
+                  const Divider(),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
