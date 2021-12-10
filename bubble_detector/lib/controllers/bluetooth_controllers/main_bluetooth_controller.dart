@@ -22,16 +22,30 @@ class MainBluetoothController extends GetxController {
 
   saveContactedUsers() {}
 
-  getUsersWithBluetoothID(List<String> bluetoothIDs) {
-    firestore
-        .collection('users')
-        .where('bluetooth_id', arrayContainsAny: bluetoothIDs)
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        print(doc["id"]);
-      });
+  getUsersWithBluetoothID(List<String> bluetoothIDs) async {
+    List<String> users = [];
+    var result = await firestore
+        .collection("users")
+        .where("bluetooth_id", whereIn: bluetoothIDs)
+        .get();
+    result.docs.forEach((res) {
+      print(res.data());
+      users.add(res.id);
     });
+
+    print(users);
+
+    // firestore
+    //     .collection('users')
+    //     .where('bluetooth_id',
+    //         arrayContainsAny: ["50:ED:3C:2F:D0:69", "64:D8:DB:98:03:06"])
+    //     .get()
+    //     .then((QuerySnapshot querySnapshot) {
+    //       print(querySnapshot);
+    //       querySnapshot.docs.forEach((doc) {
+    //         print(doc["id"]);
+    //       });
+    //     });
   }
 
   List<String> getDiscoveredDevices() {
