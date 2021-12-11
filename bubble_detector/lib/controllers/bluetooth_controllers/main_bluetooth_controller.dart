@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 class MainBluetoothController extends GetxController {
   final bluetoothStatus = false.obs;
   RxBool isDiscovering = false.obs;
+  var nearbyUsers = <String>{}.obs;
 
   StreamSubscription<BluetoothDiscoveryResult>? _streamSubscription;
   List<BluetoothDiscoveryResult> results =
@@ -31,9 +32,10 @@ class MainBluetoothController extends GetxController {
     result.docs.forEach((res) {
       print(res.data());
       users.add(res.id);
+      nearbyUsers.add(res.id);
     });
-
     print(users);
+    print(nearbyUsers);
   }
 
   List<String> getDiscoveredDevices() {

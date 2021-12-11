@@ -209,6 +209,41 @@ class _MainPage extends State<MainSettingsPage> {
                 },
               ),
             ),
+            Divider(),
+            ListTile(
+              title: const Text('Nearby Users'),
+              // subtitle: Text(_name),
+              onLongPress: null,
+            ),
+            Container(
+              // height: MediaQuery.of(context).size.height - 90,
+              // color: Colors.red,
+              child: Obx(() {
+                int notificationCount = bluetoothController.nearbyUsers.length;
+                if (notificationCount != 0) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: notificationCount,
+                    itemBuilder: (ctxt, index) {
+                      return Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                        child: Text(
+                            bluetoothController.nearbyUsers.elementAt(index)),
+                      );
+                    },
+                  );
+                } else {
+                  return Center(
+                    child: Text(
+                      "No users detected",
+                      // style: TextStyle(
+                      //   color: Colors.amber,
+                      // ),
+                    ),
+                  );
+                }
+              }),
+            ),
           ],
         ),
       ),
