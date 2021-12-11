@@ -1,3 +1,4 @@
+import 'package:bubble_detector/views/pages/Beacon/beacon_page.dart';
 import 'package:bubble_detector/views/pages/Other/covid_test.dart';
 import 'package:bubble_detector/views/pages/Other/health_tips.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -68,6 +69,10 @@ void main() async {
         GetPage(
           name: AppRoutes.COVID_TEST,
           page: () => CovidTestPage(),
+        ),
+        GetPage(
+          name: AppRoutes.BEACON,
+          page: () => BeaconPage(),
         ),
       ],
     ),
