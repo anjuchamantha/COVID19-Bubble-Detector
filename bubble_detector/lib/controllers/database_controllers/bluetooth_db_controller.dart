@@ -20,4 +20,23 @@ class BluetoothDBController extends GetxController {
       Get.snackbar("ERROR", "Failed to update user Bluetooth ID");
     });
   }
+
+  Future<void> updateContactedUsers(List<String> users) {
+    var contacts = [];
+    for (var i = 0; i < users.length; i++) {
+      contacts.add({"user": users[i], "timestamp": DateTime.now()});
+    }
+    DocumentReference userRef =
+        FirebaseFirestore.instance.collection('users').doc(user!.uid);
+    // Call the user's CollectionReference to add a new user
+    return userRef.update({
+      'contacts': FieldValue.arrayUnion(contacts),
+    }).then((value) {
+      print("Contacted Users updated");
+      Get.snackbar("Successfull", "Contacted Users updated");
+    }).catchError((error) {
+      print("Failed to update user Contacted Users: $error");
+      Get.snackbar("ERROR", "Failed to update Contacted Users");
+    });
+  }
 }
