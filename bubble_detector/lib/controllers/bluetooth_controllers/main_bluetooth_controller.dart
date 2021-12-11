@@ -34,18 +34,6 @@ class MainBluetoothController extends GetxController {
     });
 
     print(users);
-
-    // firestore
-    //     .collection('users')
-    //     .where('bluetooth_id',
-    //         arrayContainsAny: ["50:ED:3C:2F:D0:69", "64:D8:DB:98:03:06"])
-    //     .get()
-    //     .then((QuerySnapshot querySnapshot) {
-    //       print(querySnapshot);
-    //       querySnapshot.docs.forEach((doc) {
-    //         print(doc["id"]);
-    //       });
-    //     });
   }
 
   List<String> getDiscoveredDevices() {
