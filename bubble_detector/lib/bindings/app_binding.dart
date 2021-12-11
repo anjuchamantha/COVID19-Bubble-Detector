@@ -14,6 +14,7 @@ class AppBinding extends Bindings {
     // Get.put(UserController());
     Get.put(MainBluetoothController());
     Get.put(RequirementStateController());
+    Get.lazyPut(() => UserController());
     print("app binding");
   }
 }

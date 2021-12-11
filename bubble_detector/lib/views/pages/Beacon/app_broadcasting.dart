@@ -1,9 +1,11 @@
 import 'package:bubble_detector/controllers/bluetooth_controllers/requirement_state_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_beacon/flutter_beacon.dart';
 import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
 class TabBroadcasting extends StatefulWidget {
   @override
@@ -12,8 +14,10 @@ class TabBroadcasting extends StatefulWidget {
 
 class _TabBroadcastingState extends State<TabBroadcasting> {
   final controller = Get.find<RequirementStateController>();
+
   final clearFocus = FocusNode();
   bool broadcasting = false;
+  var uuid;
 
   final regexUUID = RegExp(
       r'[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}');
@@ -30,6 +34,7 @@ class _TabBroadcastingState extends State<TabBroadcasting> {
   @override
   void initState() {
     super.initState();
+    uuid = Uuid();
 
     controller.startBroadcastStream.listen((flag) {
       if (flag == true) {
@@ -50,6 +55,9 @@ class _TabBroadcastingState extends State<TabBroadcasting> {
 
   @override
   Widget build(BuildContext context) {
+    // final userController = Get.find<UserController>();
+    User? user = FirebaseAuth.instance.currentUser;
+    uuidController.text = uuid.v5(Uuid.NAMESPACE_URL, user!.uid);
     return Scaffold(
       body: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(clearFocus),
