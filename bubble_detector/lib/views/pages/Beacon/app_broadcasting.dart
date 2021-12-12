@@ -57,7 +57,8 @@ class _TabBroadcastingState extends State<TabBroadcasting> {
   Widget build(BuildContext context) {
     // final userController = Get.find<UserController>();
     User? user = FirebaseAuth.instance.currentUser;
-    uuidController.text = uuid.v5(Uuid.NAMESPACE_URL, user!.uid);
+    var phoneNumber = uuid.v5(Uuid.NAMESPACE_URL, user!.phoneNumber);
+    print(phoneNumber);
     return Scaffold(
       body: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(clearFocus),
