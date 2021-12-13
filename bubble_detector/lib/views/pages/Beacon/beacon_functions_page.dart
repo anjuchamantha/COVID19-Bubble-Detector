@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:bubble_detector/controllers/bluetooth_controllers/beacon_controller.dart';
 import 'package:bubble_detector/util/constants.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +10,11 @@ class BeaconFunctionsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final beaconController = Get.find<BeaconController>();
+    final beaconController = Get.isRegistered<BeaconController>()
+        ? Get.find<BeaconController>()
+        : Get.put(BeaconController());
+
+    // final beaconController = Get.put(BeaconController());
     return Scaffold(
       appBar: AppBar(title: Text("Beacon Functions Page")),
       body: ListView(
@@ -30,7 +36,7 @@ class BeaconFunctionsPage extends StatelessWidget {
                               },
                             )
                           : ElevatedButton(
-                              child: Text('Start Broadcast'),
+                              child: Text('Broadcast'),
                               onPressed: () {
                                 beaconController.startBroadcast(
                                     APP_UUID, "111", "000");
@@ -39,6 +45,21 @@ class BeaconFunctionsPage extends StatelessWidget {
                     },
                   ),
                 ),
+                Obx(() {
+                  return (beaconController.isBeaconBroadcasting.value)
+                      ? Container(
+                          padding: EdgeInsets.fromLTRB(16, 5, 16, 5),
+                          child: LinearProgressIndicator(
+                            backgroundColor: Colors.red[900],
+                            valueColor: new AlwaysStoppedAnimation<Color>(
+                              Colors.deepOrange,
+                            ),
+                          ),
+                        )
+                      : Container(
+                          padding: EdgeInsets.fromLTRB(0, 14, 0, 0),
+                        );
+                }),
                 Text(
                   "Broadcast Details",
                   // style: TextStyle(fontWeight: FontWeight.bold),
@@ -64,21 +85,6 @@ class BeaconFunctionsPage extends StatelessWidget {
                         return Text(
                             "Minor : ${beaconController.beaconMinor.value}");
                       }),
-                      Obx(() {
-                        return (beaconController.isBeaconBroadcasting.value)
-                            ? Container(
-                                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                                child: LinearProgressIndicator(
-                                  backgroundColor: Colors.red[900],
-                                  valueColor: new AlwaysStoppedAnimation<Color>(
-                                    Colors.red,
-                                  ),
-                                ),
-                              )
-                            : Container(
-                                padding: EdgeInsets.fromLTRB(0, 14, 0, 0),
-                              );
-                      }),
                     ],
                   ),
                 ),
@@ -90,41 +96,99 @@ class BeaconFunctionsPage extends StatelessWidget {
             child: Column(
               children: [
                 ListTile(
-                  title: ElevatedButton(
-                    child: const Text('Scan'),
-                    onPressed: () {},
+                  title: Obx(
+                    () {
+                      return (beaconController.isBeaconScanning.value)
+                          ? ElevatedButton(
+                              child: Text('Stop Scan'),
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.red[900],
+                              ),
+                              onPressed: () {
+                                beaconController.pauseScanBeacon();
+                              },
+                            )
+                          : ElevatedButton(
+                              child: Text('Scan'),
+                              onPressed: () {
+                                beaconController.scanBeacon();
+                              },
+                            );
+                    },
                   ),
                 ),
+                Obx(() {
+                  return (beaconController.isBeaconScanning.value)
+                      ? Container(
+                          padding: EdgeInsets.fromLTRB(16, 5, 16, 5),
+                          child: LinearProgressIndicator(
+                            backgroundColor: Colors.red[900],
+                            valueColor: new AlwaysStoppedAnimation<Color>(
+                              Colors.deepOrange,
+                            ),
+                          ),
+                        )
+                      : Container(
+                          padding: EdgeInsets.fromLTRB(0, 14, 0, 0),
+                        );
+                }),
                 Text(
                   "Nearby Users",
                   // style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 12,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.grey[100],
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(child: Text("Name")),
-                        Text("0.22 m"),
-                      ],
-                    ),
-                  ),
-                )
+                Obx(() {
+                  int beaconCount = beaconController.beacons.length;
+                  if (beaconCount != 0) {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: beaconCount,
+                      itemBuilder: (ctxt, index) {
+                        // return buildMessage(fcmController.messages[index]);
+                        return buildBeaconTile(
+                            beaconController.beacons[index].major.toString(),
+                            0.22);
+                      },
+                    );
+                  } else {
+                    return Center(
+                      child: Text(
+                        "No users for now",
+                        style: TextStyle(
+                          color: Colors.grey,
+                        ),
+                      ),
+                    );
+                  }
+                }),
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Padding buildBeaconTile(String name, double distance) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 8,
+      ),
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 8,
+          vertical: 12,
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: Colors.grey[100],
+        ),
+        child: Row(
+          children: [
+            Expanded(child: Text("$name")),
+            Text("$distance m"),
+          ],
+        ),
       ),
     );
   }
