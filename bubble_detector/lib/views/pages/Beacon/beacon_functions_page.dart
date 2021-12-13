@@ -144,16 +144,31 @@ class BeaconFunctionsPage extends StatelessWidget {
                 Obx(() {
                   int beaconCount = beaconController.beacons.length;
                   if (beaconCount != 0) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: beaconCount,
-                      itemBuilder: (ctxt, index) {
-                        // return buildMessage(fcmController.messages[index]);
-                        return buildBeaconTile(
-                            "+94 7${beaconController.beacons[index].major.toString()} " +
-                                "${beaconController.beacons[index].minor.toString()}",
-                            beaconController.beacons[index].accuracy);
-                      },
+                    return Column(
+                      children: [
+                        ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: beaconCount,
+                          itemBuilder: (ctxt, index) {
+                            // return buildMessage(fcmController.messages[index]);
+                            return buildBeaconTile(
+                                "+94 7${beaconController.beacons.elementAt(index).major.toString()} " +
+                                    "${beaconController.beacons.elementAt(index).minor.toString()}",
+                                beaconController.beacons
+                                    .elementAt(index)
+                                    .accuracy);
+                          },
+                        ),
+                        ElevatedButton(
+                          child: Text('Clear List'),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.grey[400],
+                          ),
+                          onPressed: () {
+                            beaconController.clearBeaconList();
+                          },
+                        )
+                      ],
                     );
                   } else {
                     return Center(

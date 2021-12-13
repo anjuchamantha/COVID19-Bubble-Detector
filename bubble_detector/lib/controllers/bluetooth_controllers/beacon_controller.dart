@@ -18,7 +18,7 @@ class BeaconController extends GetxController {
 
   StreamSubscription<RangingResult>? _streamRanging;
   final _regionBeacons = <Region, List<Beacon>>{};
-  final beacons = <Beacon>[].obs;
+  final beacons = <Beacon>{}.obs;
 
   @override
   void onInit() async {
@@ -61,11 +61,16 @@ class BeaconController extends GetxController {
 
   pauseScanBeacon() async {
     _streamRanging?.pause();
-    beacons.clear();
+    // beacons.clear();
     isBeaconScanning.value = false;
   }
 
+  clearBeaconList() {
+    beacons.clear();
+  }
+
   scanBeacon() async {
+    isBeaconScanning.value = true;
     await flutterBeacon.initializeScanning;
     final regions = <Region>[
       Region(
@@ -84,18 +89,17 @@ class BeaconController extends GetxController {
         return;
       }
     }
-    isBeaconScanning.value = true;
-
-    _streamRanging =
-        flutterBeacon.ranging(regions).listen((RangingResult result) {
-      print(result);
-      _regionBeacons[result.region] = result.beacons;
-      beacons.clear();
-      _regionBeacons.values.forEach((list) {
-        beacons.addAll(list);
-      });
-      beacons.sort(_compareParameters);
-    });
+    _streamRanging = flutterBeacon.ranging(regions).listen(
+      (RangingResult result) {
+        print(result);
+        _regionBeacons[result.region] = result.beacons;
+        // beacons.clear();
+        _regionBeacons.values.forEach((list) {
+          beacons.addAll(list);
+        });
+        // beacons.sort(_compareParameters);
+      },
+    );
   }
 
   int _compareParameters(Beacon a, Beacon b) {
