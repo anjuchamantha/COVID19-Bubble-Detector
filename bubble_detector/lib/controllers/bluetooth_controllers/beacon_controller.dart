@@ -95,6 +95,7 @@ class BeaconController extends GetxController {
     _streamRanging = flutterBeacon.ranging(regions).listen(
       (RangingResult result) {
         print(result);
+        //TODO BUG FIX: starting 0 not shown
         _regionBeacons[result.region] = result.beacons;
         // beacons.clear();
         _regionBeacons.values.forEach((list) {
