@@ -71,6 +71,7 @@ class BeaconController extends GetxController {
 
   scanBeacon() async {
     isBeaconScanning.value = true;
+    beacons.clear();
     await flutterBeacon.initializeScanning;
     final regions = <Region>[
       Region(
