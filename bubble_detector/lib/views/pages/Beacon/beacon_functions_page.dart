@@ -172,7 +172,7 @@ class BeaconFunctionsPage extends StatelessWidget {
                               },
                             ),
                             ElevatedButton(
-                              child: Text('Register Contacted Users'),
+                              child: Text('Mark as contacted'),
                               style: ElevatedButton.styleFrom(
                                 primary: Colors.green[400],
                               ),
