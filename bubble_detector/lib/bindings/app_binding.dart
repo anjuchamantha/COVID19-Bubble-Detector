@@ -1,3 +1,4 @@
+import 'package:bubble_detector/controllers/bluetooth_controllers/beacon_controller.dart';
 import 'package:bubble_detector/controllers/bluetooth_controllers/main_bluetooth_controller.dart';
 import 'package:bubble_detector/controllers/bluetooth_controllers/requirement_state_controller.dart';
 import 'package:bubble_detector/controllers/database_controllers/bluetooth_db_controller.dart';
@@ -15,6 +16,7 @@ class AppBinding extends Bindings {
     Get.put(MainBluetoothController());
     Get.put(RequirementStateController());
     Get.lazyPut(() => UserController());
+    Get.lazyPut(() => BeaconController());
     print("app binding");
   }
 }

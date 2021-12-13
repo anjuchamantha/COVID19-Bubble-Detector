@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class BluetoothDBController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
+  var nearbyUsers = <String>{}.obs;
 
   Future<void> updateUserBluetoothID(String bluetoothID) {
     DocumentReference userRef =
@@ -38,5 +39,21 @@ class BluetoothDBController extends GetxController {
       print("Failed to update user Contacted Users: $error");
       Get.snackbar("ERROR", "Failed to update Contacted Users");
     });
+  }
+
+  getUsersWithBluetoothID(List<String> bluetoothIDs) async {
+    List<String> users = [];
+    var result = await firestore
+        .collection("users")
+        .where("bluetooth_id", whereIn: bluetoothIDs)
+        .get();
+    result.docs.forEach((res) {
+      print(res.data());
+      users.add(res.id);
+      nearbyUsers.add(res.id);
+    });
+    print(users);
+    print("[FIREBASE]");
+    updateContactedUsers(users);
   }
 }

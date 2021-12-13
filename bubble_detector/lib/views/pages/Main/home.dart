@@ -57,6 +57,15 @@ class Home extends StatelessWidget {
                     ),
                   ),
                 ),
+                PopupMenuItem<int>(
+                  value: 2,
+                  child: Text(
+                    "Beacon Functions",
+                    style: TextStyle(
+                      color: ProjectColors.BLACK,
+                    ),
+                  ),
+                ),
               ],
               icon: Icon(
                 Icons.more_vert,
@@ -69,6 +78,9 @@ class Home extends StatelessWidget {
                     break;
                   case 1:
                     Get.toNamed(AppRoutes.BEACON);
+                    break;
+                  case 2:
+                    Get.toNamed(AppRoutes.BEACON_FN_PAGE);
                     break;
                 }
               },
