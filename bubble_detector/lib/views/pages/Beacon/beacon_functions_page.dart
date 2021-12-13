@@ -159,14 +159,28 @@ class BeaconFunctionsPage extends StatelessWidget {
                                     .accuracy);
                           },
                         ),
-                        ElevatedButton(
-                          child: Text('Clear List'),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.grey[400],
-                          ),
-                          onPressed: () {
-                            beaconController.clearBeaconList();
-                          },
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            ElevatedButton(
+                              child: Text('Clear List'),
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.grey[400],
+                              ),
+                              onPressed: () {
+                                beaconController.clearBeaconList();
+                              },
+                            ),
+                            ElevatedButton(
+                              child: Text('Register Contacted Users'),
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.green[400],
+                              ),
+                              onPressed: () {
+                                beaconController.updateContactedUsers();
+                              },
+                            ),
+                          ],
                         )
                       ],
                     );

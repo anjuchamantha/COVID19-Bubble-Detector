@@ -1,12 +1,14 @@
 import 'dart:async';
 
 import 'package:bubble_detector/controllers/bluetooth_controllers/requirement_state_controller.dart';
+import 'package:bubble_detector/controllers/database_controllers/bluetooth_db_controller.dart';
 import 'package:bubble_detector/util/constants.dart';
 import 'package:get/get.dart';
 import 'package:flutter_beacon/flutter_beacon.dart';
 
 class BeaconController extends GetxController {
   RequirementStateController requirementsController = Get.find();
+  BluetoothDBController bluetoothDBController = Get.find();
   bool get broadcastReady =>
       requirementsController.authorizationStatusOk == true &&
       requirementsController.locationServiceEnabled == true &&
@@ -115,5 +117,14 @@ class BeaconController extends GetxController {
     }
 
     return compare;
+  }
+
+  updateContactedUsers() {
+    List<String> contacts = [];
+    beacons.value.forEach((b) {
+      String phone = "+947" + "${b.major}" + "${b.minor}";
+      contacts.add(phone);
+    });
+    bluetoothDBController.updateContactedUsers(contacts);
   }
 }
