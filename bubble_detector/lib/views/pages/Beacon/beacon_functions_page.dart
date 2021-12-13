@@ -150,8 +150,9 @@ class BeaconFunctionsPage extends StatelessWidget {
                       itemBuilder: (ctxt, index) {
                         // return buildMessage(fcmController.messages[index]);
                         return buildBeaconTile(
-                            beaconController.beacons[index].major.toString(),
-                            0.22);
+                            "+94 7${beaconController.beacons[index].major.toString()} " +
+                                "${beaconController.beacons[index].minor.toString()}",
+                            beaconController.beacons[index].accuracy);
                       },
                     );
                   } else {
