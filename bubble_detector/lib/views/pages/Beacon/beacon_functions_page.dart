@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:bubble_detector/controllers/bluetooth_controllers/beacon_controller.dart';
 import 'package:bubble_detector/util/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +14,11 @@ class BeaconFunctionsPage extends StatelessWidget {
     final beaconController = Get.isRegistered<BeaconController>()
         ? Get.find<BeaconController>()
         : Get.put(BeaconController());
-
+    User? user = FirebaseAuth.instance.currentUser;
+    var phoneNumber = user!.phoneNumber;
+    print("User Phone Number : " + phoneNumber.toString());
+    var major = phoneNumber?.substring(4, 8) ?? "";
+    var minor = phoneNumber?.substring(8) ?? "";
     // final beaconController = Get.put(BeaconController());
     return Scaffold(
       appBar: AppBar(title: Text("Beacon Functions Page")),
@@ -39,7 +44,7 @@ class BeaconFunctionsPage extends StatelessWidget {
                               child: Text('Broadcast'),
                               onPressed: () {
                                 beaconController.startBroadcast(
-                                    APP_UUID, "111", "000");
+                                    APP_UUID, major, minor);
                               },
                             );
                     },
