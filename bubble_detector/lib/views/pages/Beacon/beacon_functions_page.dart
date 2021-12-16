@@ -142,7 +142,7 @@ class BeaconFunctionsPage extends StatelessWidget {
                   // style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Obx(() {
-                  int beaconCount = beaconController.beacons.length;
+                  int beaconCount = beaconController.beaconMsgs.length;
                   if (beaconCount != 0) {
                     return Column(
                       children: [
@@ -150,13 +150,12 @@ class BeaconFunctionsPage extends StatelessWidget {
                           shrinkWrap: true,
                           itemCount: beaconCount,
                           itemBuilder: (ctxt, index) {
+                            String key = beaconController.beaconMsgs.keys
+                                .elementAt(index);
                             // return buildMessage(fcmController.messages[index]);
                             return buildBeaconTile(
-                                "+94 7${beaconController.beacons.elementAt(index).major.toString()} " +
-                                    "${beaconController.beacons.elementAt(index).minor.toString()}",
-                                beaconController.beacons
-                                    .elementAt(index)
-                                    .accuracy);
+                                "${beaconController.beaconMsgs[key].phone}",
+                                beaconController.beaconMsgs[key].accuracy);
                           },
                         ),
                         Row(
@@ -220,7 +219,7 @@ class BeaconFunctionsPage extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Expanded(child: Text("$name")),
+            Expanded(child: Text("+94 7 **** ${name.substring(8, 12)}")),
             Text("$distance m"),
           ],
         ),

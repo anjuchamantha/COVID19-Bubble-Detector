@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bubble_detector/controllers/bluetooth_controllers/requirement_state_controller.dart';
 import 'package:bubble_detector/controllers/database_controllers/bluetooth_db_controller.dart';
+import 'package:bubble_detector/models/beacon.dart';
 import 'package:bubble_detector/util/constants.dart';
 import 'package:get/get.dart';
 import 'package:flutter_beacon/flutter_beacon.dart';
@@ -21,6 +22,7 @@ class BeaconController extends GetxController {
   StreamSubscription<RangingResult>? _streamRanging;
   final _regionBeacons = <Region, List<Beacon>>{};
   final beacons = <Beacon>{}.obs;
+  final beaconMsgs = {}.obs;
 
   @override
   void onInit() async {
@@ -46,7 +48,8 @@ class BeaconController extends GetxController {
       Get.snackbar("Already Started", "Broadcast Already Started");
     } else {
       await flutterBeacon.startBroadcast(BeaconBroadcast(
-        proximityUUID: uuid,
+        // identifier: "Cubeacon",
+        proximityUUID: APP_UUID,
         major: int.tryParse(major) ?? 0,
         minor: int.tryParse(minor) ?? 0,
       ));
@@ -69,6 +72,7 @@ class BeaconController extends GetxController {
 
   clearBeaconList() {
     beacons.clear();
+    beaconMsgs.clear();
   }
 
   scanBeacon() async {
@@ -100,10 +104,32 @@ class BeaconController extends GetxController {
         // beacons.clear();
         _regionBeacons.values.forEach((list) {
           beacons.addAll(list);
+
+          list.forEach((b) {
+            BeaconMsg msg =
+                BeaconMsg(b.proximityUUID, b.major, b.minor, b.accuracy);
+            beaconMsgs[b.minor.toString()] = msg;
+            // beaconMsgs.add(msg);
+          });
+
+          // list.map((b) {
+          //   BeaconMsg beaconMsg =
+          //       BeaconMsg(b.proximityUUID, b.major, b.minor, b.accuracy);
+          //   print("BEACON MSG Phone :");
+          //   print(beaconMsg.phone);
+          //   return beaconMsg;
+          // });
         });
         // beacons.sort(_compareParameters);
       },
     );
+
+    // beacons.forEach((b) {
+    //   BeaconMsg msg = BeaconMsg(b.proximityUUID, b.major, b.minor, b.accuracy);
+    //   beaconMsgs.add(msg);
+    // });
+    // print("Beacon Msg");
+    // print(beaconMsgs.toJson());
   }
 
   int _compareParameters(Beacon a, Beacon b) {
