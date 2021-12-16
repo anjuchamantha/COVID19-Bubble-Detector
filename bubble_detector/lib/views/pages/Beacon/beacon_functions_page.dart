@@ -22,7 +22,7 @@ class BeaconFunctionsPage extends StatelessWidget {
     // final beaconController = Get.put(BeaconController());
     return Scaffold(
       appBar: AppBar(title: Text("Beacon Functions Page")),
-      body: ListView(
+      body: Column(
         children: [
           Container(
             child: Column(
