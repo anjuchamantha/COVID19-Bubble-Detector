@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 class MainBluetoothController extends GetxController {
   final bluetoothStatus = false.obs;
   RxBool isDiscovering = false.obs;
+  var nearbyUsers = <String>{}.obs;
 
   StreamSubscription<BluetoothDiscoveryResult>? _streamSubscription;
   List<BluetoothDiscoveryResult> results =
@@ -22,16 +23,20 @@ class MainBluetoothController extends GetxController {
 
   saveContactedUsers() {}
 
-  getUsersWithBluetoothID(List<String> bluetoothIDs) {
-    firestore
-        .collection('users')
-        .where('bluetooth_id', arrayContainsAny: bluetoothIDs)
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        print(doc["id"]);
-      });
+  getUsersWithBluetoothID(List<String> bluetoothIDs) async {
+    List<String> users = [];
+    var result = await firestore
+        .collection("users")
+        .where("bluetooth_id", whereIn: bluetoothIDs)
+        .get();
+    result.docs.forEach((res) {
+      print(res.data());
+      users.add(res.id);
+      nearbyUsers.add(res.id);
     });
+    print(users);
+    print("[FIREBASE]");
+    bluetoothDBController.updateContactedUsers(users);
   }
 
   List<String> getDiscoveredDevices() {
@@ -44,7 +49,7 @@ class MainBluetoothController extends GetxController {
         devices.add(item.device.address);
       });
       print(devices);
-      Get.snackbar("Discover", "${devices.length}");
+      Get.snackbar("Discovered Devices: ", "${devices.length}");
       List<String> users = getUsersWithBluetoothID(devices);
       print("USERS : $users");
       return devices;
@@ -58,7 +63,12 @@ class MainBluetoothController extends GetxController {
     _streamSubscription =
         FlutterBluetoothSerial.instance.startDiscovery().listen(
       (r) {
-        results.add(r);
+        final existingIndex = results.indexWhere(
+            (element) => element.device.address == r.device.address);
+        if (existingIndex >= 0)
+          results[existingIndex] = r;
+        else
+          results.add(r);
       },
     );
 

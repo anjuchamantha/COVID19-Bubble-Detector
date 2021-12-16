@@ -48,6 +48,24 @@ class Home extends StatelessWidget {
                     ),
                   ),
                 ),
+                PopupMenuItem<int>(
+                  value: 1,
+                  child: Text(
+                    "Beacon",
+                    style: TextStyle(
+                      color: ProjectColors.BLACK,
+                    ),
+                  ),
+                ),
+                PopupMenuItem<int>(
+                  value: 2,
+                  child: Text(
+                    "Beacon Functions",
+                    style: TextStyle(
+                      color: ProjectColors.BLACK,
+                    ),
+                  ),
+                ),
               ],
               icon: Icon(
                 Icons.more_vert,
@@ -57,6 +75,13 @@ class Home extends StatelessWidget {
                 switch (item) {
                   case 0:
                     Get.toNamed(AppRoutes.SETTINGS);
+                    break;
+                  case 1:
+                    Get.toNamed(AppRoutes.BEACON);
+                    break;
+                  case 2:
+                    Get.toNamed(AppRoutes.BEACON_FN_PAGE);
+                    break;
                 }
               },
             ),
