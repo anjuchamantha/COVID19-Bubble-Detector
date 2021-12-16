@@ -1,5 +1,5 @@
-import 'package:bubble_detector/util/theme.dart';
-import 'package:bubble_detector/views/pages/Main/home_page.dart';
+import '../../../util/theme.dart';
+import 'home_page.dart';
 
 import '../../../util/routes.dart';
 import 'package:flutter/material.dart';

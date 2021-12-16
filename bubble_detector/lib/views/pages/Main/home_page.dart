@@ -1,13 +1,9 @@
-import 'dart:ui';
-
-import 'package:bubble_detector/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../../util/routes.dart';
 import '../../../util/theme.dart';
-import '../../../util/ui_util.dart';
-import '../../widgets/landin_page_body_text.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

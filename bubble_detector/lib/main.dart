@@ -1,7 +1,7 @@
-import 'package:bubble_detector/views/pages/Beacon/beacon_functions_page.dart';
-import 'package:bubble_detector/views/pages/Beacon/beacon_page.dart';
-import 'package:bubble_detector/views/pages/Other/covid_test.dart';
-import 'package:bubble_detector/views/pages/Other/health_tips.dart';
+import 'views/pages/Beacon/beacon_functions_page.dart';
+import 'views/pages/Beacon/beacon_page.dart';
+import 'views/pages/Other/covid_test.dart';
+import 'views/pages/Other/health_tips.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -1,4 +1,4 @@
-import 'package:bubble_detector/controllers/bluetooth_controllers/requirement_state_controller.dart';
+import '../../../controllers/bluetooth_controllers/requirement_state_controller.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 

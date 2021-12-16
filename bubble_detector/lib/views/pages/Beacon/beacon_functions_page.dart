@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
-import 'package:bubble_detector/controllers/bluetooth_controllers/beacon_controller.dart';
-import 'package:bubble_detector/util/constants.dart';
+import '../../../controllers/bluetooth_controllers/beacon_controller.dart';
+import '../../../util/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

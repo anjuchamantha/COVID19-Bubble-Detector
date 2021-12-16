@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:bubble_detector/controllers/bluetooth_controllers/requirement_state_controller.dart';
-import 'package:bubble_detector/views/pages/Beacon/app_broadcasting.dart';
-import 'package:bubble_detector/views/pages/Beacon/app_scanning.dart';
+import '../../../controllers/bluetooth_controllers/requirement_state_controller.dart';
+import 'app_broadcasting.dart';
+import 'app_scanning.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_beacon/flutter_beacon.dart';
