@@ -36,7 +36,7 @@ class MainBluetoothController extends GetxController {
     });
     print(users);
     print("[FIREBASE]");
-    bluetoothDBController.updateContactedUsers(users);
+    // bluetoothDBController.updateContactedUsers(users);
   }
 
   List<String> getDiscoveredDevices() {

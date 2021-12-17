@@ -147,11 +147,12 @@ class BeaconController extends GetxController {
   }
 
   updateContactedUsers() {
-    List<String> contacts = [];
-    beacons.value.forEach((b) {
-      String phone = "+947" + "${b.major}" + "${b.minor}";
-      contacts.add(phone);
-    });
-    bluetoothDBController.updateContactedUsers(contacts);
+    // List<BeaconMsg> contacts = [];
+    // beaconMsgs.value.forEach((b) {
+
+    //   // String phone = "+947" + "${b.major}" + "${b.minor}";
+    //   // contacts.add(phone);
+    // });
+    bluetoothDBController.updateContactedUsers(beaconMsgs);
   }
 }
