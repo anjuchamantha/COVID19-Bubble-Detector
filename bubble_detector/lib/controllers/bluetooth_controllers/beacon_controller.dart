@@ -18,6 +18,7 @@ class BeaconController extends GetxController {
   RxBool isBeaconScanning = false.obs;
   var beaconMajor = ''.obs;
   var beaconMinor = ''.obs;
+  final broadcastBeacon = BeaconMsg("uuid", 0, 0, 0.0).obs;
 
   StreamSubscription<RangingResult>? _streamRanging;
   final _regionBeacons = <Region, List<Beacon>>{};
@@ -55,6 +56,12 @@ class BeaconController extends GetxController {
       ));
       beaconMajor.value = major;
       beaconMinor.value = minor;
+      broadcastBeacon.update((val) {
+        val?.uuid = APP_UUID;
+        val?.major = int.tryParse(major) ?? 0;
+        val?.minor = int.tryParse(minor) ?? 0;
+        val?.setPhoneNumber(major, minor);
+      });
     }
     isBeaconBroadcasting.value = await flutterBeacon.isBroadcasting();
   }

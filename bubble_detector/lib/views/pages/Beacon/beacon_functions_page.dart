@@ -53,7 +53,7 @@ class BeaconFunctionsPage extends StatelessWidget {
                 Obx(() {
                   return (beaconController.isBeaconBroadcasting.value)
                       ? Container(
-                          padding: EdgeInsets.fromLTRB(16, 5, 16, 5),
+                          padding: EdgeInsets.fromLTRB(16, 2, 16, 2),
                           child: LinearProgressIndicator(
                             backgroundColor: Colors.red[900],
                             valueColor: new AlwaysStoppedAnimation<Color>(
@@ -62,33 +62,37 @@ class BeaconFunctionsPage extends StatelessWidget {
                           ),
                         )
                       : Container(
-                          padding: EdgeInsets.fromLTRB(0, 14, 0, 0),
+                          padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
                         );
                 }),
-                Text(
-                  "Broadcast Details",
-                  // style: TextStyle(fontWeight: FontWeight.bold),
-                ),
+                // Text(
+                //   "Broadcast Details",
+                //   // style: TextStyle(fontWeight: FontWeight.bold),
+                // ),
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
-                    vertical: 8,
+                    vertical: 4,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text("UUID   : "),
-                      Text(
-                        "$APP_UUID",
-                        style: TextStyle(color: Colors.grey),
-                      ),
+                      // Text("UUID   : "),
+                      // Text(
+                      //   "$APP_UUID",
+                      //   style: TextStyle(color: Colors.grey),
+                      // ),
+                      // Obx(() {
+                      //   return Text(
+                      //       "Major : ${beaconController.beaconMajor.value}");
+                      // }),
+                      // Obx(() {
+                      //   return Text(
+                      //       "Minor : ${beaconController.beaconMinor.value}");
+                      // }),
                       Obx(() {
                         return Text(
-                            "Major : ${beaconController.beaconMajor.value}");
-                      }),
-                      Obx(() {
-                        return Text(
-                            "Minor : ${beaconController.beaconMinor.value}");
+                            "Phone Number: ${beaconController.broadcastBeacon.value.phone}");
                       }),
                     ],
                   ),

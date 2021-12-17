@@ -18,4 +18,10 @@ class BeaconMsg {
         major.toString().padLeft(4, '0') +
         minor.toString().padLeft(4, '0');
   }
+
+  setPhoneNumber(var major, var minor) {
+    this.phone = "+947" +
+        major.toString().padLeft(4, '0') +
+        minor.toString().padLeft(4, '0');
+  }
 }
