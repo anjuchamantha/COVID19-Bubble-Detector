@@ -1,5 +1,6 @@
 import 'package:bubble_detector/views/pages/Beacon/beacon_functions_page.dart';
 import 'package:bubble_detector/views/pages/Beacon/beacon_page.dart';
+import 'package:bubble_detector/views/pages/Covid/detect_covid_page.dart';
 import 'package:bubble_detector/views/pages/Other/covid_test.dart';
 import 'package:bubble_detector/views/pages/Other/health_tips.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -78,6 +79,10 @@ void main() async {
         GetPage(
           name: AppRoutes.BEACON_FN_PAGE,
           page: () => BeaconFunctionsPage(),
+        ),
+        GetPage(
+          name: AppRoutes.DETECT_COVID_PAGE,
+          page: () => DetectCovidPage(),
         ),
       ],
     ),

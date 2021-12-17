@@ -11,4 +11,5 @@ class AppRoutes {
   static const String COVID_TEST = '/covid_test';
   static const String BEACON = '/beacon';
   static const String BEACON_FN_PAGE = '/beacon_fn_page';
+  static const String DETECT_COVID_PAGE = '/detect_covid_page';
 }
