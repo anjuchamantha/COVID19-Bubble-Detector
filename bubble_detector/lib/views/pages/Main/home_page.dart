@@ -10,17 +10,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> name = <String>[
-      'Notification of Spread',
-      'Notification of Spread',
-      'Notification of Spread'
-    ];
-    List<String> phoneNumber = <String>[
-      '0112 860 000',
-      '0112 860 000',
-      '0112 860 000'
-    ];
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

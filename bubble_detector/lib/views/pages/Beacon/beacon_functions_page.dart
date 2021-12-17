@@ -1,10 +1,9 @@
-import 'dart:ffi';
-
-import '../../../controllers/bluetooth_controllers/beacon_controller.dart';
-import '../../../util/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../controllers/bluetooth_controllers/beacon_controller.dart';
+import '../../../util/constants.dart';
 
 class BeaconFunctionsPage extends StatelessWidget {
   const BeaconFunctionsPage({Key? key}) : super(key: key);
