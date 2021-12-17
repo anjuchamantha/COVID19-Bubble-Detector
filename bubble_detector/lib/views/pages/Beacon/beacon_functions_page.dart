@@ -4,6 +4,7 @@ import 'package:bubble_detector/controllers/bluetooth_controllers/beacon_control
 import 'package:bubble_detector/util/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
 
 class BeaconFunctionsPage extends StatelessWidget {
@@ -35,36 +36,112 @@ class BeaconFunctionsPage extends StatelessWidget {
           Divider(),
           Expanded(child: buildScanSection(beaconController)),
           // Divider(),
-          Container(
-            color: Colors.black,
-            padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    "Detect Covid Positive ?",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    "COVID POSITIVE",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.red[900],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          buildCovidPositiveSection(context),
         ],
       ),
+    );
+  }
+
+  Container buildCovidPositiveSection(BuildContext context) {
+    return Container(
+      color: Colors.black,
+      padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              "Detect Covid Positive ?",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              showAlertDialog(context);
+            },
+            child: Text(
+              "COVID POSITIVE",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+              primary: Colors.red[900],
+            ),
+          ),
+          // TextButton(
+          //     onPressed: () {
+          //       DatePicker.showDatePicker(context,
+          //           showTitleActions: true,
+          //           minTime: DateTime(2018, 3, 5),
+          //           maxTime: DateTime(2019, 6, 7),
+          //           theme: DatePickerTheme(
+          //               headerColor: Colors.orange,
+          //               backgroundColor: Colors.blue,
+          //               itemStyle: TextStyle(
+          //                   color: Colors.white,
+          //                   fontWeight: FontWeight.bold,
+          //                   fontSize: 18),
+          //               doneStyle:
+          //                   TextStyle(color: Colors.white, fontSize: 16)),
+          //           onChanged: (date) {
+          //         print('change $date in time zone ' +
+          //             date.timeZoneOffset.inHours.toString());
+          //       }, onConfirm: (date) {
+          //         print('confirm $date');
+          //       }, currentTime: DateTime.now(), locale: LocaleType.en);
+          //     },
+          //     child: Text(
+          //       'show date picker(custom theme &date time range)',
+          //       style: TextStyle(color: Colors.blue),
+          //     )),
+        ],
+      ),
+    );
+  }
+
+  showAlertDialog(BuildContext context) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+        DatePicker.showDatePicker(context,
+            showTitleActions: true,
+            minTime: DateTime(2018, 3, 5),
+            maxTime: DateTime(2019, 6, 7),
+            theme: DatePickerTheme(
+                headerColor: Colors.orange,
+                backgroundColor: Colors.blue,
+                itemStyle: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+                doneStyle: TextStyle(color: Colors.white, fontSize: 16)),
+            onChanged: (date) {
+          print('change $date in time zone ' +
+              date.timeZoneOffset.inHours.toString());
+        }, onConfirm: (date) {
+          print('confirm $date');
+        }, currentTime: DateTime.now(), locale: LocaleType.en);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("My title"),
+      content: Text("This is my message."),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 
