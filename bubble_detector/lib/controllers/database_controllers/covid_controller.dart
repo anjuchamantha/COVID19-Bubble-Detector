@@ -1,3 +1,4 @@
+import 'package:bubble_detector/models/contact_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -7,7 +8,7 @@ class CovidController extends GetxController {
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
-  final contactedUsers = <User>[].obs;
+  final contactedUsers = <ContactUser>[].obs;
 
   updateDateSelected(DateTime dateTime) {
     print("GET : ${dateTime.toString()}");
@@ -33,19 +34,26 @@ class CovidController extends GetxController {
   // }
 
   getContactedUsers() async {
-    List<String> users = [];
+    contactedUsers.value = [];
     // DateTime bef_ = dateSelected.value.
+    final daysAgo = dateSelected.value.subtract(new Duration(days: 7));
     DocumentReference userRef =
         FirebaseFirestore.instance.collection('users').doc(user!.uid);
     var result = await userRef
         .collection("contacts_collection")
-        .where('timestamp', isLessThanOrEqualTo: dateSelected.value)
+        .where('timestamp', isGreaterThanOrEqualTo: daysAgo)
         .get();
-    print(result.toString());
+
     result.docs.forEach((res) {
       print(res.data());
-      users.add(res.id);
+      ContactUser u = ContactUser(
+        res['user'],
+        DateTime.fromMicrosecondsSinceEpoch(
+            res['timestamp'].microsecondsSinceEpoch),
+        res['distance'],
+      );
+      contactedUsers.add(u);
     });
-    print(users);
+    contactedUsers.sort((a, b) => a.distance.compareTo(b.distance));
   }
 }

@@ -46,6 +46,33 @@ class DetectCovidPage extends StatelessWidget {
                     ),
                   ),
                 ),
+                Obx(() {
+                  int notificationCount = covidController.contactedUsers.length;
+                  if (notificationCount != 0) {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: notificationCount,
+                      itemBuilder: (ctxt, index) {
+                        return Row(
+                          children: [
+                            Text(covidController.contactedUsers[index].phone),
+                            Text(
+                                "${covidController.contactedUsers[index].distance} m"),
+                          ],
+                        );
+                      },
+                    );
+                  } else {
+                    return Center(
+                      child: Text(
+                        "Press 'Notify Contacts' button to get the contacted users",
+                        style: TextStyle(
+                          color: Colors.grey[400],
+                        ),
+                      ),
+                    );
+                  }
+                }),
               ],
             ),
           ],
@@ -115,7 +142,7 @@ class DetectCovidPage extends StatelessWidget {
     final monthAgo = new DateTime.now().subtract(new Duration(days: 30));
     // set up the button
 
-    DatePicker.showDateTimePicker(
+    DatePicker.showDatePicker(
       context,
       showTitleActions: true,
       minTime: monthAgo,
