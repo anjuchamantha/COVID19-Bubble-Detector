@@ -39,8 +39,7 @@ class CovidController extends GetxController {
         FirebaseFirestore.instance.collection('users').doc(user!.uid);
     var result = await userRef
         .collection("contacts_collection")
-        .where('contacts_collection.timestamp',
-            isLessThanOrEqualTo: dateSelected.value.toString())
+        .where('timestamp', isLessThanOrEqualTo: dateSelected.value)
         .get();
     print(result.toString());
     result.docs.forEach((res) {

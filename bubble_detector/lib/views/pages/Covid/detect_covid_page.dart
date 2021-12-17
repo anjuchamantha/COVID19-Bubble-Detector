@@ -115,7 +115,7 @@ class DetectCovidPage extends StatelessWidget {
     final monthAgo = new DateTime.now().subtract(new Duration(days: 30));
     // set up the button
 
-    DatePicker.showDatePicker(
+    DatePicker.showDateTimePicker(
       context,
       showTitleActions: true,
       minTime: monthAgo,
