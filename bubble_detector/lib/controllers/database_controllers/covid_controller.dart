@@ -7,10 +7,6 @@ class CovidController extends GetxController {
     print("GET : ${dateTime.toString()}");
     dateSelected.value = dateTime;
     dateSelected.refresh();
-    // dateSelected.update((d) {
-    //   d = dateTime;
-    //   update();
-    // });
     print("COVID DATE: ${dateSelected.toString()}");
   }
 }

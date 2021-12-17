@@ -23,43 +23,93 @@ class DetectCovidPage extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            buildDateSection(covidController, context),
             Column(
               children: [
-                Obx(() {
-                  var now = covidController.dateSelected.value;
-                  String formattedDate = DateFormat.yMMMMd('en_US').format(now);
-                  return Column(
-                    children: [
-                      Text(
-                        "Date of COVID Detection :",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(8),
-                        color: Colors.grey[200],
-                        child: Text(
-                          "$formattedDate",
-                          style: TextStyle(color: Colors.black, fontSize: 20),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 16, 0, 8),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.red[900],
+                    ),
+                    onPressed: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Notify Contacts",
+                        style: TextStyle(
+                          fontSize: 18,
                         ),
                       ),
-                    ],
-                  );
-                }),
-                ElevatedButton(
-                  onPressed: () {
-                    showAlertDialog(context, covidController);
-                  },
-                  child: Text("Change Date"),
+                    ),
+                  ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
     );
   }
 
-  showAlertDialog(BuildContext context, CovidController covidController) {
+  Container buildDateSection(
+      CovidController covidController, BuildContext context) {
+    return Container(
+      padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        children: [
+          Obx(() {
+            var now = covidController.dateSelected.value;
+            String formattedDate = DateFormat('d EEE, MMM yyyy').format(now);
+            return Column(
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      "Date of COVID Detection",
+                      style: TextStyle(fontSize: 14, color: Colors.black87),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        // color: Colors.grey[200],
+                        child: Text(
+                          "$formattedDate",
+                          style: TextStyle(
+                            color: Colors.black87,
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.black87,
+                      ),
+                      onPressed: () {
+                        showDatePicker(context, covidController);
+                      },
+                      child: Icon(Icons.edit_outlined),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          }),
+        ],
+      ),
+    );
+  }
+
+  showDatePicker(BuildContext context, CovidController covidController) {
     final monthAgo = new DateTime.now().subtract(new Duration(days: 30));
     // set up the button
 
@@ -69,11 +119,12 @@ class DetectCovidPage extends StatelessWidget {
       minTime: monthAgo,
       maxTime: DateTime.now(),
       theme: DatePickerTheme(
-          headerColor: Colors.orange,
-          backgroundColor: Colors.blue,
-          itemStyle: TextStyle(
-              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
-          doneStyle: TextStyle(color: Colors.white, fontSize: 16)),
+        headerColor: Colors.black87,
+        // backgroundColor: Colors.,
+        itemStyle: TextStyle(color: Colors.black, fontSize: 18),
+        doneStyle: TextStyle(color: Colors.white, fontSize: 16),
+        cancelStyle: TextStyle(color: Colors.white),
+      ),
       onChanged: (date) {
         covidController.updateDateSelected(date);
         print('change $date in time zone ' +
