@@ -32,7 +32,9 @@ class DetectCovidPage extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       primary: Colors.red[900],
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      covidController.getContactedUsers();
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
