@@ -91,10 +91,6 @@ class BeaconController extends GetxController {
         identifier: 'Cubeacon',
         proximityUUID: APP_UUID,
       ),
-      // Region(
-      //   identifier: 'BeaconType2',
-      //   proximityUUID: '6a84c716-0f2a-1ce9-f210-6a63bd873dd9',
-      // ),
     ];
 
     if (_streamRanging != null) {
@@ -106,7 +102,6 @@ class BeaconController extends GetxController {
     _streamRanging = flutterBeacon.ranging(regions).listen(
       (RangingResult result) {
         print(result);
-        //TODO BUG FIX: starting 0 not shown
         _regionBeacons[result.region] = result.beacons;
         // beacons.clear();
         _regionBeacons.values.forEach((list) {
@@ -118,25 +113,10 @@ class BeaconController extends GetxController {
             beaconMsgs[b.minor.toString()] = msg;
             // beaconMsgs.add(msg);
           });
-
-          // list.map((b) {
-          //   BeaconMsg beaconMsg =
-          //       BeaconMsg(b.proximityUUID, b.major, b.minor, b.accuracy);
-          //   print("BEACON MSG Phone :");
-          //   print(beaconMsg.phone);
-          //   return beaconMsg;
-          // });
         });
         // beacons.sort(_compareParameters);
       },
     );
-
-    // beacons.forEach((b) {
-    //   BeaconMsg msg = BeaconMsg(b.proximityUUID, b.major, b.minor, b.accuracy);
-    //   beaconMsgs.add(msg);
-    // });
-    // print("Beacon Msg");
-    // print(beaconMsgs.toJson());
   }
 
   int _compareParameters(Beacon a, Beacon b) {
@@ -154,12 +134,6 @@ class BeaconController extends GetxController {
   }
 
   updateContactedUsers() {
-    // List<BeaconMsg> contacts = [];
-    // beaconMsgs.value.forEach((b) {
-
-    //   // String phone = "+947" + "${b.major}" + "${b.minor}";
-    //   // contacts.add(phone);
-    // });
     bluetoothDBController.updateContactedUsers(beaconMsgs);
   }
 }

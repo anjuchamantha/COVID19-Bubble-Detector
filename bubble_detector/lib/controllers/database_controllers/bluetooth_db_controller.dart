@@ -1,4 +1,3 @@
-import 'package:bubble_detector/models/beacon.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -27,27 +26,6 @@ class BluetoothDBController extends GetxController {
     DocumentReference userRef =
         FirebaseFirestore.instance.collection('users').doc(user!.uid);
 
-    // var contacts = [];
-
-    // beaconMsgs.forEach((k, b) {
-    //   contacts.add({
-    //     "user": b.phone,
-    //     "distance": b.accuracy,
-    //     "timestamp": DateTime.now()
-    //   });
-    // });
-
-    // // Call the user's CollectionReference to add a new user
-    // await userRef.update({
-    //   'contacts': FieldValue.arrayUnion(contacts),
-    // }).then((value) {
-    //   print("Contacted Users updated");
-    //   Get.snackbar("Successfull", "Contacted Users updated");
-    // }).catchError((error) {
-    //   print("Failed to update user Contacted Users: $error");
-    //   Get.snackbar("ERROR", "Failed to update Contacted Users");
-    // });
-
     var batch = firestore.batch();
 
     beaconMsgs.forEach((key, b) {
@@ -60,21 +38,7 @@ class BluetoothDBController extends GetxController {
     });
 
     await batch.commit();
+    Get.snackbar("Contacts Updated",
+        "${beaconMsgs.length} contacts updated to Database");
   }
-
-  // getUsersWithBluetoothID(List<String> bluetoothIDs) async {
-  //   List<String> users = [];
-  //   var result = await firestore
-  //       .collection("users")
-  //       .where("bluetooth_id", whereIn: bluetoothIDs)
-  //       .get();
-  //   result.docs.forEach((res) {
-  //     print(res.data());
-  //     users.add(res.id);
-  //     nearbyUsers.add(res.id);
-  //   });
-  //   print(users);
-  //   print("[FIREBASE]");
-  //   updateContactedUsers(users);
-  // }
 }
