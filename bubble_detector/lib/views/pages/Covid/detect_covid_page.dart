@@ -65,7 +65,6 @@ class DetectCovidPage extends StatelessWidget {
                         context, covidController, datePickerController);
               }),
             ),
-            // buildContactedUsersSection(covidController),
           ],
         ),
       ),
@@ -276,27 +275,5 @@ class DetectCovidPage extends StatelessWidget {
       currentTime: DateTime.now(),
       locale: LocaleType.en,
     );
-
-    // set up the AlertDialog
-    // AlertDialog alert = AlertDialog(
-    //   title: Text("Covid Positive?"),
-    //   content: Text("Please mention the date of COVID-19 detection."),
-    //   actions: [
-    //     Obx(() {
-    //       var now = covidController.dateSelected.value;
-    //       String formattedDate = DateFormat('yyyy-MM-dd').format(now);
-    //       return Text(formattedDate);
-    //     }),
-    //     okButton,
-    //   ],
-    // );
-
-    // show the dialog
-    // showDialog(
-    //   context: context,
-    //   builder: (BuildContext context) {
-    //     return alert;
-    //   },
-    // );
   }
 }
