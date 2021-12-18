@@ -9,6 +9,7 @@ class CovidController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
   final contactedUsers = <ContactUser>[].obs;
+  RxBool isLoading = false.obs;
 
   updateDateSelected(DateTime dateTime) {
     print("GET : ${dateTime.toString()}");
@@ -17,23 +18,8 @@ class CovidController extends GetxController {
     print("COVID DATE: ${dateSelected.toString()}");
   }
 
-  // getUsersWithBluetoothID(List<String> bluetoothIDs) async {
-  //   List<String> users = [];
-  //   var result = await firestore
-  //       .collection("users")
-  //       .where("bluetooth_id", whereIn: bluetoothIDs)
-  //       .get();
-  //   result.docs.forEach((res) {
-  //     print(res.data());
-  //     users.add(res.id);
-  //     nearbyUsers.add(res.id);
-  //   });
-  //   print(users);
-  //   print("[FIREBASE]");
-  //   updateContactedUsers(users);
-  // }
-
   getContactedUsers() async {
+    isLoading.value = true;
     contactedUsers.value = [];
     // DateTime bef_ = dateSelected.value.
     final daysAgo = dateSelected.value.subtract(new Duration(days: 7));
@@ -55,5 +41,6 @@ class CovidController extends GetxController {
       contactedUsers.add(u);
     });
     contactedUsers.sort((a, b) => a.distance.compareTo(b.distance));
+    isLoading.value = false;
   }
 }

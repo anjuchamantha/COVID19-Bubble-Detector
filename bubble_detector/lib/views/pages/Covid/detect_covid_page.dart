@@ -10,6 +10,10 @@ class DetectCovidPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CovidController covidController = Get.find();
+    final datePickerController = TextEditingController(text: '0');
+    // final hourPickerController = TextEditingController(text: '0');
+    // final minPickerController = TextEditingController(text: '0');
+    // final secPickerController = TextEditingController(text: '0');
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.dark,
@@ -24,60 +28,123 @@ class DetectCovidPage extends StatelessWidget {
         child: Column(
           children: [
             buildDateSection(covidController, context),
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 16, 0, 8),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.red[900],
-                    ),
-                    onPressed: () {
-                      covidController.getContactedUsers();
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Notify Contacts",
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Obx(() {
-                  int notificationCount = covidController.contactedUsers.length;
-                  if (notificationCount != 0) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: notificationCount,
-                      itemBuilder: (ctxt, index) {
-                        return Row(
-                          children: [
-                            Text(covidController.contactedUsers[index].phone),
-                            Text(
-                                "${covidController.contactedUsers[index].distance} m"),
-                          ],
-                        );
-                      },
-                    );
-                  } else {
-                    return Center(
-                      child: Text(
-                        "Press 'Notify Contacts' button to get the contacted users",
-                        style: TextStyle(
-                          color: Colors.grey[400],
-                        ),
-                      ),
-                    );
-                  }
-                }),
-              ],
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 16, 0, 8),
+              child: Obx(() {
+                return (covidController.isLoading.value)
+                    ? Center(
+                        child: CircularProgressIndicator(
+                        color: Colors.red[900],
+                      ))
+                    : buildContactedUsersSection(
+                        covidController, datePickerController);
+              }),
             ),
+            // buildContactedUsersSection(covidController),
           ],
         ),
       ),
+    );
+  }
+
+  Column buildContactedUsersSection(
+      CovidController covidController, TextEditingController datePicker) {
+    return Column(
+      children: [
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: Colors.red[900],
+          ),
+          onPressed: () {
+            covidController.getContactedUsers();
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Get Contacted Users",
+              style: TextStyle(
+                fontSize: 14,
+              ),
+            ),
+          ),
+        ),
+        Obx(() {
+          int notificationCount = covidController.contactedUsers.length;
+          if (notificationCount != 0) {
+            return Column(
+              children: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: notificationCount,
+                  itemBuilder: (ctxt, index) {
+                    String contactedDate = DateFormat('d EEE, MMM yyyy')
+                        .format(covidController.contactedUsers[index].dateTime);
+                    String dis = covidController.contactedUsers[index].distance
+                        .toString()
+                        .substring(0, 3);
+                    return Column(
+                      children: [
+                        ListTile(
+                          leading: Container(
+                            height: 40,
+                            width: 70,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.black87),
+                            child: Center(
+                              child: Text(
+                                "$dis m",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          title:
+                              Text(covidController.contactedUsers[index].phone),
+                          subtitle: Text(contactedDate),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ElevatedButton(
+                      child: Text('Clear List'),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey[400],
+                      ),
+                      onPressed: () {
+                        // beaconController.clearBeaconList();
+                      },
+                    ),
+                    ElevatedButton(
+                      child: Text('Mark as contacted'),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.green[400],
+                      ),
+                      onPressed: () {
+                        // beaconController.updateContactedUsers();
+                      },
+                    ),
+                  ],
+                )
+              ],
+            );
+          } else {
+            return Center(
+              child: Text(
+                "Press 'Notify Contacts' button to get the contacted users",
+                style: TextStyle(
+                  color: Colors.grey[400],
+                ),
+              ),
+            );
+          }
+        }),
+      ],
     );
   }
 

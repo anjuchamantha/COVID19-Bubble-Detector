@@ -4,6 +4,7 @@ class ContactUser {
   DateTime dateTime;
   var userId;
   var firebaseToken;
+  var isStore;
 
   ContactUser(this.phone, this.dateTime, this.distance);
 
