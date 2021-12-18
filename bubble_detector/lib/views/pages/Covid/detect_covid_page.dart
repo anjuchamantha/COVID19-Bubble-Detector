@@ -108,15 +108,17 @@ class DetectCovidPage extends StatelessWidget {
           ),
         ),
         Obx(() {
-          int notificationCount = covidController.contactedUsers.length;
-          if (notificationCount != 0) {
+          int contactedUsersCount = covidController.contactedUsers.length;
+          int storeCount = covidController.secDuration.value;
+          int allCount = contactedUsersCount + storeCount;
+          if (contactedUsersCount != 0) {
             return Column(
               children: [
                 ListTile(
                   trailing: Container(
                     // color: Colors.black,
                     child: Text(
-                      "22",
+                      "$allCount",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -146,15 +148,15 @@ class DetectCovidPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  title: Text("Direct contacts : $notificationCount"),
-                  subtitle: Text("Stores Visited : 0"),
+                  title: Text("Direct contacts : $contactedUsersCount"),
+                  subtitle: Text("Stores Visited : $storeCount"),
                 ),
                 Divider(),
                 Container(
                   height: MediaQuery.of(context).size.height - 470,
                   child: ListView.builder(
                     shrinkWrap: true,
-                    itemCount: notificationCount,
+                    itemCount: contactedUsersCount,
                     itemBuilder: (ctxt, index) {
                       String contactedDate = DateFormat('h:m:s a, d EEE, MMM')
                           .format(

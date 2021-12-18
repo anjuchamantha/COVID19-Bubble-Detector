@@ -14,6 +14,7 @@ class CovidController extends GetxController {
   User? user = FirebaseAuth.instance.currentUser;
   final contactedUsers = <ContactUser>[].obs;
   RxBool isLoading = false.obs;
+  RxInt storeCount = 0.obs;
 
   updateDateSelected(DateTime dateTime) {
     print("GET : ${dateTime.toString()}");
