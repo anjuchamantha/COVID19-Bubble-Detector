@@ -23,6 +23,8 @@ class CovidController extends GetxController {
   }
 
   updateDuration(List<dynamic> durations) {
+    dateSelected.value = DateTime.now();
+    dateSelected.refresh();
     daysDuration.value = durations[0];
     hrsDuration.value = durations[1];
     minDuration.value = durations[2];
@@ -31,10 +33,14 @@ class CovidController extends GetxController {
 
   getContactedUsers() async {
     isLoading.value = true;
-    contactedUsers.value = [];
+    // contactedUsers.value = [];
+    // contactedUsers.refresh();
+    dateSelected.value = DateTime.now();
+    dateSelected.refresh();
+    contactedUsers.clear();
     print("CONTACTS INIT : ${contactedUsers.length}");
     // DateTime bef_ = dateSelected.value.
-    final daysAgo = dateSelected.value.subtract(new Duration(
+    var daysAgo = dateSelected.value.subtract(new Duration(
       days: daysDuration.value,
       hours: hrsDuration.value,
       minutes: minDuration.value,
@@ -47,6 +53,8 @@ class CovidController extends GetxController {
         .collection("contacts_collection")
         .where('timestamp', isGreaterThanOrEqualTo: daysAgo)
         .get();
+
+    print(result.toString());
 
     result.docs.forEach((res) {
       print(res.data());

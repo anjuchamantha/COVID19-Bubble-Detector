@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:bubble_detector/controllers/database_controllers/covid_controller.dart';
-import 'package:bubble_detector/util/custom_picker_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_picker/flutter_picker.dart';
