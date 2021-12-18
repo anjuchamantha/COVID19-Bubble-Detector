@@ -315,7 +315,7 @@ class DetectCovidPage extends StatelessWidget {
                                         border:
                                             Border.all(color: Colors.black87)),
                                     child: Text(
-                                      "Now",
+                                      "Reset to Now",
                                       style: TextStyle(color: Colors.black87),
                                     ),
                                   ),

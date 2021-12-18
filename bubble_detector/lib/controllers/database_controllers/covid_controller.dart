@@ -16,7 +16,7 @@ class CovidController extends GetxController {
   final contactedStores = <ContactUser>[].obs;
   final indirectContactedUsers = <ContactUser>[].obs;
   RxBool isLoading = false.obs;
-  RxInt storeCount = 0.obs;
+  // RxInt storeCount = 0.obs;
 
   updateDateSelected(DateTime dateTime) {
     print("GET : ${dateTime.toString()}");
@@ -39,6 +39,8 @@ class CovidController extends GetxController {
     // dateSelected.value = DateTime.now();
     // dateSelected.refresh();
     directcontactedUsers.clear();
+    indirectContactedUsers.clear();
+    contactedStores.clear();
     print("CONTACTS INIT : ${directcontactedUsers.length}");
     // DateTime bef_ = dateSelected.value.
     var daysAgo = dateSelected.value.subtract(new Duration(
@@ -63,7 +65,7 @@ class CovidController extends GetxController {
     // contactedUsers.refresh();
     print("CONTACTS AFTER : ${directcontactedUsers.length}");
     print("CONTACTS  : $directcontactedUsers");
-    isLoading.value = false;
+    // isLoading.value = false;
   }
 
   Future<void> getContactUserDetails(
@@ -92,15 +94,12 @@ class CovidController extends GetxController {
         contactedStores.add(u);
         await getIndirectContactedUsers(u);
       }
+      isLoading.value = false;
     });
   }
 
   getIndirectContactedUsers(ContactUser u) async {
-    // isLoading.value = true;
     var dateOfContact = u.dateTime;
-    // dateSelected.value = DateTime.now();
-    // dateSelected.refresh();
-    // directcontactedUsers.clear();
     print("INDIRECT CONTACTS INIT : ${indirectContactedUsers.length}");
     // var daysAgo = dateSelected.value.subtract(new Duration(
     //   days: daysDuration.value,
@@ -119,7 +118,7 @@ class CovidController extends GetxController {
 
     print(result.toString());
 
-    // await getContactUserDetails(result);
+    // Get Firebase details of the users connected
     result.docs.forEach((res) async {
       print(res.data());
       ContactUser u = ContactUser(
