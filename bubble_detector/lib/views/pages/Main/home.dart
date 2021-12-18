@@ -1,7 +1,6 @@
 import 'package:bubble_detector/util/theme.dart';
 import 'package:bubble_detector/views/pages/Main/home_page.dart';
-<<<<<<< Updated upstream
-=======
+
 import 'package:flutter_foreground_task/ui/with_foreground_task.dart';
 
 import '../../../util/routes.dart';
