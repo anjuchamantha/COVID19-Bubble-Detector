@@ -153,7 +153,7 @@ class DetectCovidPage extends StatelessWidget {
                 ),
                 Divider(),
                 Container(
-                  height: MediaQuery.of(context).size.height - 470,
+                  height: MediaQuery.of(context).size.height - 475,
                   child: ListView.builder(
                     shrinkWrap: true,
                     itemCount: contactedUsersCount,
@@ -262,14 +262,16 @@ class DetectCovidPage extends StatelessWidget {
             var dateSelec = covidController.dateSelected.value;
             String formattedDate =
                 DateFormat('d EEE, MMM yyyy').format(dateSelec);
-            String formattedDTime = DateFormat('h:m:s a').format(dateSelec);
+            String formattedTime = DateFormat('hh:mm:ss a').format(dateSelec);
             return Column(
               children: [
                 Row(
                   children: [
-                    Text(
-                      "Date of COVID Detection",
-                      style: TextStyle(fontSize: 14, color: Colors.black87),
+                    Expanded(
+                      child: Text(
+                        "Date of COVID Detection",
+                        style: TextStyle(fontSize: 14, color: Colors.black87),
+                      ),
                     ),
                   ],
                 ),
@@ -289,13 +291,36 @@ class DetectCovidPage extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            Text(
-                              "$formattedDTime",
-                              style: TextStyle(
-                                color: Colors.black87,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            Row(
+                              children: [
+                                Text(
+                                  "$formattedTime",
+                                  style: TextStyle(
+                                    color: Colors.black87,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(width: 12),
+                                GestureDetector(
+                                  onTap: () {
+                                    covidController.dateSelected.value =
+                                        DateTime.now();
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
+                                    decoration: BoxDecoration(
+                                        // color: Colors.amber,
+                                        borderRadius: BorderRadius.circular(10),
+                                        border:
+                                            Border.all(color: Colors.black87)),
+                                    child: Text(
+                                      "Now",
+                                      style: TextStyle(color: Colors.black87),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
