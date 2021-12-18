@@ -120,8 +120,8 @@ class DetectCovidPage extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: notificationCount,
                     itemBuilder: (ctxt, index) {
-                      String contactedDate =
-                          DateFormat('h:m:s a, d EEE, MMM yyyy').format(
+                      String contactedDate = DateFormat('h:m:s a, d EEE, MMM')
+                          .format(
                               covidController.contactedUsers[index].dateTime);
                       String dis = covidController
                           .contactedUsers[index].distance
@@ -130,7 +130,7 @@ class DetectCovidPage extends StatelessWidget {
                       return ListTile(
                         visualDensity:
                             VisualDensity(horizontal: 0, vertical: -4),
-                        trailing: buildIsStoreIcon(covidController),
+                        trailing: buildIsStoreIcon(covidController, index),
                         leading: Container(
                           height: 40,
                           width: 70,
@@ -146,8 +146,8 @@ class DetectCovidPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        title:
-                            Text(covidController.contactedUsers[index].phone),
+                        title: Text(
+                            "+94 7 **** ${covidController.contactedUsers[index].phone.substring(8, 12)}"),
                         subtitle: Text(contactedDate),
                       );
                     },
@@ -196,11 +196,18 @@ class DetectCovidPage extends StatelessWidget {
     );
   }
 
-  Icon buildIsStoreIcon(CovidController covidController) {
-    return Icon(
-      Icons.shopping_cart,
-      color: Colors.black87,
-    );
+  Widget buildIsStoreIcon(CovidController covidController, int index) {
+    if (covidController.contactedUsers[index].isStore) {
+      return Icon(
+        Icons.shopping_cart,
+        color: Colors.red[900],
+      );
+    } else {
+      return Icon(
+        Icons.person,
+        color: Colors.black87,
+      );
+    }
   }
 
   Container buildDateSection(
