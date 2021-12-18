@@ -5,6 +5,7 @@ import 'package:bubble_detector/controllers/database_controllers/bluetooth_db_co
 import 'package:bubble_detector/controllers/database_controllers/covid_controller.dart';
 import 'package:bubble_detector/controllers/database_controllers/pushNotificationController.dart';
 import 'package:bubble_detector/controllers/database_controllers/user_controller.dart';
+
 import 'package:get/get.dart';
 
 class AppBinding extends Bindings {
