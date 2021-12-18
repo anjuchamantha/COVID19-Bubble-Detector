@@ -32,6 +32,7 @@ class CovidController extends GetxController {
   getContactedUsers() async {
     isLoading.value = true;
     contactedUsers.value = [];
+    print("CONTACTS INIT : ${contactedUsers.length}");
     // DateTime bef_ = dateSelected.value.
     final daysAgo = dateSelected.value.subtract(new Duration(
       days: daysDuration.value,
@@ -39,6 +40,7 @@ class CovidController extends GetxController {
       minutes: minDuration.value,
       seconds: secDuration.value,
     ));
+    print("DAYS AGO : ${daysAgo.toString()}");
     DocumentReference userRef =
         FirebaseFirestore.instance.collection('users').doc(user!.uid);
     var result = await userRef
@@ -57,6 +59,7 @@ class CovidController extends GetxController {
       contactedUsers.add(u);
     });
     contactedUsers.sort((a, b) => a.distance.compareTo(b.distance));
+    print("CONTACTS AFTER : ${contactedUsers.length}");
     isLoading.value = false;
   }
 }

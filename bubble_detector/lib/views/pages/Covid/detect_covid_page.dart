@@ -41,7 +41,7 @@ class DetectCovidPage extends StatelessWidget {
             ),
             Obx(() {
               return GestureDetector(
-                onLongPress: () {
+                onTap: () {
                   showPickerNumber(context, covidController);
                 },
                 child: Text(
@@ -94,31 +94,6 @@ class DetectCovidPage extends StatelessWidget {
       TextEditingController datePicker) {
     return Column(
       children: [
-        // TextFormField(
-        //   controller: datePicker,
-        //   decoration: InputDecoration(
-        //     labelText: 'Days',
-        //   ),
-        //   keyboardType: TextInputType.number,
-        //   validator: (val) {
-        //     if (val == null || val.isEmpty) {
-        //       return 'Major required';
-        //     }
-
-        //     try {
-        //       int major = int.parse(val.toString());
-
-        //       if (major < 0 || major > 31) {
-        //         return 'Days must be number between 0 and 31';
-        //       }
-        //     } on FormatException {
-        //       return 'Days must be number';
-        //     }
-
-        //     return null;
-        //   },
-        // ),
-
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             primary: Colors.red[900],
