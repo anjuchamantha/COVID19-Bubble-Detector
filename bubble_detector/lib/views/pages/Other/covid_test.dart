@@ -1,9 +1,11 @@
+import 'dart:ui';
+
+import 'package:bubble_detector/controllers/page_state_contollers/LandingPagesController/coivd_test_page_controller.dart';
+import 'package:bubble_detector/views/widgets/landing_page_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../controllers/page_state_contollers/LandingPagesController/coivd_test_page_controller.dart';
 import '../../../util/theme.dart';
-import '../../widgets/landing_page_button.dart';
 
 class CovidTestPage extends StatelessWidget {
   const CovidTestPage({Key? key}) : super(key: key);

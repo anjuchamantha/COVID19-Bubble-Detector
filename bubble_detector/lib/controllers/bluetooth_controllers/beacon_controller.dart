@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'requirement_state_controller.dart';
-import '../database_controllers/bluetooth_db_controller.dart';
-import '../../models/beacon.dart';
-import '../../util/constants.dart';
+import 'package:bubble_detector/controllers/bluetooth_controllers/requirement_state_controller.dart';
+import 'package:bubble_detector/controllers/database_controllers/bluetooth_db_controller.dart';
+import 'package:bubble_detector/models/beacon.dart';
+import 'package:bubble_detector/util/constants.dart';
 import 'package:get/get.dart';
 import 'package:flutter_beacon/flutter_beacon.dart';
 

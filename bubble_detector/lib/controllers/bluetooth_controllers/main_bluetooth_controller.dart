@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import '../database_controllers/bluetooth_db_controller.dart';
+import 'package:bubble_detector/controllers/database_controllers/bluetooth_db_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:get/get.dart';

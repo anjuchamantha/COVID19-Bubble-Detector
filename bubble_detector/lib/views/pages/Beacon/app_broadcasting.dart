@@ -1,10 +1,11 @@
+import 'package:bubble_detector/controllers/bluetooth_controllers/requirement_state_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flutter/services.dart';
 import 'package:flutter_beacon/flutter_beacon.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
-
-import '../../../controllers/bluetooth_controllers/requirement_state_controller.dart';
 
 class TabBroadcasting extends StatefulWidget {
   @override
