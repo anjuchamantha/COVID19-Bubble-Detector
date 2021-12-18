@@ -1,23 +1,31 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:uuid/uuid.dart';
+// import 'package:uuid/uuid.dart';
 
 class UserController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  User? user = FirebaseAuth.instance.currentUser;
+//   User currentUser = FirebaseAuth.instance.currentUser;
+// if (currentUser != null) {
+//   await currentUser.reload();
+// }
+
+//   User? user = await FirebaseAuth.instance.currentUser;
 
   Future<void> addUser(String name, bool isStore) {
-    var uuid = Uuid();
+    User? user = FirebaseAuth.instance.currentUser;
+    // var uuid = Uuid();
+    print("ADD USER1");
     DocumentReference userRef =
         FirebaseFirestore.instance.collection('users').doc(user!.uid);
     // Call the user's CollectionReference to add a new user
+    print("ADD USER2");
     return userRef.set({
-      'id': user!.uid,
+      'id': user.uid,
       'isStore': isStore,
       'name': name,
-      'phone': user!.phoneNumber,
-      'bluetooth_id': uuid.v5(Uuid.NAMESPACE_URL, user!.uid),
+      'phone': user.phoneNumber,
+      // 'bluetooth_id': uuid.v5(Uuid.NAMESPACE_URL, user!.uid),
     }).then((value) {
       print("User Added");
       Get.snackbar("User Data Added", "Successfully added User Data.");
@@ -28,6 +36,7 @@ class UserController extends GetxController {
   }
 
   Future<void> updateUser(String key, String value) {
+    User? user = FirebaseAuth.instance.currentUser;
     DocumentReference userRef =
         FirebaseFirestore.instance.collection('users').doc(user!.uid);
     return userRef.update({

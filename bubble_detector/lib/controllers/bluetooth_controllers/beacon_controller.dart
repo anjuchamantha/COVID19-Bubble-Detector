@@ -8,8 +8,16 @@ import 'package:get/get.dart';
 import 'package:flutter_beacon/flutter_beacon.dart';
 
 class BeaconController extends GetxController {
-  RequirementStateController requirementsController = Get.find();
-  BluetoothDBController bluetoothDBController = Get.find();
+  RequirementStateController requirementsController =
+      Get.isRegistered<RequirementStateController>()
+          ? Get.find<RequirementStateController>()
+          : Get.put(RequirementStateController());
+
+  BluetoothDBController bluetoothDBController =
+      Get.isRegistered<BluetoothDBController>()
+          ? Get.find<BluetoothDBController>()
+          : Get.put(BluetoothDBController());
+
   bool get broadcastReady =>
       requirementsController.authorizationStatusOk == true &&
       requirementsController.locationServiceEnabled == true &&

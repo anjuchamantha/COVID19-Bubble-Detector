@@ -1,9 +1,16 @@
-import 'package:bubble_detector/controllers/bluetooth_controllers/beacon_controller.dart';
+import 'package:bubble_detector/controllers/bluetooth_controllers/foreground_controller.dart';
+import 'package:bubble_detector/main.dart';
 import 'package:bubble_detector/util/constants.dart';
+
 import 'package:bubble_detector/util/routes.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+
+import '../../../controllers/bluetooth_controllers/beacon_controller.dart';
+import '../../../util/routes.dart';
+import '../../../util/ui_util.dart';
 
 class BeaconFunctionsPage extends StatelessWidget {
   const BeaconFunctionsPage({Key? key}) : super(key: key);
@@ -14,24 +21,26 @@ class BeaconFunctionsPage extends StatelessWidget {
         ? Get.find<BeaconController>()
         : Get.put(BeaconController());
 
-    User? user = FirebaseAuth.instance.currentUser;
-    var phoneNumber = user!.phoneNumber;
-    print("User Phone Number : " + phoneNumber.toString());
-    var major = phoneNumber?.substring(4, 8) ?? "";
-    var minor = phoneNumber?.substring(8) ?? "";
+    final foregroundController = Get.isRegistered<ForegroundController>()
+        ? Get.find<ForegroundController>()
+        : Get.put(ForegroundController());
+
+    var major = UiUtil.major();
+    var minor = UiUtil.minor();
     // final beaconController = Get.put(BeaconController());
     return Scaffold(
       appBar: AppBar(
-        brightness: Brightness.dark,
         title: Text(
           "Beacon Functions Page",
           style: TextStyle(fontWeight: FontWeight.normal),
         ),
         backgroundColor: Colors.black,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
       body: Column(
         children: [
-          buildBroadcastSection(beaconController, major, minor),
+          buildBroadcastSection(
+              foregroundController, beaconController, major, minor),
           Divider(),
           Expanded(child: buildScanSection(beaconController)),
           // Divider(),
@@ -74,7 +83,7 @@ class BeaconFunctionsPage extends StatelessWidget {
     );
   }
 
-  Container buildBroadcastSection(
+  Container buildBroadcastSection(ForegroundController foregroundController,
       BeaconController beaconController, String major, String minor) {
     return Container(
       // color: Colors.amber,
@@ -90,14 +99,17 @@ class BeaconFunctionsPage extends StatelessWidget {
                           primary: Colors.red[900],
                         ),
                         onPressed: () {
+                          foregroundController.stopForegroundTask();
                           beaconController.stopBroadcast();
                         },
                       )
                     : ElevatedButton(
                         child: Text('Broadcast'),
                         onPressed: () {
+                          foregroundController
+                              .startForegroundTask(startCallback);
                           beaconController.startBroadcast(
-                              APP_UUID, major, minor);
+                              APP_UUID, UiUtil.major(), UiUtil.minor());
                         },
                       );
               },

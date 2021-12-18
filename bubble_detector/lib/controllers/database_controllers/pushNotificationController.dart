@@ -37,6 +37,7 @@ class FCMController extends GetxController {
     String? token = await _firebaseMessaging.getToken();
     print("FirebaseMessaging token: $token");
     userController.updateUser("firebase_msg_token", token.toString());
+
     // secureStorageController.storeFirebaseToken(token);
 
     // Handling Message In Foreground
