@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 class FCMController extends GetxController {
   FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-  UserController userController = Get.find();
+  //UserController userController = Get.find();
   // final SecureStorageController secureStorageController =
   //     Get.find<SecureStorageController>();
   final messages = <Message>[].obs;
@@ -36,7 +36,8 @@ class FCMController extends GetxController {
     print('User granted permission: ${settings.authorizationStatus}');
     String? token = await _firebaseMessaging.getToken();
     print("FirebaseMessaging token: $token");
-    userController.updateUser("firebase_msg_token", token.toString());
+    // userController.updateUser("firebase_msg_token", token.toString());
+
     // secureStorageController.storeFirebaseToken(token);
 
     // Handling Message In Foreground

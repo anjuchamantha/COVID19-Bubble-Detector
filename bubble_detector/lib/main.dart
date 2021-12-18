@@ -1,3 +1,4 @@
+import 'package:bubble_detector/util/foreground_task_handler.dart';
 import 'package:bubble_detector/views/pages/Beacon/beacon_functions_page.dart';
 import 'package:bubble_detector/views/pages/Beacon/beacon_page.dart';
 import 'package:bubble_detector/views/pages/Covid/detect_covid_page.dart';
@@ -6,6 +7,7 @@ import 'package:bubble_detector/views/pages/Other/health_tips.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -21,6 +23,11 @@ import 'views/pages/Main/home.dart';
 import 'views/pages/Settings/discovery_page.dart';
 import 'views/pages/Settings/main_seetings_page.dart';
 import 'views/pages/splash_page.dart';
+
+void startCallback() {
+  // The setTaskHandler function must be called to handle the task in the background
+  FlutterForegroundTask.setTaskHandler(ForegroundTaskHandler());
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
