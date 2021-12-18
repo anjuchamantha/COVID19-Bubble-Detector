@@ -5,6 +5,10 @@ import 'package:get/get.dart';
 
 class CovidController extends GetxController {
   Rx<DateTime> dateSelected = DateTime.now().obs;
+  var daysDuration = 5.obs;
+  var hrsDuration = 0.obs;
+  var minDuration = 0.obs;
+  var secDuration = 0.obs;
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
@@ -18,11 +22,23 @@ class CovidController extends GetxController {
     print("COVID DATE: ${dateSelected.toString()}");
   }
 
+  updateDuration(List<dynamic> durations) {
+    daysDuration.value = durations[0];
+    hrsDuration.value = durations[1];
+    minDuration.value = durations[2];
+    secDuration.value = durations[3];
+  }
+
   getContactedUsers() async {
     isLoading.value = true;
     contactedUsers.value = [];
     // DateTime bef_ = dateSelected.value.
-    final daysAgo = dateSelected.value.subtract(new Duration(days: 7));
+    final daysAgo = dateSelected.value.subtract(new Duration(
+      days: daysDuration.value,
+      hours: hrsDuration.value,
+      minutes: minDuration.value,
+      seconds: secDuration.value,
+    ));
     DocumentReference userRef =
         FirebaseFirestore.instance.collection('users').doc(user!.uid);
     var result = await userRef

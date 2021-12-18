@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:bubble_detector/controllers/database_controllers/covid_controller.dart';
+import 'package:bubble_detector/util/custom_picker_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_picker/flutter_picker.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -29,6 +33,27 @@ class DetectCovidPage extends StatelessWidget {
           children: [
             buildDateSection(covidController, context),
             Padding(
+              padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+              child: Text(
+                "Get Contacted users within",
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
+            Obx(() {
+              return GestureDetector(
+                onLongPress: () {
+                  showPickerNumber(context, covidController);
+                },
+                child: Text(
+                  "${covidController.daysDuration.value} Days, ${covidController.hrsDuration.value} Hours, ${covidController.minDuration.value} Minutes, ${covidController.secDuration.value} Seconds",
+                  style: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              );
+            }),
+            Padding(
               padding: const EdgeInsets.fromLTRB(0, 16, 0, 8),
               child: Obx(() {
                 return (covidController.isLoading.value)
@@ -37,7 +62,7 @@ class DetectCovidPage extends StatelessWidget {
                         color: Colors.red[900],
                       ))
                     : buildContactedUsersSection(
-                        covidController, datePickerController);
+                        context, covidController, datePickerController);
               }),
             ),
             // buildContactedUsersSection(covidController),
@@ -47,10 +72,53 @@ class DetectCovidPage extends StatelessWidget {
     );
   }
 
-  Column buildContactedUsersSection(
-      CovidController covidController, TextEditingController datePicker) {
+  showPickerNumber(BuildContext context, CovidController covidController) {
+    new Picker(
+      adapter: NumberPickerAdapter(data: [
+        NumberPickerColumn(begin: 0, end: 14),
+        NumberPickerColumn(begin: 0, end: 24),
+        NumberPickerColumn(begin: 0, end: 60),
+        NumberPickerColumn(begin: 0, end: 60),
+      ]),
+      hideHeader: true,
+      title: new Text("Days : Hrs : Mins : Secs"),
+      onConfirm: (Picker picker, List value) {
+        print(value.toString());
+        print(picker.getSelectedValues());
+        covidController.updateDuration(picker.getSelectedValues());
+      },
+    ).showDialog(context);
+  }
+
+  Column buildContactedUsersSection(context, CovidController covidController,
+      TextEditingController datePicker) {
     return Column(
       children: [
+        // TextFormField(
+        //   controller: datePicker,
+        //   decoration: InputDecoration(
+        //     labelText: 'Days',
+        //   ),
+        //   keyboardType: TextInputType.number,
+        //   validator: (val) {
+        //     if (val == null || val.isEmpty) {
+        //       return 'Major required';
+        //     }
+
+        //     try {
+        //       int major = int.parse(val.toString());
+
+        //       if (major < 0 || major > 31) {
+        //         return 'Days must be number between 0 and 31';
+        //       }
+        //     } on FormatException {
+        //       return 'Days must be number';
+        //     }
+
+        //     return null;
+        //   },
+        // ),
+
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             primary: Colors.red[900],
