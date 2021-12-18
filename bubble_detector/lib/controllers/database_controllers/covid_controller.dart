@@ -56,7 +56,7 @@ class CovidController extends GetxController {
 
     print(result.toString());
 
-    result.docs.forEach((res) {
+    result.docs.forEach((res) async {
       print(res.data());
       ContactUser u = ContactUser(
         res['user'],
@@ -64,6 +64,16 @@ class CovidController extends GetxController {
             res['timestamp'].microsecondsSinceEpoch),
         res['distance'],
       );
+
+      var user = await FirebaseFirestore.instance
+          .collection('users')
+          .where('phone', isEqualTo: res['user'])
+          .get();
+      print("FIREBASE USER");
+
+      print(user.docs[0].data());
+      u.updateUserData(user.docs[0]['name'], user.docs[0]['id'],
+          user.docs[0]['firebase_msg_token'], user.docs[0]['isStore']);
       contactedUsers.add(u);
     });
     contactedUsers.sort((a, b) => a.distance.compareTo(b.distance));

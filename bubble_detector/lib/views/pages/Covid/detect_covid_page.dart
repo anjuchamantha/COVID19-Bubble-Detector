@@ -112,63 +112,72 @@ class DetectCovidPage extends StatelessWidget {
           if (notificationCount != 0) {
             return Column(
               children: [
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: notificationCount,
-                  itemBuilder: (ctxt, index) {
-                    String contactedDate = DateFormat('d EEE, MMM yyyy')
-                        .format(covidController.contactedUsers[index].dateTime);
-                    String dis = covidController.contactedUsers[index].distance
-                        .toString()
-                        .substring(0, 3);
-                    return Column(
-                      children: [
-                        ListTile(
-                          leading: Container(
-                            height: 40,
-                            width: 70,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.black87),
-                            child: Center(
-                              child: Text(
-                                "$dis m",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
+                Text("No of Direct contacts : $notificationCount"),
+                Text("All contacts : 0"),
+                Container(
+                  height: MediaQuery.of(context).size.height - 450,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: notificationCount,
+                    itemBuilder: (ctxt, index) {
+                      String contactedDate =
+                          DateFormat('h:m:s a, d EEE, MMM yyyy').format(
+                              covidController.contactedUsers[index].dateTime);
+                      String dis = covidController
+                          .contactedUsers[index].distance
+                          .toString()
+                          .substring(0, 3);
+                      return ListTile(
+                        visualDensity:
+                            VisualDensity(horizontal: 0, vertical: -4),
+                        trailing: buildIsStoreIcon(covidController),
+                        leading: Container(
+                          height: 40,
+                          width: 70,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.black87),
+                          child: Center(
+                            child: Text(
+                              "$dis m",
+                              style: TextStyle(
+                                color: Colors.white,
                               ),
                             ),
                           ),
-                          title:
-                              Text(covidController.contactedUsers[index].phone),
-                          subtitle: Text(contactedDate),
                         ),
-                      ],
-                    );
-                  },
+                        title:
+                            Text(covidController.contactedUsers[index].phone),
+                        subtitle: Text(contactedDate),
+                      );
+                    },
+                  ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ElevatedButton(
-                      child: Text('Clear List'),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.grey[400],
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton(
+                        child: Text('Clear List'),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.grey[400],
+                        ),
+                        onPressed: () {
+                          // beaconController.clearBeaconList();
+                        },
                       ),
-                      onPressed: () {
-                        // beaconController.clearBeaconList();
-                      },
-                    ),
-                    ElevatedButton(
-                      child: Text('Mark as contacted'),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.green[400],
+                      ElevatedButton(
+                        child: Text('Mark as contacted'),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.green[400],
+                        ),
+                        onPressed: () {
+                          // beaconController.updateContactedUsers();
+                        },
                       ),
-                      onPressed: () {
-                        // beaconController.updateContactedUsers();
-                      },
-                    ),
-                  ],
+                    ],
+                  ),
                 )
               ],
             );
@@ -187,6 +196,13 @@ class DetectCovidPage extends StatelessWidget {
     );
   }
 
+  Icon buildIsStoreIcon(CovidController covidController) {
+    return Icon(
+      Icons.shopping_cart,
+      color: Colors.black87,
+    );
+  }
+
   Container buildDateSection(
       CovidController covidController, BuildContext context) {
     return Container(
@@ -198,8 +214,10 @@ class DetectCovidPage extends StatelessWidget {
       child: Column(
         children: [
           Obx(() {
-            var now = covidController.dateSelected.value;
-            String formattedDate = DateFormat('d EEE, MMM yyyy').format(now);
+            var dateSelec = covidController.dateSelected.value;
+            String formattedDate =
+                DateFormat('d EEE, MMM yyyy').format(dateSelec);
+            String formattedDTime = DateFormat('h:m:s a').format(dateSelec);
             return Column(
               children: [
                 Row(
@@ -215,13 +233,26 @@ class DetectCovidPage extends StatelessWidget {
                     Expanded(
                       child: Container(
                         // color: Colors.grey[200],
-                        child: Text(
-                          "$formattedDate",
-                          style: TextStyle(
-                            color: Colors.black87,
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "$formattedDate",
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "$formattedDTime",
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
