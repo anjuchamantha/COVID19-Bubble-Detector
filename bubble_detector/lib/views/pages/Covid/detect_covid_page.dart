@@ -212,8 +212,8 @@ class DetectCovidPage extends StatelessWidget {
                           primary: Colors.green[400],
                         ),
                         onPressed: () {
-                          covidController.directcontactedUsers
-                              .sort((a, b) => a.distance.compareTo(b.distance));
+                          // covidController.directcontactedUsers
+                          //     .sort((a, b) => a.dateTime.compareTo(b.dateTime));
                         },
                       ),
                     ],
@@ -238,9 +238,21 @@ class DetectCovidPage extends StatelessWidget {
 
   Widget buildIsStoreIcon(CovidController covidController, int index) {
     if (covidController.directcontactedUsers[index].isStore) {
-      return Icon(
-        Icons.shopping_cart,
-        color: Colors.red[900],
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            Icons.shopping_cart,
+            color: Colors.red[900],
+          ),
+          SizedBox(
+            width: 2,
+          ),
+          Text(
+            "${covidController.directcontactedUsers[index].indirects.toString()}",
+            style: TextStyle(color: Colors.red[900]),
+          ),
+        ],
       );
     } else {
       return Icon(

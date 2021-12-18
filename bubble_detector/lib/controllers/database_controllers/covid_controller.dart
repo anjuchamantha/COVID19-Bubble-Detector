@@ -121,6 +121,7 @@ class CovidController extends GetxController {
         .get();
 
     print(result.toString());
+    u.indirects = result.docs.length;
 
     // Get Firebase details of the users connected
     result.docs.forEach((res) async {

@@ -6,6 +6,7 @@ class ContactUser {
   var firebaseToken;
   var isStore;
   var name;
+  int indirects = 0;
 
   ContactUser(this.phone, this.dateTime, this.distance);
 

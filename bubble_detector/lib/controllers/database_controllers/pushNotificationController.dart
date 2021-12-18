@@ -39,21 +39,6 @@ class FCMController extends GetxController {
     userController.updateUser("firebase_msg_token", token.toString());
     // secureStorageController.storeFirebaseToken(token);
 
-    // _firebaseMessaging.configure(
-    //   onMessage: (Map<String, dynamic> message) async {
-    //     print("onMessage: $message");
-    //     addMessage(message);
-    //   },
-    //   onLaunch: (Map<String, dynamic> message) async {
-    //     print("onLaunch: $message");
-    //     addMessage(message);
-    //   },
-    //   onResume: (Map<String, dynamic> message) async {
-    //     print("onResume: $message");
-    //     addMessage(message);
-    //   },
-    // );
-
     // Handling Message In Foreground
     FirebaseMessaging.onMessage.listen((RemoteMessage event) {
       print("message recieved");
