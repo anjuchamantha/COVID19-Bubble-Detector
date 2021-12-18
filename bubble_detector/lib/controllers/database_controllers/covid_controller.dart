@@ -65,7 +65,7 @@ class CovidController extends GetxController {
     // contactedUsers.refresh();
     print("CONTACTS AFTER : ${directcontactedUsers.length}");
     print("CONTACTS  : $directcontactedUsers");
-    // isLoading.value = false;
+    isLoading.value = false;
   }
 
   Future<void> getContactUserDetails(
@@ -94,7 +94,7 @@ class CovidController extends GetxController {
         contactedStores.add(u);
         await getIndirectContactedUsers(u);
       }
-      isLoading.value = false;
+      // isLoading.value = false;
     });
   }
 

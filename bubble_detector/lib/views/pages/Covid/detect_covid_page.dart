@@ -347,13 +347,14 @@ class DetectCovidPage extends StatelessWidget {
 
   showDatePicker(BuildContext context, CovidController covidController) {
     final monthAgo = new DateTime.now().subtract(new Duration(days: 30));
+    final currentTime = new DateTime.now().add(Duration(seconds: 1));
     // set up the button
 
-    DatePicker.showDatePicker(
+    DatePicker.showDateTimePicker(
       context,
       showTitleActions: true,
       minTime: monthAgo,
-      maxTime: DateTime.now(),
+      maxTime: currentTime,
       theme: DatePickerTheme(
         headerColor: Colors.black87,
         // backgroundColor: Colors.,
