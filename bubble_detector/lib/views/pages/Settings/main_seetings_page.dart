@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:bubble_detector/controllers/bluetooth_controllers/main_bluetooth_controller.dart';
-import 'package:bubble_detector/controllers/database_controllers/bluetooth_db_controller.dart';
-import 'package:bubble_detector/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:get/instance_manager.dart';
-import 'background_collecting_task.dart';
 import 'package:get/get.dart';
+
+import '../../../controllers/bluetooth_controllers/main_bluetooth_controller.dart';
+import '../../../controllers/database_controllers/bluetooth_db_controller.dart';
+import '../../../util/routes.dart';
+import 'background_collecting_task.dart';
 
 class MainSettingsPage extends StatefulWidget {
   @override
