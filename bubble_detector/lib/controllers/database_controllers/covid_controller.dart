@@ -113,7 +113,11 @@ class CovidController extends GetxController {
     //TOTO: check for only that contacted date
     var result = await userRef
         .collection("contacts_collection")
-        .where('timestamp', isGreaterThanOrEqualTo: dateOfContact)
+        .where(
+          'timestamp',
+          isGreaterThanOrEqualTo: dateOfContact,
+          isLessThanOrEqualTo: dateOfContact.add(Duration(days: 1)),
+        )
         .get();
 
     print(result.toString());

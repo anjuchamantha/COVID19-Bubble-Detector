@@ -110,7 +110,8 @@ class DetectCovidPage extends StatelessWidget {
         Obx(() {
           int contactedUsersCount = covidController.directcontactedUsers.length;
           int storeCount = covidController.contactedStores.length;
-          int allCount = contactedUsersCount + storeCount;
+          int indirectCount = covidController.indirectContactedUsers.length;
+          int allCount = contactedUsersCount + indirectCount;
           if (contactedUsersCount != 0) {
             return Column(
               children: [
@@ -149,7 +150,8 @@ class DetectCovidPage extends StatelessWidget {
                     ),
                   ),
                   title: Text("Direct contacts : $contactedUsersCount"),
-                  subtitle: Text("Stores Visited : $storeCount"),
+                  subtitle:
+                      Text("Stores : $storeCount Indirect : $indirectCount"),
                 ),
                 Divider(),
                 Container(
