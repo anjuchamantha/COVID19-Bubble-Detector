@@ -56,6 +56,17 @@ class CovidController extends GetxController {
 
     print(result.toString());
 
+    await getContactUserDetails(result);
+
+    // contactedUsers.sort((a, b) => a.distance.compareTo(b.distance));
+    // contactedUsers.refresh();
+    print("CONTACTS AFTER : ${contactedUsers.length}");
+    print("CONTACTS  : $contactedUsers");
+    isLoading.value = false;
+  }
+
+  Future<void> getContactUserDetails(
+      QuerySnapshot<Map<String, dynamic>> result) async {
     result.docs.forEach((res) async {
       print(res.data());
       ContactUser u = ContactUser(
@@ -76,8 +87,5 @@ class CovidController extends GetxController {
           user.docs[0]['firebase_msg_token'], user.docs[0]['isStore']);
       contactedUsers.add(u);
     });
-    contactedUsers.sort((a, b) => a.distance.compareTo(b.distance));
-    print("CONTACTS AFTER : ${contactedUsers.length}");
-    isLoading.value = false;
   }
 }

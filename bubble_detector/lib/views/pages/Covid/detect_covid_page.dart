@@ -112,10 +112,46 @@ class DetectCovidPage extends StatelessWidget {
           if (notificationCount != 0) {
             return Column(
               children: [
-                Text("No of Direct contacts : $notificationCount"),
-                Text("All contacts : 0"),
+                ListTile(
+                  trailing: Container(
+                    // color: Colors.black,
+                    child: Text(
+                      "22",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ),
+                  visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                  leading: Container(
+                    height: 40,
+                    width: 70,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.green[400],
+                      ),
+                      onPressed: () {
+                        covidController.contactedUsers
+                            .sort((a, b) => a.distance.compareTo(b.distance));
+                      },
+                      child: Center(
+                        child: Text(
+                          "Sort",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  title: Text("Direct contacts : $notificationCount"),
+                  subtitle: Text("Stores Visited : 0"),
+                ),
+                Divider(),
                 Container(
-                  height: MediaQuery.of(context).size.height - 450,
+                  height: MediaQuery.of(context).size.height - 470,
                   child: ListView.builder(
                     shrinkWrap: true,
                     itemCount: notificationCount,
@@ -125,8 +161,7 @@ class DetectCovidPage extends StatelessWidget {
                               covidController.contactedUsers[index].dateTime);
                       String dis = covidController
                           .contactedUsers[index].distance
-                          .toString()
-                          .substring(0, 3);
+                          .toString();
                       return ListTile(
                         visualDensity:
                             VisualDensity(horizontal: 0, vertical: -4),
@@ -158,22 +193,23 @@ class DetectCovidPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
+                      // ElevatedButton(
+                      //   child: Text('Clear List'),
+                      //   style: ElevatedButton.styleFrom(
+                      //     primary: Colors.grey[400],
+                      //   ),
+                      //   onPressed: () {
+                      //     // beaconController.clearBeaconList();
+                      //   },
+                      // ),
                       ElevatedButton(
-                        child: Text('Clear List'),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.grey[400],
-                        ),
-                        onPressed: () {
-                          // beaconController.clearBeaconList();
-                        },
-                      ),
-                      ElevatedButton(
-                        child: Text('Mark as contacted'),
+                        child: Text('Notify Alll'),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.green[400],
                         ),
                         onPressed: () {
-                          // beaconController.updateContactedUsers();
+                          covidController.contactedUsers
+                              .sort((a, b) => a.distance.compareTo(b.distance));
                         },
                       ),
                     ],
