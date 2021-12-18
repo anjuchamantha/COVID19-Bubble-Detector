@@ -108,8 +108,8 @@ class DetectCovidPage extends StatelessWidget {
           ),
         ),
         Obx(() {
-          int contactedUsersCount = covidController.contactedUsers.length;
-          int storeCount = covidController.secDuration.value;
+          int contactedUsersCount = covidController.directcontactedUsers.length;
+          int storeCount = covidController.contactedStores.length;
           int allCount = contactedUsersCount + storeCount;
           if (contactedUsersCount != 0) {
             return Column(
@@ -135,7 +135,7 @@ class DetectCovidPage extends StatelessWidget {
                         primary: Colors.green[400],
                       ),
                       onPressed: () {
-                        covidController.contactedUsers
+                        covidController.directcontactedUsers
                             .sort((a, b) => a.distance.compareTo(b.distance));
                       },
                       child: Center(
@@ -159,10 +159,10 @@ class DetectCovidPage extends StatelessWidget {
                     itemCount: contactedUsersCount,
                     itemBuilder: (ctxt, index) {
                       String contactedDate = DateFormat('h:m:s a, d EEE, MMM')
-                          .format(
-                              covidController.contactedUsers[index].dateTime);
+                          .format(covidController
+                              .directcontactedUsers[index].dateTime);
                       String dis = covidController
-                          .contactedUsers[index].distance
+                          .directcontactedUsers[index].distance
                           .toString();
                       return ListTile(
                         visualDensity:
@@ -184,7 +184,7 @@ class DetectCovidPage extends StatelessWidget {
                           ),
                         ),
                         title: Text(
-                            "+94 7 **** ${covidController.contactedUsers[index].phone.substring(8, 12)}"),
+                            "+94 7 **** ${covidController.directcontactedUsers[index].phone.substring(8, 12)}"),
                         subtitle: Text(contactedDate),
                       );
                     },
@@ -210,7 +210,7 @@ class DetectCovidPage extends StatelessWidget {
                           primary: Colors.green[400],
                         ),
                         onPressed: () {
-                          covidController.contactedUsers
+                          covidController.directcontactedUsers
                               .sort((a, b) => a.distance.compareTo(b.distance));
                         },
                       ),
@@ -235,7 +235,7 @@ class DetectCovidPage extends StatelessWidget {
   }
 
   Widget buildIsStoreIcon(CovidController covidController, int index) {
-    if (covidController.contactedUsers[index].isStore) {
+    if (covidController.directcontactedUsers[index].isStore) {
       return Icon(
         Icons.shopping_cart,
         color: Colors.red[900],

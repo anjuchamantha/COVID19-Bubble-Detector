@@ -12,7 +12,9 @@ class CovidController extends GetxController {
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
-  final contactedUsers = <ContactUser>[].obs;
+  final directcontactedUsers = <ContactUser>[].obs;
+  final contactedStores = <ContactUser>[].obs;
+  final indirectContactedUsers = <ContactUser>[].obs;
   RxBool isLoading = false.obs;
   RxInt storeCount = 0.obs;
 
@@ -38,8 +40,8 @@ class CovidController extends GetxController {
     // contactedUsers.refresh();
     dateSelected.value = DateTime.now();
     dateSelected.refresh();
-    contactedUsers.clear();
-    print("CONTACTS INIT : ${contactedUsers.length}");
+    directcontactedUsers.clear();
+    print("CONTACTS INIT : ${directcontactedUsers.length}");
     // DateTime bef_ = dateSelected.value.
     var daysAgo = dateSelected.value.subtract(new Duration(
       days: daysDuration.value,
@@ -61,8 +63,8 @@ class CovidController extends GetxController {
 
     // contactedUsers.sort((a, b) => a.distance.compareTo(b.distance));
     // contactedUsers.refresh();
-    print("CONTACTS AFTER : ${contactedUsers.length}");
-    print("CONTACTS  : $contactedUsers");
+    print("CONTACTS AFTER : ${directcontactedUsers.length}");
+    print("CONTACTS  : $directcontactedUsers");
     isLoading.value = false;
   }
 
@@ -86,7 +88,68 @@ class CovidController extends GetxController {
       print(user.docs[0].data());
       u.updateUserData(user.docs[0]['name'], user.docs[0]['id'],
           user.docs[0]['firebase_msg_token'], user.docs[0]['isStore']);
-      contactedUsers.add(u);
+      directcontactedUsers.add(u);
+
+      if (u.isStore) {
+        contactedStores.add(u);
+        await getIndirectContactedUsers(u);
+      }
     });
+  }
+
+  getIndirectContactedUsers(ContactUser u) async {
+    // isLoading.value = true;
+    var dateOfContact = u.dateTime;
+    // dateSelected.value = DateTime.now();
+    // dateSelected.refresh();
+    // directcontactedUsers.clear();
+    print("INDIRECT CONTACTS INIT : ${indirectContactedUsers.length}");
+    // var daysAgo = dateSelected.value.subtract(new Duration(
+    //   days: daysDuration.value,
+    //   hours: hrsDuration.value,
+    //   minutes: minDuration.value,
+    //   seconds: secDuration.value,
+    // ));
+    // print("DAYS AGO : ${daysAgo.toString()}");
+    DocumentReference userRef =
+        FirebaseFirestore.instance.collection('users').doc(u.userId);
+    //TOTO: check for only that contacted date
+    var result = await userRef
+        .collection("contacts_collection")
+        .where('timestamp', isGreaterThanOrEqualTo: dateOfContact)
+        .get();
+
+    print(result.toString());
+
+    // await getContactUserDetails(result);
+    result.docs.forEach((res) async {
+      print(res.data());
+      ContactUser u = ContactUser(
+        res['user'],
+        DateTime.fromMicrosecondsSinceEpoch(
+            res['timestamp'].microsecondsSinceEpoch),
+        res['distance'],
+      );
+
+      var user = await FirebaseFirestore.instance
+          .collection('users')
+          .where('phone', isEqualTo: res['user'])
+          .get();
+      // print("FIREBASE USER");
+
+      print(user.docs[0].data());
+      u.updateUserData(user.docs[0]['name'], user.docs[0]['id'],
+          user.docs[0]['firebase_msg_token'], user.docs[0]['isStore']);
+      indirectContactedUsers.add(u);
+
+      // if (u.isStore) {
+      //   contactedStores.add(u);
+      //   await getIndirectContactedUsers(u);
+      // }
+    });
+
+    print("INDIRECT CONTACTS AFTER : ${indirectContactedUsers.length}");
+    print("INDIRECT CONTACTS  : $indirectContactedUsers");
+    // isLoading.value = false;
   }
 }
