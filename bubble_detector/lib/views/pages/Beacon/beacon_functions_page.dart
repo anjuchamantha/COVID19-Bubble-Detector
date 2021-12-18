@@ -1,24 +1,17 @@
 import 'package:bubble_detector/controllers/bluetooth_controllers/foreground_controller.dart';
 import 'package:bubble_detector/main.dart';
 import 'package:bubble_detector/util/constants.dart';
-<<<<<<< Updated upstream
+
 import 'package:bubble_detector/util/routes.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-=======
-import 'package:bubble_detector/util/foreground_task_handler.dart';
->>>>>>> Stashed changes
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:get/get.dart';
 
-<<<<<<< Updated upstream
-=======
 import '../../../controllers/bluetooth_controllers/beacon_controller.dart';
 import '../../../util/routes.dart';
 import '../../../util/ui_util.dart';
 
->>>>>>> Stashed changes
 class BeaconFunctionsPage extends StatelessWidget {
   const BeaconFunctionsPage({Key? key}) : super(key: key);
 
