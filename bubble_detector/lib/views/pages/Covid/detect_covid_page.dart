@@ -212,6 +212,7 @@ class DetectCovidPage extends StatelessWidget {
                           primary: Colors.green[400],
                         ),
                         onPressed: () {
+                          covidController.sendNotificationsToAll();
                           // covidController.directcontactedUsers
                           //     .sort((a, b) => a.dateTime.compareTo(b.dateTime));
                         },

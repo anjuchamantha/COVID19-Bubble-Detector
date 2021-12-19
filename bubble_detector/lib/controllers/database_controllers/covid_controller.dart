@@ -1,3 +1,4 @@
+import 'package:bubble_detector/controllers/database_controllers/pushNotificationController.dart';
 import 'package:bubble_detector/models/contact_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,11 +13,16 @@ class CovidController extends GetxController {
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
+
   final directcontactedUsers = <ContactUser>[].obs;
   final contactedStores = <ContactUser>[].obs;
   final indirectContactedUsers = <ContactUser>[].obs;
   RxBool isLoading = false.obs;
   // RxInt storeCount = 0.obs;
+  final directNotifications = <String>{}.obs;
+  final inDirectNotifications = <String>{}.obs;
+
+  FCMController fcmController = Get.find();
 
   updateDateSelected(DateTime dateTime) {
     print("GET : ${dateTime.toString()}");
@@ -153,5 +159,44 @@ class CovidController extends GetxController {
     print("INDIRECT CONTACTS AFTER : ${indirectContactedUsers.length}");
     print("INDIRECT CONTACTS  : $indirectContactedUsers");
     // isLoading.value = false;
+  }
+
+  sendNotificationsToAll() async {
+    directNotifications.clear();
+    inDirectNotifications.clear();
+    directcontactedUsers.forEach((element) {
+      addToNotificationSet(element, true);
+    });
+    indirectContactedUsers.forEach((element) {
+      addToNotificationSet(element, false);
+    });
+    await fcmController.sendPushNotifications(
+        directNotifications.toList(), true);
+    await fcmController.sendPushNotifications(
+        inDirectNotifications.toList(), false);
+  }
+
+  addToNotificationSet(ContactUser u, bool isDirect) {
+    String fcmToken = u.firebaseToken;
+    // String contactedDate =
+    //     DateFormat('h:m:s a, d EEE, MMM yyyy').format(u.dateTime);
+
+    if (isDirect) {
+      // NotificationMsg msg = NotificationMsg(
+      //     "COVID Alert",
+      //     "Direct Contact [distance ${u.distance.toString()} m] has detected COVID Positive on $contactedDate",
+      //     u.dateTime,
+      //     u.distance,
+      //     isDirect);
+      directNotifications.add(fcmToken);
+    } else {
+      // NotificationMsg msg = NotificationMsg(
+      //     "COVID Alert",
+      //     "In-direct contact has detected COVID Positive on $contactedDate",
+      //     u.dateTime,
+      //     u.distance,
+      //     isDirect);
+      inDirectNotifications.add(fcmToken);
+    }
   }
 }
