@@ -17,7 +17,7 @@ class Home extends StatelessWidget {
     //TabController _tabController = new TabController(length: 4, vsync: this)
 
     return DefaultTabController(
-      length: 4,
+      length: 2,
       child: WithForegroundTask(
         child: Scaffold(
           appBar: AppBar(
@@ -25,10 +25,26 @@ class Home extends StatelessWidget {
             automaticallyImplyLeading: false,
             bottom: TabBar(
               tabs: [
-                Tab(icon: Icon(Icons.home)),
-                Tab(icon: Icon(Icons.history)),
-                Tab(icon: Icon(Icons.notifications)),
-                Tab(icon: Icon(Icons.phone)),
+                Tab(
+                  icon: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.home),
+                      SizedBox(width: 10),
+                      Text('Home'),
+                    ],
+                  ),
+                ),
+                Tab(
+                  icon: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.phone),
+                      SizedBox(width: 10),
+                      Text('Emergency'),
+                    ],
+                  ),
+                ),
               ],
               labelColor: Theme.of(context).primaryColor,
               unselectedLabelColor: Colors.grey[400],
@@ -102,8 +118,6 @@ class Home extends StatelessWidget {
                   child: TabBarView(
                     children: [
                       HomePage(),
-                      EmergencyContactPage(),
-                      EmergencyContactPage(),
                       EmergencyContactPage(),
                     ],
                     physics: BouncingScrollPhysics(),

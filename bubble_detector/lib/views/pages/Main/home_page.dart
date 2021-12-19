@@ -1,30 +1,15 @@
-import 'dart:ui';
-
-import 'package:bubble_detector/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../../util/routes.dart';
 import '../../../util/theme.dart';
-import '../../../util/ui_util.dart';
-import '../../widgets/landin_page_body_text.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<String> name = <String>[
-      'Notification of Spread',
-      'Notification of Spread',
-      'Notification of Spread'
-    ];
-    List<String> phoneNumber = <String>[
-      '0112 860 000',
-      '0112 860 000',
-      '0112 860 000'
-    ];
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -32,7 +17,7 @@ class HomePage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
           child: Text(
-            'Take your Virtual COVID Test',
+            'Are you detected positive?',
             style: TextStyle(
               fontSize: 14,
               color: ProjectColors.BLACK,
@@ -56,7 +41,7 @@ class HomePage extends StatelessWidget {
                   splashColor: ProjectColors.ACCENT_COLOR,
                   child: Container(
                     color: Colors.green[400],
-                    height: MediaQuery.of(context).size.height / 6,
+                    height: MediaQuery.of(context).size.height / 5,
                     width: MediaQuery.of(context).size.width,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
@@ -64,22 +49,12 @@ class HomePage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Seems like you are OK',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: ProjectColors.BACKGROUND_COLOR,
-                              fontWeight: FontWeight.w300,
-                              letterSpacing: 0.1,
-                            ),
-                          ),
-                          SizedBox(height: 8),
                           Row(
                             children: [
                               Text(
-                                'Take the Virtual COVID Test',
+                                "Notify others\nLet's stop the spread together!",
                                 style: TextStyle(
-                                  fontSize: 23,
+                                  fontSize: 18,
                                   color: ProjectColors.BACKGROUND_COLOR,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -87,10 +62,20 @@ class HomePage extends StatelessWidget {
                               Spacer(),
                               Icon(
                                 Icons.arrow_forward_ios_rounded,
-                                size: 14,
+                                size: 18,
                                 color: ProjectColors.BACKGROUND_COLOR,
                               )
                             ],
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            "But don't worry your personal data will not be revelaed 😇",
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: ProjectColors.BACKGROUND_COLOR,
+                              fontWeight: FontWeight.w300,
+                              letterSpacing: 0.1,
+                            ),
                           ),
                         ],
                       ),
@@ -99,7 +84,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 100,
+                top: 140,
                 child: GestureDetector(
                   onTap: () {
                     Get.toNamed(AppRoutes.HEALTH_TIPS);
