@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
                 color: const Color(0xcffFF8906),
                 child: InkWell(
                   onTap: () {
-                    Get.toNamed(AppRoutes.COVID_TEST);
+                    Get.toNamed(AppRoutes.DETECT_COVID_PAGE);
                   },
                   splashColor: ProjectColors.ACCENT_COLOR,
                   child: Container(

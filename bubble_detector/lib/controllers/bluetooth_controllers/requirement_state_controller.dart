@@ -16,6 +16,27 @@ class RequirementStateController extends GetxController {
       authorizationStatus.value == AuthorizationStatus.always;
   bool get locationServiceEnabled => locationService.value;
 
+  @override
+  void onInit() async {
+    super.onInit();
+    await checkAllRequirements();
+  }
+
+  checkAllRequirements() async {
+    final bluetoothState = await flutterBeacon.bluetoothState;
+    this.updateBluetoothState(bluetoothState);
+    print('BLUETOOTH $bluetoothState');
+
+    final authorizationStatus = await flutterBeacon.authorizationStatus;
+    this.updateAuthorizationStatus(authorizationStatus);
+    print('AUTHORIZATION $authorizationStatus');
+
+    final locationServiceEnabled =
+        await flutterBeacon.checkLocationServicesIfEnabled;
+    this.updateLocationService(locationServiceEnabled);
+    print('LOCATION SERVICE $locationServiceEnabled');
+  }
+
   updateBluetoothState(BluetoothState state) {
     bluetoothState.value = state;
   }
