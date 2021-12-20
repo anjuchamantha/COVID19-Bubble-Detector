@@ -1,9 +1,11 @@
 import 'dart:ui';
 
 import 'package:bubble_detector/controllers/page_state_contollers/LandingPagesController/coivd_test_page_controller.dart';
+import 'package:bubble_detector/util/routes.dart';
 import 'package:bubble_detector/views/widgets/landing_page_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../../util/theme.dart';
 
@@ -20,42 +22,78 @@ class CovidTestPage extends StatelessWidget {
             SizedBox(height: 8),
             Spacer(),
             Text(
-              'Have you taken a test for COVID-19 ?',
+              'You were marked as a contact',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: ProjectColors.ACCENT_COLOR,
+                fontSize: 12,
+              ),
+            ),
+            SizedBox(height: 2),
+            Text(
+              'Take a PCR or Rapid-Antigen test for COVID-19.',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: ProjectColors.PRIMARY_COLOR,
-                fontSize: 22,
-                fontWeight: FontWeight.w700,
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: 64),
+            SizedBox(height: 32),
             SvgPicture.asset(
               'images/covid_test.svg',
               height: MediaQuery.of(context).size.height / 3.5,
             ),
-            SizedBox(height: 64),
+            SizedBox(height: 32),
             Text(
-              'I tested',
+              "Let's stop the spread TOGETHER !",
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, color: ProjectColors.ACCENT_COLOR),
+              style: TextStyle(
+                color: ProjectColors.BLACK,
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+                letterSpacing: 0.2,
+              ),
             ),
+            SizedBox(height: 16),
+            Divider(indent: 16, endIndent: 16),
+            SizedBox(height: 16),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CovidPostiveNegativeRadioButton(
-                  value: CovidPostiveNegative.NEGATIVE,
+                Text(
+                  "Are you detected positive?",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: ProjectColors.ACCENT_COLOR,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
-                CovidPostiveNegativeRadioButton(
-                  value: CovidPostiveNegative.POSTIVE,
+                SizedBox(width: 16),
+                SizedBox(
+                  width: 130,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Get.toNamed(AppRoutes.DETECT_COVID_PAGE);
+                    },
+                    child: Text(
+                      'Detected\nPositive',
+                      textAlign: TextAlign.center,
+                    ),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          ProjectColors.SECONDARY_COLOR),
+                    ),
+                  ),
                 ),
               ],
             ),
+            SizedBox(height: 16),
+            Divider(indent: 16, endIndent: 16),
+            SizedBox(height: 16),
             Spacer(),
-            LandingPageButton(
-              text: 'Completed',
-              onPressed: () {},
-            ),
-            Spacer(),
-            SizedBox(height: 8),
           ],
         ),
       ),

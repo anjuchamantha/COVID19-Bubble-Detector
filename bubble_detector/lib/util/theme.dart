@@ -7,6 +7,9 @@ abstract class PrimaryTheme {
       fontFamily: 'Poppins',
       primaryColor: ProjectColors.PRIMARY_COLOR,
       secondaryHeaderColor: ProjectColors.SECONDARY_COLOR,
+      appBarTheme: AppBarTheme(
+        backgroundColor: ProjectColors.PRIMARY_COLOR,
+      ),
       textTheme: TextTheme(
         bodyText1: TextStyle(),
         bodyText2: TextStyle(),
