@@ -15,7 +15,7 @@
     </queries>
    
    <application
-        android:label="bubble_detector"
+        android:label="Bubble Detector"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

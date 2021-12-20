@@ -1,14 +1,6 @@
-import 'dart:developer';
 import 'dart:isolate';
 
-import 'package:flutter_beacon/flutter_beacon.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
-
-import '../controllers/bluetooth_controllers/beacon_controller.dart';
-import 'constants.dart';
-import 'ui_util.dart';
 
 class ForegroundTaskHandler extends TaskHandler {
   int updateCount = 0;
@@ -31,7 +23,7 @@ class ForegroundTaskHandler extends TaskHandler {
   Future<void> onEvent(DateTime timestamp, SendPort? sendPort) async {
     FlutterForegroundTask.updateService(
       notificationTitle: 'Bubble Detector',
-      notificationText: name, // Bubble Detector is keeping you safe 😃
+      notificationText: 'Bubble Detector is keeping you safe 😃', //
     );
     //await _runForegroundTask();
 

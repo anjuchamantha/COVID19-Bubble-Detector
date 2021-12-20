@@ -3,8 +3,6 @@ import 'dart:isolate';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:get/get.dart';
 
-import '../../util/foreground_task_handler.dart';
-
 class ForegroundController extends GetxController {
   ReceivePort? receivePortHome;
 

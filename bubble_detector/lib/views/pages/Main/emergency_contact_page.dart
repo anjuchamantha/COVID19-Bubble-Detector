@@ -13,14 +13,26 @@ class EmergencyContactPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> name = <String>[
+      'Presidential Task Force',
       'Notification of Spread',
-      'Notification of Spread',
-      'Notification of Spread'
+      'Covid Related Public Complain',
+      'Presidential Secretariat',
+      'Quarantine Unit',
+      'Ministry of Defense',
+      'Health Promotion Bureau',
+      'Lanka Sathosa',
+      'Lanka Sathosa - Sahana Badu Malla',
     ];
     List<String> phoneNumber = <String>[
+      '117',
       '0112 860 000',
-      '0112 860 000',
-      '0112 860 000'
+      '0114 354 550',
+      '0112 354 354',
+      '0112 112 705',
+      '0112 430 860',
+      '0112 696 606',
+      '0112 307 512',
+      '1998'
     ];
 
     return Padding(
@@ -90,7 +102,7 @@ class EmergencyContactPage extends StatelessWidget {
 
           Expanded(
             child: ListView.separated(
-              physics: NeverScrollableScrollPhysics(),
+              physics: BouncingScrollPhysics(),
               padding: const EdgeInsets.all(8),
               itemCount: name.length,
               itemBuilder: (BuildContext context, int index) {
