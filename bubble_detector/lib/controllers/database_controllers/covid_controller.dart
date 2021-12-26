@@ -24,6 +24,12 @@ class CovidController extends GetxController {
 
   FCMController fcmController = Get.find();
 
+  @override
+  void onInit() async {
+    await this.getContactedUsers();
+    super.onInit();
+  }
+
   updateDateSelected(DateTime dateTime) {
     print("GET : ${dateTime.toString()}");
     dateSelected.value = dateTime;
