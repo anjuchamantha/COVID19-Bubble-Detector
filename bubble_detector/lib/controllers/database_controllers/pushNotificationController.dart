@@ -122,7 +122,9 @@ class FCMController extends GetxController {
       "notification": {
         "title": title,
         "body": body,
-        "click_action": "FLUTTER_NOTIFICATION_CLICK"
+        "click_action": "FLUTTER_NOTIFICATION_CLICK",
+        "image":
+            "https://i2.wp.com/media.premiumtimesng.com/wp-content/files/2021/07/COVID-19-Alert.jpg"
       },
       "data": {
         "title": title,
