@@ -42,6 +42,7 @@ void main() async {
     GetMaterialApp(
       initialBinding: AppBinding(),
       theme: PrimaryTheme.buildTheme(),
+      debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.SPLASH,
       getPages: [
         GetPage(

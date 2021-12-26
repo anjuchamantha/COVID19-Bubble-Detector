@@ -1,16 +1,15 @@
-import 'package:bubble_detector/views/widgets/Direct_Contact_Home_Page_First.dart';
-import 'package:bubble_detector/views/widgets/HomePageFirst.dart';
-import 'package:bubble_detector/views/widgets/Indirect_Contact_Home_Page_First.dart';
-import 'package:bubble_detector/views/widgets/No_Postive_Home_Page_First.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/database_controllers/covid_controller.dart';
 import '../../../util/routes.dart';
 import '../../../util/theme.dart';
+import '../../widgets/Indirect_Contact_Home_Page_First.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final CovidController covidController = Get.find();
+  HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +47,7 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'in the last 5 days',
+                          'in the last ${covidController.daysDuration.value} days',
                           style: TextStyle(
                             fontSize: 12,
                             color: ProjectColors.ACCENT_COLOR,
@@ -63,86 +62,136 @@ class HomePage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Positioned(
-                    right: 0,
-                    child: Column(
-                      children: [
-                        Text(
-                          '65',
-                          style: TextStyle(
-                            fontSize: 72,
-                            color: ProjectColors.BLACK,
-                            fontWeight: FontWeight.w800,
-                            letterSpacing: 0.2,
-                          ),
-                        ),
-                        Row(
+                  Obx(() {
+                    int contactedUsersCount =
+                        covidController.directcontactedUsers.length;
+                    int storeCount = covidController.contactedStores.length;
+                    int indirectCount =
+                        covidController.indirectContactedUsers.length;
+                    int allCount = contactedUsersCount + indirectCount;
+                    if (contactedUsersCount != 0) {
+                      return Positioned(
+                        right: 0,
+                        child: Column(
                           children: [
+                            // Total Count
                             Text(
-                              'Direct Contacts : ',
+                              allCount.toString(),
                               style: TextStyle(
-                                fontSize: 14,
-                                color: ProjectColors.BLACK,
-                                letterSpacing: 0.2,
-                              ),
-                            ),
-                            Text(
-                              '33',
-                              style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 72,
                                 color: ProjectColors.BLACK,
                                 fontWeight: FontWeight.w800,
                                 letterSpacing: 0.2,
                               ),
                             ),
+
+                            // Direct Count
+                            Row(
+                              children: [
+                                Text(
+                                  'Direct Contacts : ',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: ProjectColors.BLACK,
+                                    letterSpacing: 0.2,
+                                  ),
+                                ),
+                                Text(
+                                  contactedUsersCount.toString(),
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: ProjectColors.BLACK,
+                                    fontWeight: FontWeight.w800,
+                                    letterSpacing: 0.2,
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            SizedBox(height: 4),
+
+                            // Store Count
+                            Row(
+                              children: [
+                                Text(
+                                  'Stores Entered : ',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: ProjectColors.BLACK,
+                                    letterSpacing: 0.2,
+                                  ),
+                                ),
+                                Text(
+                                  storeCount.toString(),
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: ProjectColors.BLACK,
+                                    fontWeight: FontWeight.w800,
+                                    letterSpacing: 0.2,
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            // indirect count
+                            Row(
+                              children: [
+                                Text(
+                                  'Indirect Contacts : ',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: ProjectColors.ACCENT_COLOR,
+                                    letterSpacing: 0.2,
+                                  ),
+                                ),
+                                Text(
+                                  indirectCount.toString(),
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: ProjectColors.ACCENT_COLOR,
+                                    fontWeight: FontWeight.w800,
+                                    letterSpacing: 0.2,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
-                        SizedBox(height: 4),
-                        Row(
+                      );
+                    } else {
+                      return Positioned(
+                        right: 20,
+                        top: 20,
+                        child: Wrap(
+                          direction: Axis.vertical,
+                          spacing: -9,
                           children: [
-                            Text(
-                              'Stores Entered : ',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: ProjectColors.BLACK,
-                                letterSpacing: 0.2,
+                            Padding(
+                              padding: const EdgeInsets.only(left: 32.0),
+                              child: Text(
+                                '0',
+                                style: TextStyle(
+                                  fontSize: 64,
+                                  color: ProjectColors.SECONDARY_BLACK,
+                                  fontWeight: FontWeight.w800,
+                                  letterSpacing: 0.2,
+                                ),
                               ),
                             ),
                             Text(
-                              '33',
+                              'Contacts',
                               style: TextStyle(
-                                fontSize: 14,
-                                color: ProjectColors.BLACK,
-                                fontWeight: FontWeight.w800,
-                                letterSpacing: 0.2,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              'Indirect Contacts : ',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: ProjectColors.ACCENT_COLOR,
-                                letterSpacing: 0.2,
-                              ),
-                            ),
-                            Text(
-                              '33',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: ProjectColors.ACCENT_COLOR,
-                                fontWeight: FontWeight.w800,
+                                fontSize: 24,
+                                color: ProjectColors.SECONDARY_BLACK,
+                                fontWeight: FontWeight.w400,
                                 letterSpacing: 0.2,
                               ),
                             ),
                           ],
                         ),
-                      ],
-                    ),
-                  ),
+                      );
+                    }
+                  }),
                 ],
               ),
               Column(
