@@ -1,4 +1,6 @@
+import 'package:bubble_detector/util/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:uuid/uuid.dart';
@@ -28,7 +30,7 @@ class UserController extends GetxController {
       // 'bluetooth_id': uuid.v5(Uuid.NAMESPACE_URL, user!.uid),
     }).then((value) {
       print("User Added");
-      Get.snackbar("User Data Added", "Successfully added User Data.");
+      // Get.snackbar("User Data Added", "Successfully added User Data.");
     }).catchError((error) {
       print("Failed to add user: $error");
       Get.snackbar("ERROR", "Error saving User Data.");
@@ -43,10 +45,27 @@ class UserController extends GetxController {
       key: value,
     }).then((value) {
       print("User $key updated");
-      Get.snackbar("Successfull", "User $key updated");
+      // Get.snackbar("Successfull", "User $key updated");
     }).catchError((error) {
       print("Failed to update user $key with value $value: Error - $error");
       Get.snackbar("ERROR", "Failed to update user $key with value $value");
     });
+  }
+
+  void signOut() async {
+    FirebaseAuth _auth = FirebaseAuth.instance;
+    try {
+      await _auth.signOut();
+      Get.toNamed(AppRoutes.SPLASH);
+    } catch (e) {
+      Get.snackbar(
+        "Error signing out",
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.white,
+        margin: EdgeInsets.only(bottom: 12, left: 8, right: 8),
+        duration: Duration(seconds: 4),
+      );
+    }
   }
 }

@@ -46,14 +46,16 @@ class HomePage extends StatelessWidget {
                             letterSpacing: 0.2,
                           ),
                         ),
-                        Text(
-                          'in the last ${covidController.daysDuration.value} days',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: ProjectColors.ACCENT_COLOR,
-                            letterSpacing: 0.2,
-                          ),
-                        ),
+                        Obx(() {
+                          return Text(
+                            'in the last ${covidController.daysDuration.value} days',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: ProjectColors.ACCENT_COLOR,
+                              letterSpacing: 0.2,
+                            ),
+                          );
+                        }),
                         SizedBox(height: 6),
                         SvgPicture.asset(
                           'images/Group 2.svg',

@@ -40,7 +40,11 @@ class AuthPageController extends GetxController with StateMixin {
           try {
             await auth.signInWithCredential(credential);
             Get.snackbar(
-                "Login Successful", "SMS OTP Automatic Login Successful");
+              "Login Successful",
+              "SMS OTP Automatic Login Successful",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.white,
+            );
 
             landingPagesController.increaseStepCounter();
             landingPagesController.nextLandingPage();

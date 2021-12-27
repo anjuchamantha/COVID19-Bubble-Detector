@@ -126,7 +126,7 @@ class HomePageFirst extends StatelessWidget {
                               SizedBox(height: 4),
                               Flexible(
                                 child: Text(
-                                  'What can you do to protect you and your loved ones from COVID 19',
+                                  'What can you do to protect you and your loved ones from COVID...',
                                   softWrap: true,
                                   style: TextStyle(
                                     fontSize: 12,

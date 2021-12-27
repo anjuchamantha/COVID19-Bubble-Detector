@@ -1,4 +1,5 @@
 import 'package:bubble_detector/controllers/bluetooth_controllers/requirement_state_controller.dart';
+import 'package:bubble_detector/controllers/database_controllers/user_controller.dart';
 import 'package:bubble_detector/util/theme.dart';
 import 'package:bubble_detector/util/ui_util.dart';
 import 'package:bubble_detector/views/pages/Main/home_page.dart';
@@ -15,6 +16,7 @@ import 'emergency_contact_page.dart';
 class Home extends StatelessWidget {
   final RequirementStateController controller =
       Get.find<RequirementStateController>();
+  final UserController userCntroller = Get.find();
 
   Home({Key? key}) : super(key: key);
 
@@ -92,18 +94,18 @@ class Home extends StatelessWidget {
               }),
               Obx(() {
                 return IconButton(
-                  tooltip: controller.locationServiceEnabled
+                  tooltip: controller.locationService.value
                       ? 'Location Service ON'
                       : 'Location Service OFF',
                   icon: Icon(
-                    controller.locationServiceEnabled
+                    controller.locationService.value
                         ? Icons.location_on
                         : Icons.location_off,
                   ),
-                  color: controller.locationServiceEnabled
+                  color: controller.locationService.value
                       ? ProjectColors.ACCENT_COLOR
                       : Colors.red,
-                  onPressed: controller.locationServiceEnabled
+                  onPressed: controller.locationService.value
                       ? () {}
                       : () async {
                           await UiUtil.handleOpenLocationSettings(
@@ -171,6 +173,15 @@ class Home extends StatelessWidget {
                       ),
                     ),
                   ),
+                  PopupMenuItem<int>(
+                    value: 3,
+                    child: Text(
+                      "Sign Out",
+                      style: TextStyle(
+                        color: ProjectColors.BLACK,
+                      ),
+                    ),
+                  ),
                 ],
                 icon: Icon(
                   Icons.more_vert,
@@ -186,6 +197,9 @@ class Home extends StatelessWidget {
                       break;
                     case 2:
                       Get.toNamed(AppRoutes.BEACON_FN_PAGE);
+                      break;
+                    case 3:
+                      userCntroller.signOut();
                       break;
                   }
                 },
